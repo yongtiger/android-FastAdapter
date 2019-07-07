@@ -40,7 +40,3 @@ dependencies {
 
     implementation  'com.mikepenz:materialize:1.1.2'
 }
-
-if (project.hasProperty('pushall') || project.hasProperty('libraryextensiononly')) {
-    apply from: '../gradle-release.gradle'
-}
