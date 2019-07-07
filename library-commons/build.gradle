@@ -28,7 +28,7 @@ android {
 }
 
 dependencies {
-    implementation project(':librarycore')
+    implementation project(':library-core')
 
     implementation "com.android.support:appcompat-v7:${versions.supportLib}"
     implementation "com.android.support:recyclerview-v7:${versions.supportLib}"

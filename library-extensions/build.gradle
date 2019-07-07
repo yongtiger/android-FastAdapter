@@ -30,9 +30,9 @@ android {
 }
 
 dependencies {
-    implementation  project(':librarycore')
-    implementation  project(':librarycommons')
-    implementation  project(':libraryextensionsexpandable')
+    implementation  project(':library-core')
+    implementation  project(':library-commons')
+    implementation  project(':library-extensions-expandable')
 
     implementation  "com.android.support:recyclerview-v7:${versions.supportLib}"
     implementation  "com.android.support:design:${versions.supportLib}"
