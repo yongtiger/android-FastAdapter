@@ -20,6 +20,7 @@ android {
 
         setProperty("archivesBaseName", "FastAdapter-v$versionName-c$versionCode")
     }
+
     buildTypes {
         debug {
             versionNameSuffix "-DEBUG"
@@ -38,6 +39,7 @@ android {
             minifyEnabled false
         }
     }
+
     lintOptions {
         abortOnError false
     }
