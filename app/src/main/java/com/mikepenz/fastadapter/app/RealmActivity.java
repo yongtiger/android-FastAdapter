@@ -17,6 +17,7 @@ import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.app.items.RealmSampleUserItem;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter.listeners.OnClickListener;
+import com.mikepenz.fastadapter.select.SelectExtension;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.itemanimators.AlphaInAnimator;
 import com.mikepenz.material_design_iconic_typeface_library.MaterialDesignIconic;
@@ -60,6 +61,12 @@ public class RealmActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        ///[FIX#RealmSampleUserItem Select]
+        mFastItemAdapter.withSelectable(true);
+//        mFastItemAdapter.withAllowDeselection(false);
+//        mFastItemAdapter.select(0);
+        mFastItemAdapter.getExtension(SelectExtension.class).select(0);
 
         //get our recyclerView and do basic setup
         RecyclerView rv = (RecyclerView) findViewById(R.id.rv);
