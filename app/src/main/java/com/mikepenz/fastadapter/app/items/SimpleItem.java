@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
+import android.support.v4.view.ViewCompat;
 import android.view.View;
 import android.widget.TextView;
 
@@ -14,7 +15,6 @@ import com.mikepenz.fastadapter.commons.utils.FastAdapterUIUtils;
 import com.mikepenz.fastadapter.items.AbstractItem;
 import com.mikepenz.fastadapter_extensions.drag.IDraggable;
 import com.mikepenz.materialdrawer.holder.StringHolder;
-import com.mikepenz.materialize.util.UIUtils;
 
 import java.util.List;
 
@@ -115,7 +115,8 @@ public class SimpleItem extends AbstractItem<SimpleItem, SimpleItem.ViewHolder> 
             Context ctx = itemView.getContext();
 
             //set the background for the item
-            UIUtils.setBackground(view, FastAdapterUIUtils.getSelectableBackground(ctx, Color.RED, true));
+//            UIUtils.setBackground(view, FastAdapterUIUtils.getSelectableBackground(ctx, Color.RED, true));
+            ViewCompat.setBackground(view, FastAdapterUIUtils.getSelectableBackground(ctx, Color.RED, true));
             //set the text for the name
             StringHolder.applyTo(item.name, name);
             //set the text for the description or hide

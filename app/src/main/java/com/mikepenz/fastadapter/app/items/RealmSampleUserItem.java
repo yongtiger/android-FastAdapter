@@ -2,7 +2,7 @@ package com.mikepenz.fastadapter.app.items;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.v7.widget.RecyclerView;
+import android.support.v4.view.ViewCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +13,6 @@ import com.mikepenz.fastadapter.IItem;
 import com.mikepenz.fastadapter.app.R;
 import com.mikepenz.fastadapter.commons.utils.FastAdapterUIUtils;
 import com.mikepenz.fastadapter.items.AbstractItem;
-import com.mikepenz.materialdrawer.holder.StringHolder;
-import com.mikepenz.materialize.util.UIUtils;
 
 import java.util.Collections;
 import java.util.List;
@@ -301,12 +299,10 @@ public class RealmSampleUserItem extends RealmObject implements IItem<RealmSampl
     }
 
     protected static class ViewHolder extends FastAdapter.ViewHolder<RealmSampleUserItem> { ///[FIX#RealmSampleUserItem Select]FastAdapter.ViewHolder
-        protected View view;
         protected TextView name;
 
         public ViewHolder(View view) {
             super(view);
-            this.view = view;
             this.name = (TextView) view.findViewById(R.id.text);
         }
 
@@ -317,7 +313,8 @@ public class RealmSampleUserItem extends RealmObject implements IItem<RealmSampl
 
             ///[FIX#RealmSampleUserItem Select]
             //set the background for the item
-            UIUtils.setBackground(view, FastAdapterUIUtils.getSelectableBackground(ctx, Color.RED, true));
+//            UIUtils.setBackground(view, FastAdapterUIUtils.getSelectableBackground(ctx, Color.RED, true));
+            ViewCompat.setBackground(itemView, FastAdapterUIUtils.getSelectableBackground(ctx, Color.RED, true));
         }
 
         @Override
