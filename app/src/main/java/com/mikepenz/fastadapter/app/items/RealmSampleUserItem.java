@@ -304,17 +304,27 @@ public class RealmSampleUserItem extends RealmObject implements IItem<RealmSampl
         public ViewHolder(View view) {
             super(view);
             this.name = (TextView) view.findViewById(R.id.text);
+
+            ///[FIX#UIUtils.setBackground]
+            //get the context
+            Context ctx = itemView.getContext();
+
+            //set the background for the item
+//            UIUtils.setBackground(itemView, FastAdapterUIUtils.getSelectableBackground(ctx, Color.RED, true));
+            ViewCompat.setBackground(itemView, FastAdapterUIUtils.getSelectableBackground(ctx, Color.RED, true));
         }
 
         @Override
         public void bindView(RealmSampleUserItem item, List<Object> payloads) {
-            //get the context
-            Context ctx = itemView.getContext();
-
-            ///[FIX#RealmSampleUserItem Select]
-            //set the background for the item
-//            UIUtils.setBackground(view, FastAdapterUIUtils.getSelectableBackground(ctx, Color.RED, true));
-            ViewCompat.setBackground(itemView, FastAdapterUIUtils.getSelectableBackground(ctx, Color.RED, true));
+            ///[FIX#UIUtils.setBackground]
+            itemView.setSelected(item.isSelected());
+//            //get the context
+//            Context ctx = itemView.getContext();
+//
+//            ///[FIX#RealmSampleUserItem Select]
+//            //set the background for the item
+////            UIUtils.setBackground(view, FastAdapterUIUtils.getSelectableBackground(ctx, Color.RED, true));
+//            ViewCompat.setBackground(itemView, FastAdapterUIUtils.getSelectableBackground(ctx, Color.RED, true));
         }
 
         @Override
