@@ -3,12 +3,12 @@ package com.mikepenz.fastadapter.app.items;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v4.view.ViewCompat;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.IItem;
 import com.mikepenz.fastadapter.app.R;
 import com.mikepenz.fastadapter.commons.utils.FastAdapterUIUtils;
@@ -298,7 +298,7 @@ public class RealmSampleUserItem extends RealmObject implements IItem<RealmSampl
         return Long.valueOf(mIdentifier).hashCode();
     }
 
-    protected static class ViewHolder extends FastAdapter.ViewHolder<RealmSampleUserItem> { ///[FIX#RealmSampleUserItem Select]FastAdapter.ViewHolder
+    protected static class ViewHolder extends RecyclerView.ViewHolder {
         protected TextView name;
 
         public ViewHolder(View view) {
@@ -313,21 +313,5 @@ public class RealmSampleUserItem extends RealmObject implements IItem<RealmSampl
 //            UIUtils.setBackground(itemView, FastAdapterUIUtils.getSelectableBackground(ctx, Color.RED, true));
             ViewCompat.setBackground(itemView, FastAdapterUIUtils.getSelectableBackground(ctx, Color.RED, true));
         }
-
-        @Override
-        public void bindView(RealmSampleUserItem item, List<Object> payloads) {
-            ///[FIX#UIUtils.setBackground]
-            itemView.setSelected(item.isSelected());
-//            //get the context
-//            Context ctx = itemView.getContext();
-//
-//            ///[FIX#RealmSampleUserItem Select]
-//            //set the background for the item
-////            UIUtils.setBackground(view, FastAdapterUIUtils.getSelectableBackground(ctx, Color.RED, true));
-//            ViewCompat.setBackground(itemView, FastAdapterUIUtils.getSelectableBackground(ctx, Color.RED, true));
-        }
-
-        @Override
-        public void unbindView(RealmSampleUserItem item) {}
     }
 }
