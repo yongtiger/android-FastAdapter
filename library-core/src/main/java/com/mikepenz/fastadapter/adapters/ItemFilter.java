@@ -225,7 +225,7 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             ///[FIX#ItemFilter#Sort]
             mItemAdapter.clear();
             mItemAdapter.addInternal(mOriginalItems);
-            mOriginalItems = mItemAdapter.getAdapterItems();
+            mOriginalItems = new ArrayList<>(mItemAdapter.getAdapterItems());
 
             publishResults(mConstraint, performFiltering(mConstraint));
             return mItemAdapter;
@@ -261,7 +261,7 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             ///[FIX#ItemFilter#Sort]
             mItemAdapter.clear();
             mItemAdapter.addInternal(mOriginalItems);
-            mOriginalItems = mItemAdapter.getAdapterItems();
+            mOriginalItems = new ArrayList<>(mItemAdapter.getAdapterItems());
 
             publishResults(mConstraint, performFiltering(mConstraint));
             return mItemAdapter;
