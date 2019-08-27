@@ -22,6 +22,15 @@ import static java.util.Arrays.asList;
  */
 public class ItemFilter<Model, Item extends IItem> extends Filter {
     private List<Item> mOriginalItems;
+
+    ///[ADD#ItemFilter#mOriginalItems]
+    public List<Item> getOriginalItems() {
+        return mOriginalItems;
+    }
+    public void setOriginalItems(List<Item> originalItems) {
+        this.mOriginalItems = mOriginalItems;
+    }
+
     private CharSequence mConstraint;
     private ModelAdapter<?, Item> mItemAdapter;
 
