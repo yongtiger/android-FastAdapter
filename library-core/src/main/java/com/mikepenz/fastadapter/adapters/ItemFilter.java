@@ -6,8 +6,10 @@ import com.mikepenz.fastadapter.IAdapterExtension;
 import com.mikepenz.fastadapter.IItem;
 import com.mikepenz.fastadapter.IItemAdapter;
 import com.mikepenz.fastadapter.listeners.ItemFilterListener;
+import com.mikepenz.fastadapter.utils.ComparableItemListImpl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -222,9 +224,9 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             mOriginalItems.addAll(items);
 
             ///[FIX#ItemFilter#Sort]
-            mItemAdapter.clear();
-            mItemAdapter.addInternal(mOriginalItems);
-            mOriginalItems = new ArrayList<>(mItemAdapter.getAdapterItems());
+            if (mItemAdapter.getItemList() instanceof ComparableItemListImpl) {
+                Collections.sort(mOriginalItems, ((ComparableItemListImpl) mItemAdapter.getItemList()).getComparator());
+            }
 
             publishResults(mConstraint, performFiltering(mConstraint));
             return mItemAdapter;
@@ -258,9 +260,9 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             mOriginalItems.addAll(getAdapterPosition(mItemAdapter.getAdapterItems().get(position)) - mItemAdapter.getFastAdapter().getPreItemCount(position), items);
 
             ///[FIX#ItemFilter#Sort]
-            mItemAdapter.clear();
-            mItemAdapter.addInternal(mOriginalItems);
-            mOriginalItems = new ArrayList<>(mItemAdapter.getAdapterItems());
+            if (mItemAdapter.getItemList() instanceof ComparableItemListImpl) {
+                Collections.sort(mOriginalItems, ((ComparableItemListImpl) mItemAdapter.getItemList()).getComparator());
+            }
 
             publishResults(mConstraint, performFiltering(mConstraint));
             return mItemAdapter;
