@@ -221,6 +221,7 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
                 mItemAdapter.getIdDistributor().checkIds(items);
             }
             mOriginalItems.addAll(items);
+
             ///[FIX#ItemFilter#Sort]
             mItemAdapter.clear();
             mItemAdapter.addInternal(mOriginalItems);
@@ -256,6 +257,7 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
                 mItemAdapter.getIdDistributor().checkIds(items);
             }
             mOriginalItems.addAll(getAdapterPosition(mItemAdapter.getAdapterItems().get(position)) - mItemAdapter.getFastAdapter().getPreItemCount(position), items);
+
             ///[FIX#ItemFilter#Sort]
             mItemAdapter.clear();
             mItemAdapter.addInternal(mOriginalItems);
