@@ -28,7 +28,7 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
         return mOriginalItems;
     }
     public void setOriginalItems(List<Item> originalItems) {
-        this.mOriginalItems = mOriginalItems;
+        this.mOriginalItems = originalItems;
     }
 
     private CharSequence mConstraint;
