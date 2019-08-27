@@ -225,7 +225,7 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
 
             ///[FIX#ItemFilter#Sort]
             if (mItemAdapter.getItemList() instanceof ComparableItemListImpl) {
-                Collections.sort(mOriginalItems, ((ComparableItemListImpl) mItemAdapter.getItemList()).getComparator());
+                Collections.sort(mOriginalItems, ((ComparableItemListImpl<Item>) mItemAdapter.getItemList()).getComparator());
             }
 
             publishResults(mConstraint, performFiltering(mConstraint));
@@ -261,7 +261,7 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
 
             ///[FIX#ItemFilter#Sort]
             if (mItemAdapter.getItemList() instanceof ComparableItemListImpl) {
-                Collections.sort(mOriginalItems, ((ComparableItemListImpl) mItemAdapter.getItemList()).getComparator());
+                Collections.sort(mOriginalItems, ((ComparableItemListImpl<Item>) mItemAdapter.getItemList()).getComparator());
             }
 
             publishResults(mConstraint, performFiltering(mConstraint));
