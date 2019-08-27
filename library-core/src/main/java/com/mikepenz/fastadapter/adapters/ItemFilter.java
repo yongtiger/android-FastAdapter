@@ -221,6 +221,11 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
                 mItemAdapter.getIdDistributor().checkIds(items);
             }
             mOriginalItems.addAll(items);
+            ///[FIX#ItemFilter#Sort]
+            mItemAdapter.clear();
+            mItemAdapter.addInternal(mOriginalItems);
+            mOriginalItems = mItemAdapter.getAdapterItems();
+
             publishResults(mConstraint, performFiltering(mConstraint));
             return mItemAdapter;
         } else {
@@ -251,6 +256,11 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
                 mItemAdapter.getIdDistributor().checkIds(items);
             }
             mOriginalItems.addAll(getAdapterPosition(mItemAdapter.getAdapterItems().get(position)) - mItemAdapter.getFastAdapter().getPreItemCount(position), items);
+            ///[FIX#ItemFilter#Sort]
+            mItemAdapter.clear();
+            mItemAdapter.addInternal(mOriginalItems);
+            mOriginalItems = mItemAdapter.getAdapterItems();
+
             publishResults(mConstraint, performFiltering(mConstraint));
             return mItemAdapter;
         } else {
