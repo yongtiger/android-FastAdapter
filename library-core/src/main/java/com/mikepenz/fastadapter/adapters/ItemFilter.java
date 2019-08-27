@@ -38,7 +38,6 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
         this.mItemAdapter = itemAdapter;
     }
 
-
     //the listener which will be called after the items were filtered
     protected ItemFilterListener<Item> mItemFilterListener;
 
