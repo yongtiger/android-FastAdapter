@@ -33,6 +33,7 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
         this.mOriginalItems = originalItems;
     }
 
+
     private CharSequence mConstraint;
     private ModelAdapter<?, Item> mItemAdapter;
 
