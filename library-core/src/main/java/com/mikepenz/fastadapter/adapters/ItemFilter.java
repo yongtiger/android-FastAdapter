@@ -19,7 +19,6 @@ import javax.annotation.Nullable;
 
 import static java.util.Arrays.asList;
 
-
 /**
  * ItemFilter which extends the Filter api provided by Android
  * This calls automatically all required methods, just overwrite the filterItems method
@@ -33,6 +32,14 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
     }
     public void setOriginalItems(List<Item> originalItems) {
         this.mOriginalItems = originalItems;
+    }
+    public void sortOriginalItems() {
+        if (mItemAdapter.getItemList() instanceof ComparableItemListImpl) {
+            Comparator<Item> comparator = ((ComparableItemListImpl<Item>) mItemAdapter.getItemList()).getComparator();
+            if (comparator != null) {
+                Collections.sort(mOriginalItems, comparator);
+            }
+        }
     }
 
     private CharSequence mConstraint;
@@ -226,12 +233,7 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             mOriginalItems.addAll(items);
 
             ///[FIX#ItemFilter#Sort]
-            if (mItemAdapter.getItemList() instanceof ComparableItemListImpl) {
-                Comparator<Item> comparator = ((ComparableItemListImpl<Item>) mItemAdapter.getItemList()).getComparator();
-                if (comparator != null) {
-                    Collections.sort(mOriginalItems, comparator);
-                }
-            }
+            sortOriginalItems();
 
             publishResults(mConstraint, performFiltering(mConstraint));
             return mItemAdapter;
@@ -265,12 +267,7 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             mOriginalItems.addAll(getAdapterPosition(mItemAdapter.getAdapterItems().get(position)) - mItemAdapter.getFastAdapter().getPreItemCount(position), items);
 
             ///[FIX#ItemFilter#Sort]
-            if (mItemAdapter.getItemList() instanceof ComparableItemListImpl) {
-                Comparator<Item> comparator = ((ComparableItemListImpl<Item>) mItemAdapter.getItemList()).getComparator();
-                if (comparator != null) {
-                    Collections.sort(mOriginalItems, comparator);
-                }
-            }
+            sortOriginalItems();
 
             publishResults(mConstraint, performFiltering(mConstraint));
             return mItemAdapter;
