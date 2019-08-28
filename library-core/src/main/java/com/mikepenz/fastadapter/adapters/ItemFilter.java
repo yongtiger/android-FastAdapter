@@ -34,7 +34,7 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
         this.mOriginalItems = originalItems;
     }
     public void sortOriginalItems() {
-        if (mItemAdapter.getItemList() instanceof ComparableItemListImpl) {
+        if (mItemAdapter.getItemList() instanceof ComparableItemListImpl && mOriginalItems != null && mOriginalItems.size() > 0) {
             Comparator<Item> comparator = ((ComparableItemListImpl<Item>) mItemAdapter.getItemList()).getComparator();
             if (comparator != null) {
                 Collections.sort(mOriginalItems, comparator);
