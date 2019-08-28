@@ -19,6 +19,7 @@ import javax.annotation.Nullable;
 
 import static java.util.Arrays.asList;
 
+
 /**
  * ItemFilter which extends the Filter api provided by Android
  * This calls automatically all required methods, just overwrite the filterItems method
