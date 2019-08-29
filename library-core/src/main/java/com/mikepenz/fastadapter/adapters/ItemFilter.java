@@ -287,7 +287,11 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             if (mItemAdapter.isUseIdDistributor()) {
                 mItemAdapter.getIdDistributor().checkId(item);
             }
-            mOriginalItems.set(getAdapterPosition(mItemAdapter.getAdapterItems().get(position)) - mItemAdapter.getFastAdapter().getPreItemCount(position), item);
+
+            ///[FIX#ItemFilter#global position]
+//            mOriginalItems.set(getAdapterPosition(mItemAdapter.getAdapterItems().get(position)) - mItemAdapter.getFastAdapter().getPreItemCount(position), item);
+            mOriginalItems.set(getAdapterPosition(mItemAdapter.getAdapterItems().get(position - mItemAdapter.getFastAdapter().getPreItemCount(position))), item);
+
             publishResults(mConstraint, performFiltering(mConstraint));
             return mItemAdapter;
         } else {
@@ -305,11 +309,19 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
     public ModelAdapter<?, Item> move(int fromPosition, int toPosition) {
         if (mOriginalItems != null) {
             int preItemCount = mItemAdapter.getFastAdapter().getPreItemCount(fromPosition);
-            int adjustedFrom = getAdapterPosition(mItemAdapter.getAdapterItems().get(fromPosition));
-            int adjustedTo = getAdapterPosition(mItemAdapter.getAdapterItems().get(toPosition));
-            Item item = mOriginalItems.get(adjustedFrom - preItemCount);
-            mOriginalItems.remove(adjustedFrom - preItemCount);
-            mOriginalItems.add(adjustedTo - preItemCount, item);
+
+            ///[FIX#ItemFilter#global position]
+//            int adjustedFrom = getAdapterPosition(mItemAdapter.getAdapterItems().get(fromPosition));
+//            int adjustedTo = getAdapterPosition(mItemAdapter.getAdapterItems().get(toPosition));
+//            Item item = mOriginalItems.get(adjustedFrom - preItemCount);
+//            mOriginalItems.remove(adjustedFrom - preItemCount);
+//            mOriginalItems.add(adjustedTo - preItemCount, item);
+            int adjustedFrom = getAdapterPosition(mItemAdapter.getAdapterItems().get(fromPosition - preItemCount));
+            int adjustedTo = getAdapterPosition(mItemAdapter.getAdapterItems().get(toPosition - preItemCount));
+            Item item = mOriginalItems.get(adjustedFrom);
+            mOriginalItems.remove(adjustedFrom);
+            mOriginalItems.add(adjustedTo, item);
+
             performFiltering(mConstraint);
             return mItemAdapter;
         } else {
@@ -324,7 +336,10 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
      */
     public ModelAdapter<?, Item> remove(int position) {
         if (mOriginalItems != null) {
-            mOriginalItems.remove(getAdapterPosition(mItemAdapter.getAdapterItems().get(position)) - mItemAdapter.getFastAdapter().getPreItemCount(position));
+            ///[FIX#ItemFilter#global position]
+//            mOriginalItems.remove(getAdapterPosition(mItemAdapter.getAdapterItems().get(position)) - mItemAdapter.getFastAdapter().getPreItemCount(position));
+            mOriginalItems.remove(getAdapterPosition(mItemAdapter.getAdapterItems().get(position - mItemAdapter.getFastAdapter().getPreItemCount(position))));
+
             publishResults(mConstraint, performFiltering(mConstraint));
             return mItemAdapter;
         } else {
@@ -346,7 +361,11 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             //make sure we do not delete to many items
             int saveItemCount = Math.min(itemCount, length - position + preItemCount);
             for (int i = 0; i < saveItemCount; i++) {
-                mOriginalItems.remove(position - preItemCount);
+
+                ///[FIX#ItemFilter#global position]
+//                mOriginalItems.remove(position - preItemCount);
+                mOriginalItems.remove(getAdapterPosition(mItemAdapter.getAdapterItems().get(position - preItemCount)));
+
             }
             publishResults(mConstraint, performFiltering(mConstraint));
             return mItemAdapter;
