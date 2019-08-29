@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.mikepenz.fastadapter.IItem;
 import com.mikepenz.fastadapter.app.R;
 import com.mikepenz.fastadapter.commons.utils.FastAdapterUIUtils;
-import com.mikepenz.fastadapter.items.AbstractItem;
 
 import java.util.Collections;
 import java.util.List;
@@ -284,7 +283,9 @@ public class RealmSampleUserItem extends RealmObject implements IItem<RealmSampl
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AbstractItem<?, ?> that = (AbstractItem<?, ?>) o;
+        ///[FIX#Cannot cast]
+//        AbstractItem<?, ?> that = (AbstractItem<?, ?>) o;
+        IItem<?, ?> that = (IItem<?, ?>) o;
         return mIdentifier == that.getIdentifier();
     }
 
