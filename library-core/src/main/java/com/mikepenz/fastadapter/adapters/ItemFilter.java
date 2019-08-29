@@ -336,6 +336,7 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
      */
     public ModelAdapter<?, Item> remove(int position) {
         if (mOriginalItems != null) {
+
             ///[FIX#ItemFilter#global position]
 //            mOriginalItems.remove(getAdapterPosition(mItemAdapter.getAdapterItems().get(position)) - mItemAdapter.getFastAdapter().getPreItemCount(position));
             mOriginalItems.remove(getAdapterPosition(mItemAdapter.getAdapterItems().get(position - mItemAdapter.getFastAdapter().getPreItemCount(position))));
