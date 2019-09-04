@@ -34,8 +34,9 @@ import butterknife.ButterKnife;
 /**
  * Created by Gagan on 5/3/2017.
  */
-
-public class StickyHeaderMopubAdsActivity extends AppCompatActivity implements OnClickListener<LetterItem> {
+///[FIX#StickyHeaderMopubAdsActivity]
+//public class StickyHeaderMopubAdsActivity extends AppCompatActivity implements OnClickListener<LetterItem> {
+public class StickyHeaderMopubAdsActivity extends AppCompatActivity implements OnClickListener<IItem> {
 
     private MopubFastItemAdapter<IItem> mAdapter;
     private static final String[] headers = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
@@ -61,6 +62,7 @@ public class StickyHeaderMopubAdsActivity extends AppCompatActivity implements O
         final StickyHeaderAdapter stickyHeaderAdapter = new StickyHeaderAdapter();
         final ItemAdapter headerAdapter = new ItemAdapter();
         mAdapter = new MopubFastItemAdapter<>();
+        mAdapter.withOnClickListener(this); ///[FIX#StickyHeaderMopubAdsActivity]
         mAdapter.addAdapter(0, headerAdapter);
 
         ViewBinder viewBinder = new ViewBinder.Builder(R.layout.native_ad_item)
@@ -110,9 +112,15 @@ public class StickyHeaderMopubAdsActivity extends AppCompatActivity implements O
         getSupportActionBar().setHomeButtonEnabled(false);
     }
 
+    ///[FIX#StickyHeaderMopubAdsActivity]
+//    @Override
+//    public boolean onClick(View v, IAdapter<LetterItem> adapter, @NonNull LetterItem item, int position) {
+//        Toast.makeText(this, "Item pressed " + item.letter + " at position " + position, Toast.LENGTH_SHORT).show();
+//        return false;
+//    }
     @Override
-    public boolean onClick(View v, IAdapter<LetterItem> adapter, @NonNull LetterItem item, int position) {
-        Toast.makeText(this, "Item pressed " + item.letter + " at position " + position, Toast.LENGTH_SHORT).show();
+    public boolean onClick(View v, IAdapter<IItem> adapter, @NonNull IItem item, int position) {
+        Toast.makeText(this, "Item pressed " + ((SimpleItem) item).name + " at position " + position, Toast.LENGTH_SHORT).show();
         return false;
     }
 
