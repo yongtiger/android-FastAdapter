@@ -254,7 +254,7 @@ public class SwipeListActivity extends AppCompatActivity implements ItemTouchCal
     public void onPreSwipe(SimpleSwipeCallback simpleSwipeCallback, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
         Drawable leaveBehindDrawableRight = new IconicsDrawable(this)
                 .icon(MaterialDesignIconic.Icon.gmi_block)
-                .color(Color.WHITE)
+                .color(Color.RED)
                 .sizeDp(24);
         simpleSwipeCallback.withLeaveBehindSwipeRight(leaveBehindDrawableRight);
     }
