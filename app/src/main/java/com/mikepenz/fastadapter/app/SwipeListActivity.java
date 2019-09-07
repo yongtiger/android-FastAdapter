@@ -48,6 +48,9 @@ public class SwipeListActivity extends AppCompatActivity implements ItemTouchCal
     private SimpleDragCallback touchCallback;
     private ItemTouchHelper touchHelper;
 
+    ///[UPGRADE#onSwiping()]
+    private Drawable blockLeaveBehindDrawableLeft;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         findViewById(android.R.id.content).setSystemUiVisibility(findViewById(android.R.id.content).getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
@@ -256,8 +259,6 @@ public class SwipeListActivity extends AppCompatActivity implements ItemTouchCal
     }
 
     ///[UPGRADE#onSwiping()]
-    private Drawable blockLeaveBehindDrawableLeft;
-
     @Override
     public void onSwiping(SimpleSwipeCallback simpleSwipeCallback, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,
                           float dX, float dY, int actionState, boolean isCurrentlyActive) {
