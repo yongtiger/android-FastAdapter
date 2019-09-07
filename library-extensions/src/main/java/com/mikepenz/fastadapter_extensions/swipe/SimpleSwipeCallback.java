@@ -29,6 +29,8 @@ public class SimpleSwipeCallback extends ItemTouchHelper.SimpleCallback {
          */
         void itemSwiped(int position, int direction);
 
+        ///[UPGRADE#onPreSwipe()]
+        void onPreSwipe(SimpleSwipeCallback simpleSwipeCallback, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder);
     }
 
     private final ItemSwipeCallback itemSwipeCallback;
@@ -126,6 +128,10 @@ public class SimpleSwipeCallback extends ItemTouchHelper.SimpleCallback {
         }
         if (Math.abs(dX) > Math.abs(dY)) {
             boolean isLeft = dX < 0;
+
+            ///[UPGRADE#onPreSwipe()]
+            itemSwipeCallback.onPreSwipe(this, recyclerView, viewHolder);
+
             if (bgPaint == null) {
                 bgPaint = new Paint();
                 if (horizontalMargin == Integer.MAX_VALUE) {

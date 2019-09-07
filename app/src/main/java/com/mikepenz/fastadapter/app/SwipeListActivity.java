@@ -249,4 +249,14 @@ public class SwipeListActivity extends AppCompatActivity implements ItemTouchCal
         //TODO can this above be made more generic, along with the support in the item?
     }
 
+    ///[UPGRADE#onPreSwipe()]
+    @Override
+    public void onPreSwipe(SimpleSwipeCallback simpleSwipeCallback, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+        Drawable leaveBehindDrawableRight = new IconicsDrawable(this)
+                .icon(MaterialDesignIconic.Icon.gmi_block)
+                .color(Color.WHITE)
+                .sizeDp(24);
+        simpleSwipeCallback.withLeaveBehindSwipeRight(leaveBehindDrawableRight);
+    }
+
 }
