@@ -29,8 +29,9 @@ public class SimpleSwipeCallback extends ItemTouchHelper.SimpleCallback {
          */
         void itemSwiped(int position, int direction);
 
-        ///[UPGRADE#onPreSwipe()]
-        void onPreSwipe(SimpleSwipeCallback simpleSwipeCallback, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder);
+        ///[UPGRADE#onSwiping()]
+        void onSwiping(SimpleSwipeCallback simpleSwipeCallback, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,
+                       float dX, float dY, int actionState, boolean isCurrentlyActive);
     }
 
     private final ItemSwipeCallback itemSwipeCallback;
@@ -58,12 +59,20 @@ public class SimpleSwipeCallback extends ItemTouchHelper.SimpleCallback {
         this.bgColorLeft = bgColor;
     }
 
+    ///[UPGRADE#onSwiping()]
+    public Drawable getLeaveBehindSwipeLeft() {
+        return this.leaveBehindDrawableLeft;
+    }
     public SimpleSwipeCallback withLeaveBehindSwipeLeft(Drawable d) {
         this.leaveBehindDrawableLeft = d;
         setDefaultSwipeDirs(super.getSwipeDirs(null, null) | ItemTouchHelper.LEFT);
         return this;
     }
 
+    ///[UPGRADE#onSwiping()]
+    public Drawable getLeaveBehindSwipeRight() {
+        return this.leaveBehindDrawableRight;
+    }
     public SimpleSwipeCallback withLeaveBehindSwipeRight(Drawable d) {
         this.leaveBehindDrawableRight = d;
         setDefaultSwipeDirs(super.getSwipeDirs(null, null) | ItemTouchHelper.RIGHT);
@@ -79,11 +88,19 @@ public class SimpleSwipeCallback extends ItemTouchHelper.SimpleCallback {
         return this;
     }
 
+    ///[UPGRADE#onSwiping()]
+    public @ColorInt int getBackgroundSwipeLeft() {
+        return bgColorLeft;
+    }
     public SimpleSwipeCallback withBackgroundSwipeLeft(@ColorInt int bgColor) {
         bgColorLeft = bgColor;
         return this;
     }
 
+    ///[UPGRADE#onSwiping()]
+    public @ColorInt int getBackgroundSwipeRight() {
+        return bgColorRight;
+    }
     public SimpleSwipeCallback withBackgroundSwipeRight(@ColorInt int bgColor) {
         bgColorRight = bgColor;
         return this;
@@ -127,10 +144,11 @@ public class SimpleSwipeCallback extends ItemTouchHelper.SimpleCallback {
             return;
         }
         if (Math.abs(dX) > Math.abs(dY)) {
-            boolean isLeft = dX < 0;
 
-            ///[UPGRADE#onPreSwipe()]
-            itemSwipeCallback.onPreSwipe(this, recyclerView, viewHolder);
+            ///[UPGRADE#onSwiping()]
+            itemSwipeCallback.onSwiping(this, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+
+            boolean isLeft = dX < 0;
 
             if (bgPaint == null) {
                 bgPaint = new Paint();

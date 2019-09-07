@@ -117,6 +117,12 @@ public class SwipeListActivity extends AppCompatActivity implements ItemTouchCal
                 .color(Color.WHITE)
                 .sizeDp(24);
 
+        ///[UPGRADE#onSwiping()]
+        blockLeaveBehindDrawableLeft = new IconicsDrawable(this)
+                .icon(MaterialDesignIconic.Icon.gmi_block)
+                .color(Color.RED)
+                .sizeDp(24);
+
         touchCallback = new SimpleSwipeDragCallback(
                 this,
                 this,
@@ -249,14 +255,15 @@ public class SwipeListActivity extends AppCompatActivity implements ItemTouchCal
         //TODO can this above be made more generic, along with the support in the item?
     }
 
-    ///[UPGRADE#onPreSwipe()]
+    ///[UPGRADE#onSwiping()]
+    private Drawable blockLeaveBehindDrawableLeft;
+
     @Override
-    public void onPreSwipe(SimpleSwipeCallback simpleSwipeCallback, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-        Drawable leaveBehindDrawableRight = new IconicsDrawable(this)
-                .icon(MaterialDesignIconic.Icon.gmi_block)
-                .color(Color.RED)
-                .sizeDp(24);
-        simpleSwipeCallback.withLeaveBehindSwipeRight(leaveBehindDrawableRight);
+    public void onSwiping(SimpleSwipeCallback simpleSwipeCallback, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,
+                          float dX, float dY, int actionState, boolean isCurrentlyActive) {
+        if (dX < 0 && simpleSwipeCallback.getLeaveBehindSwipeLeft() != blockLeaveBehindDrawableLeft) {   ///isLeft
+            simpleSwipeCallback.withLeaveBehindSwipeLeft(blockLeaveBehindDrawableLeft);
+        }
     }
 
 }

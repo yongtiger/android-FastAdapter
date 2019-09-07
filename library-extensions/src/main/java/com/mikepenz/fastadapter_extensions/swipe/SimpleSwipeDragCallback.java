@@ -32,12 +32,20 @@ public class SimpleSwipeDragCallback extends SimpleDragCallback {
         simpleSwipeCallback = new SimpleSwipeCallback(itemSwipeCallback, leaveBehindDrawable, swipeDirs, bgColor);
     }
 
+    ///[UPGRADE#onSwiping()]
+    public Drawable getLeaveBehindSwipeLeft() {
+        return simpleSwipeCallback.getLeaveBehindSwipeLeft();
+    }
     public SimpleSwipeDragCallback withLeaveBehindSwipeLeft(Drawable d) {
         setDefaultSwipeDirs(super.getSwipeDirs(null, null) | ItemTouchHelper.LEFT);
         simpleSwipeCallback.withLeaveBehindSwipeLeft(d);
         return this;
     }
 
+    ///[UPGRADE#onSwiping()]
+    public Drawable getLeaveBehindSwipeRight() {
+        return simpleSwipeCallback.getLeaveBehindSwipeRight();
+    }
     public SimpleSwipeDragCallback withLeaveBehindSwipeRight(Drawable d) {
         setDefaultSwipeDirs(super.getSwipeDirs(null, null) | ItemTouchHelper.RIGHT);
         simpleSwipeCallback.withLeaveBehindSwipeRight(d);
@@ -54,11 +62,19 @@ public class SimpleSwipeDragCallback extends SimpleDragCallback {
         return this;
     }
 
+    ///[UPGRADE#onSwiping()]
+    public @ColorInt int  getBackgroundSwipeLeft() {
+        return simpleSwipeCallback.getBackgroundSwipeLeft();
+    }
     public SimpleSwipeDragCallback withBackgroundSwipeLeft(@ColorInt int bgColor) {
         simpleSwipeCallback.withBackgroundSwipeLeft(bgColor);
         return this;
     }
 
+    ///[UPGRADE#onSwiping()]
+    public @ColorInt int  getBackgroundSwipeRight() {
+        return simpleSwipeCallback.getBackgroundSwipeRight();
+    }
     public SimpleSwipeDragCallback withBackgroundSwipeRight(@ColorInt int bgColor) {
         simpleSwipeCallback.withBackgroundSwipeRight(bgColor);
         return this;
