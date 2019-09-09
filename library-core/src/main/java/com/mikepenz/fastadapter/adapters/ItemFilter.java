@@ -159,15 +159,9 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             }
             return selections;
         } else {
-            ///[FIX#Nullable#getSelections()/getSelectedItems()]
+            ///[FIX#ItemFilter/ModelAdapter#getSelections()/getSelectedItems()]
 //            return mItemAdapter.getFastAdapter().getSelections();
-            Set<Integer> selections = new HashSet<>();
-            for (int selection : mItemAdapter.getFastAdapter().getSelections()) {
-                if (mItemAdapter.getFastAdapter().getAdapter(selection) == mItemAdapter) {
-                    selections.add(selection);
-                }
-            }
-            return selections;
+            return mItemAdapter.getSelections();
         }
     }
 
@@ -187,15 +181,9 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             }
             return selections;
         } else {
-            ///[FIX#Nullable#getSelections()/getSelectedItems()]
+            ///[FIX#ItemFilter/ModelAdapter#getSelections()/getSelectedItems()]
 //            return mItemAdapter.getFastAdapter().getSelectedItems();
-            Set<Item> selections = new HashSet<>();
-            for (Item selection : mItemAdapter.getFastAdapter().getSelectedItems()) {
-                if (mItemAdapter.getFastAdapter().getAdapter(mItemAdapter.getFastAdapter().getPosition(selection)) == mItemAdapter) {
-                    selections.add(selection);
-                }
-            }
-            return selections;
+            return mItemAdapter.getSelectedItems();
         }
     }
 

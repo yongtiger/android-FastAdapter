@@ -21,7 +21,9 @@ import com.mikepenz.fastadapter.utils.DefaultItemListImpl;
 import com.mikepenz.fastadapter.utils.Triple;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Nullable;
 
@@ -569,5 +571,36 @@ public class ModelAdapter<Model, Item extends IItem> extends AbstractAdapter<Ite
         }
 
         return new Triple<>(false, null, null);
+    }
+
+    ///[FIX#ItemFilter/ModelAdapter#getSelections()/getSelectedItems()]
+    /**
+     * helper method to get all selections from the given adapter
+     *
+     * @return a Set with the global positions of all selected Items in the given adapter
+     */
+    public Set<Integer> getSelections() {
+        Set<Integer> selections = new HashSet<>();
+        for (int selection : getFastAdapter().getSelections()) {
+            if (getFastAdapter().getAdapter(selection) == this) {
+                selections.add(selection);
+            }
+        }
+        return selections;
+    }
+    ///[FIX#ItemFilter/ModelAdapter#getSelections()/getSelectedItems()]
+    /**
+     * helper method to get all selections from the given adapter
+     *
+     * @return a Set with the selected items out of all items  in the given adapter (not the listed ones)
+     */
+    public Set<Item> getSelectedItems() {
+        Set<Item> selections = new HashSet<>();
+        for (Item selection : getFastAdapter().getSelectedItems()) {
+            if (getFastAdapter().getAdapter(getFastAdapter().getPosition(selection)) == this) {
+                selections.add(selection);
+            }
+        }
+        return selections;
     }
 }
