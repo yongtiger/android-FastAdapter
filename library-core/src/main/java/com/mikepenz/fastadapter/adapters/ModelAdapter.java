@@ -588,6 +588,7 @@ public class ModelAdapter<Model, Item extends IItem> extends AbstractAdapter<Ite
         }
         return selections;
     }
+
     ///[FIX#ItemFilter/ModelAdapter#getSelections()/getSelectedItems()]
     /**
      * helper method to get all selections from the given adapter
