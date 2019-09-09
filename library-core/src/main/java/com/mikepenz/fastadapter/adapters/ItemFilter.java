@@ -1,5 +1,6 @@
 package com.mikepenz.fastadapter.adapters;
 
+import android.support.annotation.Nullable;
 import android.widget.Filter;
 
 import com.mikepenz.fastadapter.IAdapterExtension;
@@ -14,8 +15,6 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import javax.annotation.Nullable;
 
 import static java.util.Arrays.asList;
 
@@ -160,7 +159,15 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             }
             return selections;
         } else {
-            return mItemAdapter.getFastAdapter().getSelections();
+            ///[FIX#Nullable#getSelections()/getSelectedItems()]
+//            return mItemAdapter.getFastAdapter().getSelections();
+            Set<Integer> selections = new HashSet<>();
+            for (int selection : mItemAdapter.getFastAdapter().getSelections()) {
+                if (mItemAdapter.getFastAdapter().getAdapter(selection) == mItemAdapter) {
+                    selections.add(selection);
+                }
+            }
+            return selections;
         }
     }
 
@@ -180,7 +187,15 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             }
             return selections;
         } else {
-            return mItemAdapter.getFastAdapter().getSelectedItems();
+            ///[FIX#Nullable#getSelections()/getSelectedItems()]
+//            return mItemAdapter.getFastAdapter().getSelectedItems();
+            Set<Item> selections = new HashSet<>();
+            for (Item selection : mItemAdapter.getFastAdapter().getSelectedItems()) {
+                if (mItemAdapter.getFastAdapter().getAdapter(mItemAdapter.getFastAdapter().getPosition(selection)) == mItemAdapter) {
+                    selections.add(selection);
+                }
+            }
+            return selections;
         }
     }
 
