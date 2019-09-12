@@ -128,6 +128,7 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
     public CharSequence getConstraint() {
         return mConstraint;
     }
+
     ///[UPGRADE#ItemFilter#setConstraint(CharSequence constraint)]
     public void setConstraint(CharSequence constraint) {
         mConstraint = constraint;
