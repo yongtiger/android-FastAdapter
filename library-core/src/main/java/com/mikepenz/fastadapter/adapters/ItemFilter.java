@@ -401,4 +401,5 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
         mOriginalItems = null;
         mConstraint = null;
     }
+
 }
