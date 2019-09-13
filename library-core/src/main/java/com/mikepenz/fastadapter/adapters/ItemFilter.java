@@ -395,4 +395,10 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             return mItemAdapter.clear();
         }
     }
+
+    ///[UPGRADE#ItemFilter#reset()]
+    public void reset() {
+        mOriginalItems = null;
+        mConstraint = null;
+    }
 }
