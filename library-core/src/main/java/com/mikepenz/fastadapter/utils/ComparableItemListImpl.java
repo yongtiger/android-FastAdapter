@@ -42,7 +42,9 @@ public class ComparableItemListImpl<Item extends IItem> extends DefaultItemListI
      * @return this
      */
     public ComparableItemListImpl<Item> withComparator(@Nullable Comparator<Item> comparator) {
-        return withComparator(comparator, true);
+        ///[UPGRADE#ComparableItemListImpl#withComparator(@Nullable Comparator<Item> comparator, boolean sortNow, boolean notify)]
+//        return withComparator(comparator, true);
+        return withComparator(comparator, true, true);
     }
 
     /**
@@ -53,13 +55,19 @@ public class ComparableItemListImpl<Item extends IItem> extends DefaultItemListI
      * @param sortNow    specifies if we use the provided comparator to sort now
      * @return this
      */
-    public ComparableItemListImpl<Item> withComparator(@Nullable Comparator<Item> comparator, boolean sortNow) {
+    ///[UPGRADE#ComparableItemListImpl#withComparator(@Nullable Comparator<Item> comparator, boolean sortNow, boolean notify)]
+//    public ComparableItemListImpl<Item> withComparator(@Nullable Comparator<Item> comparator, boolean sortNow) {
+    public ComparableItemListImpl<Item> withComparator(@Nullable Comparator<Item> comparator, boolean sortNow, boolean notify) {
         this.mComparator = comparator;
 
         //we directly sort the list with the defined comparator
         if (mItems != null && mComparator != null && sortNow) {
             Collections.sort(mItems, mComparator);
-            getFastAdapter().notifyAdapterDataSetChanged();
+            ///[UPGRADE#ComparableItemListImpl#withComparator(@Nullable Comparator<Item> comparator, boolean sortNow, boolean notify)]
+//            getFastAdapter().notifyAdapterDataSetChanged();
+            if(notify) {
+                getFastAdapter().notifyAdapterDataSetChanged();
+            }
         }
 
         return this;
