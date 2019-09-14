@@ -56,7 +56,9 @@ public class ComparableItemListImpl<Item extends IItem> extends DefaultItemListI
      * @return this
      */
     ///[UPGRADE#ComparableItemListImpl#withComparator(@Nullable Comparator<Item> comparator, boolean sortNow, boolean notify)]
-//    public ComparableItemListImpl<Item> withComparator(@Nullable Comparator<Item> comparator, boolean sortNow) {
+    public ComparableItemListImpl<Item> withComparator(@Nullable Comparator<Item> comparator, boolean sortNow) {
+        return withComparator(comparator, sortNow, true);
+    }
     public ComparableItemListImpl<Item> withComparator(@Nullable Comparator<Item> comparator, boolean sortNow, boolean notify) {
         this.mComparator = comparator;
 
