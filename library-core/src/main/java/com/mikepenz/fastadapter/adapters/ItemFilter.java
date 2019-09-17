@@ -387,7 +387,6 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
                     }
                 }
             }
-
             publishResults(mConstraint, performFiltering(mConstraint));
         } else {
             mItemAdapter.recursive(new AdapterPredicate<Item>() {
