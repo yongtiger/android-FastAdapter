@@ -214,7 +214,10 @@ public class SwipeListActivity extends AppCompatActivity implements ItemTouchCal
     }
 
     @Override
-    public void itemSwiped(int position, int direction) {
+    ///[FIX#SimpleSwipeCallback#itemSwiped(long identifier, int direction)]
+//    public void itemSwiped(int position, int direction) {
+    public void itemSwiped(long identifier, int direction) {
+
         // -- Option 1: Direct action --
         //do something when swiped such as: select, remove, update, ...:
         //A) fastItemAdapter.select(position);
@@ -222,7 +225,13 @@ public class SwipeListActivity extends AppCompatActivity implements ItemTouchCal
         //C) update item, set "read" if an email etc
 
         // -- Option 2: Delayed action --
-        final SwipeableItem item = fastItemAdapter.getItem(position);
+        ///[FIX#SimpleSwipeCallback#itemSwiped(long identifier, int direction)]
+//        final SwipeableItem item = fastItemAdapter.getItem(position);
+        final SwipeableItem item = fastItemAdapter.getItemById(identifier).first;
+        if (item == null) {
+            return;
+        }
+
         item.setSwipedDirection(direction);
 
         // This can vary depending on direction but remove & archive simulated here both results in
@@ -234,7 +243,9 @@ public class SwipeListActivity extends AppCompatActivity implements ItemTouchCal
                 int position = fastItemAdapter.getAdapterPosition(item);
                 if (position != RecyclerView.NO_POSITION) {
                     //this sample uses a filter. If a filter is used we should use the methods provided by the filter (to make sure filter and normal state is updated)
-                    fastItemAdapter.getItemFilter().remove(position);
+                    ///[FIX#SimpleSwipeCallback#itemSwiped(long identifier, int direction)]
+//                    fastItemAdapter.getItemFilter().remove(position);
+                    fastItemAdapter.getItemFilter().removeByIdentifier(item.getIdentifier());
                 }
             }
         };
@@ -252,6 +263,9 @@ public class SwipeListActivity extends AppCompatActivity implements ItemTouchCal
                 }
             }
         });
+
+        ///[FIX#SimpleSwipeCallback#itemSwiped(long identifier, int direction)]
+        int position = fastItemAdapter.getAdapterPosition(item);
 
         fastItemAdapter.notifyItemChanged(position);
 

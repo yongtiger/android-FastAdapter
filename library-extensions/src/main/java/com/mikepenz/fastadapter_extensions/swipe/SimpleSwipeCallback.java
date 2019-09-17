@@ -21,13 +21,15 @@ public class SimpleSwipeCallback extends ItemTouchHelper.SimpleCallback {
 
     public interface ItemSwipeCallback {
 
-        /**
-         * Called when an item has been swiped
-         *
-         * @param position  position of item in the adapter
-         * @param direction direction the item was swiped
-         */
-        void itemSwiped(int position, int direction);
+        ///[FIX#SimpleSwipeCallback#itemSwiped(long identifier, int direction)]
+//        /**
+//         * Called when an item has been swiped
+//         *
+//         * @param position  position of item in the adapter
+//         * @param direction direction the item was swiped
+//         */
+//        void itemSwiped(int position, int direction);
+        void itemSwiped(long identifier, int direction);
 
         ///[UPGRADE#onSwiping()]
         void onSwiping(SimpleSwipeCallback simpleSwipeCallback, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,
@@ -124,9 +126,13 @@ public class SimpleSwipeCallback extends ItemTouchHelper.SimpleCallback {
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
         viewHolder.itemView.setTranslationX(0);
         viewHolder.itemView.setTranslationY(0);
-        int position = viewHolder.getAdapterPosition();
-        if (position != RecyclerView.NO_POSITION) {
-            itemSwipeCallback.itemSwiped(position, direction);
+        ///[FIX#SimpleSwipeCallback#itemSwiped(long identifier, int direction)]
+//        int position = viewHolder.getAdapterPosition();
+//        if (position != RecyclerView.NO_POSITION) {
+//            itemSwipeCallback.itemSwiped(position, direction);
+//        }
+        if (viewHolder.getItemId() != -1L) {
+            itemSwipeCallback.itemSwiped(viewHolder.getItemId(), direction);
         }
     }
 
