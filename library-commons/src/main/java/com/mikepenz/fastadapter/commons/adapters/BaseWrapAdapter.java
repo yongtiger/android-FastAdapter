@@ -9,7 +9,6 @@ import com.mikepenz.fastadapter.IItem;
 import java.util.List;
 
 public class BaseWrapAdapter<Item extends IItem> extends FastAdapter {
-
     /*
      * GENERAL CODE NEEDED TO WRAP AN ADAPTER
      */
