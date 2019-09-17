@@ -1,12 +1,18 @@
 package com.mikepenz.fastadapter.adapters;
 
+import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.widget.Filter;
 
+import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.IAdapterExtension;
+import com.mikepenz.fastadapter.IExpandable;
 import com.mikepenz.fastadapter.IItem;
 import com.mikepenz.fastadapter.IItemAdapter;
+import com.mikepenz.fastadapter.ISubItem;
 import com.mikepenz.fastadapter.listeners.ItemFilterListener;
+import com.mikepenz.fastadapter.utils.AdapterPredicate;
 import com.mikepenz.fastadapter.utils.ComparableItemListImpl;
 
 import java.util.ArrayList;
@@ -15,6 +21,7 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import static java.util.Arrays.asList;
 
@@ -354,6 +361,59 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
         } else {
             return mItemAdapter.remove(position);
         }
+    }
+
+    ///[UPGRADE#removeByIdentifier(final long identifier)]
+    /**
+     * remvoes an item by it's identifier
+     *
+     * @param identifier the identifier to search for
+     * @return this
+     */
+    public ModelAdapter<?, Item> removeByIdentifier(final long identifier) {
+        if (mOriginalItems != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                mOriginalItems.removeIf(new Predicate<Item>() {
+                    @Override
+                    public boolean test(Item item) {
+                        return item.getIdentifier() == identifier;
+                    }
+                });
+            } else {
+                for (Item item : mOriginalItems) {
+                    if (item.getIdentifier() == identifier) {
+                        mOriginalItems.remove(item);
+                        break;
+                    }
+                }
+            }
+
+            publishResults(mConstraint, performFiltering(mConstraint));
+        } else {
+            mItemAdapter.recursive(new AdapterPredicate<Item>() {
+                @Override
+                public boolean apply(@NonNull IAdapter<Item> lastParentAdapter, int lastParentPosition, Item item, int position) {
+                    if (identifier == item.getIdentifier()) {
+                        //if it's a subitem remove it from the parent
+                        if (item instanceof ISubItem) {
+                            //a sub item which is not in the list can be instantly deleted
+                            IExpandable parent = (IExpandable) ((ISubItem) item).getParent();
+                            //parent should not be null, but check in any case..
+                            if (parent != null) {
+                                parent.getSubItems().remove(item);
+                            }
+                        }
+                        if (position != -1) {
+                            //a normal displayed item can only be deleted afterwards
+                            remove(position);
+                        }
+                    }
+                    return false;
+                }
+            }, false);
+        }
+
+        return mItemAdapter;
     }
 
     /**
