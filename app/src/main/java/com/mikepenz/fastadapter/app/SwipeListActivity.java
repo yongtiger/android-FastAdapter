@@ -217,7 +217,6 @@ public class SwipeListActivity extends AppCompatActivity implements ItemTouchCal
     ///[FIX#SimpleSwipeCallback#itemSwiped(long identifier, int direction)]
 //    public void itemSwiped(int position, int direction) {
     public void itemSwiped(long identifier, int direction) {
-
         // -- Option 1: Direct action --
         //do something when swiped such as: select, remove, update, ...:
         //A) fastItemAdapter.select(position);
