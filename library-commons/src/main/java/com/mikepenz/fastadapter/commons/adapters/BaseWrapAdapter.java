@@ -144,6 +144,9 @@ public class BaseWrapAdapter<Item extends IItem> extends FastAdapter {
      */
     @Override
     public void setHasStableIds(boolean hasStableIds) {
+        ///[FIX#BaseWrapAdapter#setHasStableIds(boolean hasStableIds)]
+        super.setHasStableIds(hasStableIds);
+
         if (mFastAdapter != null) {
             mFastAdapter.setHasStableIds(hasStableIds);
         }
