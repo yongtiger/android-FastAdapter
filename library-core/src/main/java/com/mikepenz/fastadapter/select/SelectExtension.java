@@ -272,6 +272,19 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
         }
     }
 
+    ///[UPGRADE#SelectExtension#toggleSelection()]
+    public void toggleSelection() {
+        mFastAdapter.recursive(new AdapterPredicate<Item>() {
+            @Override
+            public boolean apply(@NonNull IAdapter<Item> lastParentAdapter, int lastParentPosition, Item item, int position) {
+                if (item.isSelectable()) {
+                    toggleSelection(position);
+                }
+                return false;
+            }
+        }, false);
+    }
+
     /**
      * handles the selection and deselects item if multiSelect is disabled
      *
