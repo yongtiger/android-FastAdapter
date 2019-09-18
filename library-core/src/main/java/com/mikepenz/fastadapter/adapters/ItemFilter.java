@@ -1,6 +1,5 @@
 package com.mikepenz.fastadapter.adapters;
 
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.widget.Filter;
@@ -21,7 +20,6 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Predicate;
 
 import static java.util.Arrays.asList;
 
@@ -372,19 +370,10 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
      */
     public ModelAdapter<?, Item> removeByIdentifier(final long identifier) {
         if (mOriginalItems != null) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                mOriginalItems.removeIf(new Predicate<Item>() {
-                    @Override
-                    public boolean test(Item item) {
-                        return item.getIdentifier() == identifier;
-                    }
-                });
-            } else {
-                for (Item item : mOriginalItems) {
-                    if (item.getIdentifier() == identifier) {
-                        mOriginalItems.remove(item);
-                        break;
-                    }
+            for (Item item : mOriginalItems) {
+                if (item.getIdentifier() == identifier) {
+                    mOriginalItems.remove(item);
+                    break;
                 }
             }
             publishResults(mConstraint, performFiltering(mConstraint));
