@@ -273,6 +273,9 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
     }
 
     ///[UPGRADE#SelectExtension#toggleSelection()]
+    /**
+     * toggles the selection of all items
+     */
     public void toggleSelection() {
         mFastAdapter.recursive(new AdapterPredicate<Item>() {
             @Override
