@@ -104,8 +104,9 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             // No filter implemented we return all the list
             results.values = mOriginalItems;
             results.count = mOriginalItems.size();
-            //our filter was cleared we can now forget the old OriginalItems
-            mOriginalItems = null;
+            ///[FIX#ItemFilter#mOriginalItems = null]
+//            //our filter was cleared we can now forget the old OriginalItems
+//            mOriginalItems = null;
 
             if (mItemFilterListener != null) {
                 mItemFilterListener.onReset();
@@ -146,8 +147,10 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             mItemAdapter.setInternal((List<Item>) results.values, false, null);
         }
 
-        //only fire when we are filtered, not in onreset
-        if (mItemFilterListener != null && mOriginalItems != null) {
+        ///[FIX#ItemFilter#mOriginalItems = null]
+//        //only fire when we are filtered, not in onreset
+//        if (mItemFilterListener != null && mOriginalItems != null) {
+        if (mItemFilterListener != null) {
             mItemFilterListener.itemsFiltered(constraint, (List<Item>) results.values);
         }
     }
