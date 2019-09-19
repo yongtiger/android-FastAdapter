@@ -148,7 +148,7 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
         }
 
         ///[FIX#ItemFilter#mOriginalItems = null]
-//        //only fire when we are filtered, not in onreset
+//        //only fire when we are filtered, not in onReset()
 //        if (mItemFilterListener != null && mOriginalItems != null) {
         if (mItemFilterListener != null) {
             mItemFilterListener.itemsFiltered(constraint, (List<Item>) results.values);
