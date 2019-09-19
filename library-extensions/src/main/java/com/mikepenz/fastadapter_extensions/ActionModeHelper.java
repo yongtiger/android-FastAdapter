@@ -1,6 +1,5 @@
 package com.mikepenz.fastadapter_extensions;
 
-
 import android.support.annotation.MenuRes;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
@@ -131,6 +130,8 @@ public class ActionModeHelper<Item extends IItem> {
             else if (item.isSelectable())
                 selected++;
             checkActionMode(act, selected);
+            ///[FIX#ActionModeHelper]
+            return false;
         }
 
         return null;
@@ -151,9 +152,14 @@ public class ActionModeHelper<Item extends IItem> {
             mSelectExtension.select(position);
             // update title
             checkActionMode(act, 1);
-            //we consume this event so the normal onClick isn't called anymore
-            return mActionMode;
         }
+        //we consume this event so the normal onClick isn't called anymore
+        return mActionMode;
+    }
+
+    ///[UPGRADE#ActionModeHelper#startSupportActionMode()]
+    public ActionMode startSupportActionMode(AppCompatActivity act) {
+        mActionMode = act.startSupportActionMode(mInternalCallback);
         return mActionMode;
     }
 
