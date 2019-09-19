@@ -1,5 +1,6 @@
 package com.mikepenz.fastadapter_extensions;
 
+
 import android.support.annotation.MenuRes;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
