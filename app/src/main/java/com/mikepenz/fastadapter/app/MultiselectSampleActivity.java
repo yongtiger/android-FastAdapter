@@ -105,6 +105,12 @@ public class MultiselectSampleActivity extends AppCompatActivity {
 
         //
         mUndoHelper = new UndoHelper<>(mFastAdapter, new UndoHelper.UndoListener<SimpleItem>() {
+            ///[UndoHelper#UndoListener#postDoChange()/postUnDoChange()]
+            @Override
+            public void postDoChange(int doChangeCount) {}
+            @Override
+            public void postUnDoChange(int unDoChangeCount) {}
+
             @Override
             public void commitRemove(Set<Integer> positions, ArrayList<FastAdapter.RelativeInfo<SimpleItem>> removed) {
                 Log.e("UndoHelper", "Positions: " + positions.toString() + " Removed: " + removed.size());
