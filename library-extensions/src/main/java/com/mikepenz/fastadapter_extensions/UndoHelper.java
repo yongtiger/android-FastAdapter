@@ -77,11 +77,14 @@ public class UndoHelper<Item extends IItem> {
 
         mSnackBar.addCallback(mSnackbarCallback)
                 .setAction(actionText, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                undoChange();
-            }
-        });
+                    @Override
+                    public void onClick(View v) {
+                        ///[UndoHelper#UndoListener#postDoChange()/postUnDoChange()]
+//                undoChange();
+                        final int unDoChangeCount = undoChange();
+                        mUndoListener.postUnDoChange(unDoChangeCount);
+                    }
+                });
     }
 
     public @Nullable
@@ -119,7 +122,7 @@ public class UndoHelper<Item extends IItem> {
      * @param positions  the positions where the items were removed
      * @return the generated Snackbar
      */
-    public Snackbar remove(final View view, final String text, final String actionText, @Snackbar.Duration int duration, final Set<Integer> positions) {
+    public Snackbar remove(final View view, final String text, final String actionText, @Snackbar.Duration int duration, final Set<Integer> positions) {/////////List<Object> payloads
         if (mHistory != null) {
             // Set a flag, if remove was called before the Snackbar
             // executed the commit -> Snackbar does not commit the new
@@ -141,13 +144,26 @@ public class UndoHelper<Item extends IItem> {
         });
 
         mHistory = history;
-        doChange(); // Do not execute when Snackbar shows up, instead change immediately
 
-        mSnackBar = Snackbar.make(view, text, duration).addCallback(mSnackbarCallback);
+        ///[UndoHelper#UndoListener#postDoChange()/postUnDoChange()]
+//        doChange(); // Do not execute when Snackbar shows up, instead change immediately
+        final int doChangeCount = doChange();
+        mUndoListener.postDoChange(doChangeCount);
+        if (doChangeCount == 0) {
+            return null;
+        }
+
+        ///[UndoHelper#UndoListener#postDoChange()/postUnDoChange()]
+//        mSnackBar = Snackbar.make(view, text, duration).addCallback(mSnackbarCallback);
+        mSnackBar = Snackbar.make(view, String.format(text, doChangeCount), duration).addCallback(mSnackbarCallback);
+
         mSnackBar.setAction(actionText, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                undoChange();
+                ///[UndoHelper#UndoListener#postDoChange()/postUnDoChange()]
+//                undoChange();
+                final int unDoChangeCount = undoChange();
+                mUndoListener.postUnDoChange(unDoChangeCount);
             }
         });
 
@@ -174,20 +190,25 @@ public class UndoHelper<Item extends IItem> {
         }
     }
 
-    private void doChange() {
+    private int doChange() {
+        int doChangeCount = 0;    ///[UndoHelper#UndoListener#postDoChange()/postUnDoChange()]
         if (mHistory != null) {
             if (mHistory.action == ACTION_REMOVE) {
                 for (int i = mHistory.items.size() - 1; i >= 0; i--) {
                     FastAdapter.RelativeInfo<Item> relativeInfo = mHistory.items.get(i);
                     if (relativeInfo.adapter instanceof IItemAdapter) {
                         ((IItemAdapter) relativeInfo.adapter).remove(relativeInfo.position);
+                        doChangeCount++;  ///[UndoHelper#UndoListener#postDoChange()/postUnDoChange()]
                     }
                 }
             }
         }
+
+        return doChangeCount; ///[UndoHelper#UndoListener#postDoChange()/postUnDoChange()]
     }
 
-    private void undoChange() {
+    private int undoChange() {
+        int unDoChangeCount = 0;  ///[UndoHelper#UndoListener#postDoChange()/postUnDoChange()]
         if (mHistory != null) {
             if (mHistory.action == ACTION_REMOVE) {
                 for (int i = 0, size = mHistory.items.size(); i < size; i++) {
@@ -197,15 +218,22 @@ public class UndoHelper<Item extends IItem> {
                         adapter.addInternal(relativeInfo.position, asList(relativeInfo.item));
                         if (relativeInfo.item.isSelected()) {
                             mAdapter.select(relativeInfo.position);
+                            unDoChangeCount++;
                         }
                     }
                 }
             }
         }
         mHistory = null;
+
+        return unDoChangeCount; ///[UndoHelper#UndoListener#postDoChange()/postUnDoChange()]
     }
 
     public interface UndoListener<Item extends IItem> {
+        ///[UndoHelper#UndoListener#postDoChange()/postUnDoChange()]
+        void postDoChange(int doChangeCount);
+        void postUnDoChange(int unDoChangeCount);
+
         void commitRemove(Set<Integer> positions, ArrayList<FastAdapter.RelativeInfo<Item>> removed);
     }
 
