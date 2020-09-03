@@ -31,12 +31,12 @@ android {
 
 dependencies {
     implementation  project(':library-core')
-    implementation  project(':library-commons')
+    implementation  project(':library')
     implementation  project(':library-extensions-expandable')
 
-    implementation  "com.android.support:recyclerview-v7:${versions.supportLib}"
-    implementation  "com.android.support:design:${versions.supportLib}"
-    implementation  "com.android.support:support-annotations:${versions.supportLib}"
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'com.google.android.material:material:1.2.0'
+    implementation 'androidx.annotation:annotation:1.1.0'
 
-    implementation  'com.mikepenz:materialize:1.1.2'
+    implementation  'com.mikepenz:materialize:1.2.1'
 }

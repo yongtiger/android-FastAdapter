@@ -1,6 +1,6 @@
 package com.mikepenz.fastadapter.app;
 
-import android.support.multidex.MultiDexApplication;
+import androidx.multidex.MultiDexApplication;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;

@@ -1,10 +1,6 @@
 package com.mikepenz.fastadapter;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.util.ArrayMap;
-import android.support.v4.util.Pair;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.MotionEvent;
@@ -38,6 +34,11 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Nullable;
+
+import androidx.annotation.NonNull;
+import androidx.collection.ArrayMap;
+import androidx.core.util.Pair;
+import androidx.recyclerview.widget.RecyclerView;
 
 import static com.mikepenz.fastadapter.adapters.ItemAdapter.items;
 

@@ -2,9 +2,9 @@ package com.mikepenz.fastadapter.app.items;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
-import android.support.v4.view.ViewCompat;
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+import androidx.core.view.ViewCompat;
 import android.view.View;
 import android.widget.TextView;
 

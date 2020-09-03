@@ -1,6 +1,5 @@
 package com.mikepenz.fastadapter.listeners;
 
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.mikepenz.fastadapter.FastAdapter;
@@ -8,6 +7,8 @@ import com.mikepenz.fastadapter.IItem;
 import com.mikepenz.fastadapter.R;
 
 import java.util.List;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 public class OnBindViewHolderListenerImpl implements OnBindViewHolderListener {
     /**

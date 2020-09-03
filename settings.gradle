@@ -1,5 +1,6 @@
+include ':library'
 include ':app'
 include ':library-core'
-include ':library-commons'
+include ':library'
 include ':library-extensions'
 include ':library-extensions-expandable'
