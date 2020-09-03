@@ -16,27 +16,35 @@ android {
 
         consumerProguardFiles 'consumer-proguard-rules.pro'
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+
     productFlavors {
     }
+
     lintOptions {
         abortOnError false
     }
 }
 
 dependencies {
-    implementation  project(':library-core')
-    implementation  project(':library')
-    implementation  project(':library-extensions-expandable')
-
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'com.google.android.material:material:1.2.0'
     implementation 'androidx.annotation:annotation:1.1.0'
 
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+
+    // used to base on some backwards compatible themes
+    // contains util classes to support various android versions, and clean up code
+    // comes with the awesome "Holder"-Pattern
+    // https://github.com/mikepenz/Materialize
     implementation  'com.mikepenz:materialize:1.2.1'
+
+    implementation  project(':library-core')
+    implementation  project(':library')
+    implementation  project(':library-extensions-expandable')
 }

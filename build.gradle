@@ -1,20 +1,17 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     ext {
-        release = [
-                versionName: "3.3.1",
-                versionCode: 3301
-        ]
-
         setup = [
-                compileSdk: 30,
-                buildTools: "30.0.0",
-                minSdk    : 16, ///minSdkVersion 14 cannot be smaller than version 16 declared in library [io.realm:realm-android-library:7.0.3]
-                targetSdk : 30
+                compileSdk : 30,
+                buildTools : "30.0.0",
+//                minSdk     : 14,
+                minSdk     : 16,    ///Note: cannot be smaller than version 16 declared in library [io.realm:realm-android-library:7.0.3]
+                targetSdk  : 30
         ]
 
-        versions = [
-                androidX: '1.2.0'
+        release = [
+                versionName: "1.0.1",
+                versionCode: 10001
         ]
     }
 
@@ -22,10 +19,11 @@ buildscript {
         google()
         jcenter()
     }
+
     dependencies {
         classpath 'com.android.tools.build:gradle:4.0.1'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.5'
     }
 }
 
