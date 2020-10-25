@@ -143,8 +143,6 @@ public class RealmActivity extends AppCompatActivity {
                 mRealm.where(RealmSampleUserItem.class).findAllAsync().addChangeListener(new RealmChangeListener<RealmResults<RealmSampleUserItem>>() {
                     @Override
                     public void onChange(RealmResults<RealmSampleUserItem> userItems) {
-                        //Remove the change listener
-                        userItems.removeChangeListener(this);
                         //Store the primary key to get access from a other thread
                         final long newPrimaryKey = userItems.last().getIdentifier() + 1;
                         mRealm.executeTransactionAsync(new Realm.Transaction() {
@@ -154,6 +152,12 @@ public class RealmActivity extends AppCompatActivity {
                                 newUser.withName("Sample Realm Element " + newPrimaryKey);
                             }
                         });
+
+                        ///[FIX#有时RecyclerView无法更新]
+                        ///注意：必须在mRealm.executeTransactionAsync()之后！
+                        ///否则可能不会执行RealmChangeListener#onChange()，造成RecyclerView无法更新
+                        //Remove the change listener
+                        userItems.removeChangeListener(this);
                     }
                 });
                 return true;

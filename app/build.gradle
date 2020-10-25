@@ -150,6 +150,6 @@ buildscript {
     }
 
     dependencies {
-        classpath "io.realm:realm-gradle-plugin:7.0.3"  ///Note: cannot be smaller than version 16 declared in library [io.realm:realm-android-library:7.0.3]
+        classpath "io.realm:realm-gradle-plugin:7.0.8"  ///Note: cannot be smaller than version 16 declared in library [io.realm:realm-android-library:7.0.3]
     }
 }
