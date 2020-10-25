@@ -143,9 +143,13 @@ public class RealmActivity extends AppCompatActivity {
                 mRealm.where(RealmSampleUserItem.class).findAllAsync().addChangeListener(new RealmChangeListener<RealmResults<RealmSampleUserItem>>() {
                     @Override
                     public void onChange(RealmResults<RealmSampleUserItem> userItems) {
+                        //////??????[BUG#有时RecyclerView无法更新]参考：BrainAssistant#MemoryCategoryActivity#doAdd()
+                        //Remove the change listener
+                        userItems.removeChangeListener(this);
+
                         //Store the primary key to get access from a other thread
                         final long newPrimaryKey = userItems.last().getIdentifier() + 1;
-                        mRealm.executeTransaction(new Realm.Transaction() {
+                        mRealm.executeTransactionAsync(new Realm.Transaction() {
                             @Override
                             public void execute(Realm realm) {
                                 RealmSampleUserItem newUser = realm.createObject(RealmSampleUserItem.class, newPrimaryKey);
@@ -153,11 +157,6 @@ public class RealmActivity extends AppCompatActivity {
                             }
                         });
 
-                        ///[FIX#有时RecyclerView无法更新]
-                        ///注意：不能使用mRealm.executeTransactionAsync()！
-                        ///否则可能不会执行RealmChangeListener#onChange()，造成RecyclerView无法更新
-                        //Remove the change listener
-                        userItems.removeChangeListener(this);
                     }
                 });
                 return true;

@@ -10,8 +10,8 @@ buildscript {
         ]
 
         release = [
-                versionName: "1.0.3",   ///v1.0.3#[FIX#有时RecyclerView无法更新]不能使用mRealm.executeTransactionAsync()！
-                versionCode: 10003
+                versionName: "1.0.4",   ///v1.0.4#[BUG#有时RecyclerView无法更新]参考：BrainAssistant#MemoryCategoryActivity#doAdd()
+                versionCode: 10004
         ]
     }
 
