@@ -145,7 +145,7 @@ public class RealmActivity extends AppCompatActivity {
                     public void onChange(RealmResults<RealmSampleUserItem> userItems) {
                         //Store the primary key to get access from a other thread
                         final long newPrimaryKey = userItems.last().getIdentifier() + 1;
-                        mRealm.executeTransactionAsync(new Realm.Transaction() {
+                        mRealm.executeTransaction(new Realm.Transaction() {
                             @Override
                             public void execute(Realm realm) {
                                 RealmSampleUserItem newUser = realm.createObject(RealmSampleUserItem.class, newPrimaryKey);
@@ -154,7 +154,7 @@ public class RealmActivity extends AppCompatActivity {
                         });
 
                         ///[FIX#有时RecyclerView无法更新]
-                        ///注意：必须在mRealm.executeTransactionAsync()之后！
+                        ///注意：不能使用mRealm.executeTransactionAsync()！
                         ///否则可能不会执行RealmChangeListener#onChange()，造成RecyclerView无法更新
                         //Remove the change listener
                         userItems.removeChangeListener(this);
