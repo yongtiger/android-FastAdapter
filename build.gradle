@@ -10,8 +10,8 @@ buildscript {
         ]
 
         release = [
-                versionName: "1.0.5",   ///v1.0.5#update gradle
-                versionCode: 10005
+                versionName: "1.0.6",   ///v1.0.6#add ModelAdapterUtil
+                versionCode: 10006
         ]
     }
 
