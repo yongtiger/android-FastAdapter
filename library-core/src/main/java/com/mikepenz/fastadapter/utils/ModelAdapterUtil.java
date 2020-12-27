@@ -8,7 +8,7 @@ import com.mikepenz.fastadapter.adapters.ModelAdapter;
 
 import java.util.List;
 
-public class ModelAdapterUtil {
+public abstract class ModelAdapterUtil {
     public static <Item extends IItem> void add(@Nullable ModelAdapter<Item, Item> adapter, @Nullable List<Item> items) {
         if (adapter == null || items == null || items.size() == 0) {
             return;
