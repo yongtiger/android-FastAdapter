@@ -10,8 +10,8 @@ buildscript {
         ]
 
         release = [
-                versionName: "1.0.7",   ///v1.0.7#add ModelAdapterUtil
-                versionCode: 10007
+                versionName: "1.0.8",   ///v1.0.8#upgrade ModelAdapterUtil
+                versionCode: 10008
         ]
     }
 
