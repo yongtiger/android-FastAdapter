@@ -10,8 +10,8 @@ buildscript {
         ]
 
         release = [
-                versionName: "1.0.9",   ///v1.0.9#upgrade ModelAdapterUtil
-                versionCode: 10009
+                versionName: "1.0.10",   ///v1.0.10#[FIX#ItemFilter#global position]
+                versionCode: 100010
         ]
     }
 

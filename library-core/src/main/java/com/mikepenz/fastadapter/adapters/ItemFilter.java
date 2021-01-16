@@ -280,7 +280,9 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             if (mItemAdapter.isUseIdDistributor()) {
                 mItemAdapter.getIdDistributor().checkIds(items);
             }
-            mOriginalItems.addAll(getAdapterPosition(mItemAdapter.getAdapterItems().get(position)) - mItemAdapter.getFastAdapter().getPreItemCount(position), items);
+            ///[FIX#ItemFilter#global position]
+//            mOriginalItems.addAll(getAdapterPosition(mItemAdapter.getAdapterItems().get(position)) - mItemAdapter.getFastAdapter().getPreItemCount(position), items);
+            mOriginalItems.addAll(getAdapterPosition(mItemAdapter.getAdapterItems().get(position - mItemAdapter.getFastAdapter().getPreItemCount(position))), items);
 
             ///[FIX#ItemFilter#Sort]
             sortOriginalItems();
