@@ -129,7 +129,7 @@ public abstract class ModelAdapterUtil {
     }
 
     public static <Item extends IItem> void removeByIdentifier(@Nullable ModelAdapter<Item, Item> adapter, final long identifier) {
-        if (adapter == null) {
+        if (adapter == null || identifier == -1L) {
             return;
         }
 
