@@ -134,13 +134,13 @@ public class RadioButtonSampleItem extends AbstractItem<RadioButtonSampleItem, R
         @Override
         public void onClick(View v, int position, FastAdapter<RadioButtonSampleItem> fastAdapter, RadioButtonSampleItem item) {
             if (!item.isSelected()) {
-                Set<Integer> selections = fastAdapter.getSelections();
+                Set<Integer> selections = fastAdapter.getExtension(SelectExtension.class).getSelections();
                 if (!selections.isEmpty()) {
                     int selectedPosition = selections.iterator().next();
                     fastAdapter.getExtension(SelectExtension.class).deselect();
                     fastAdapter.notifyItemChanged(selectedPosition);
                 }
-                fastAdapter.select(position);
+                fastAdapter.getExtension(SelectExtension.class).select(position);
             }
         }
     }
