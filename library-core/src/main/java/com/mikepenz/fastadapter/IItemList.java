@@ -17,6 +17,9 @@ public interface IItemList<Item> {
     ///[UPGRADE#remove(Item item)]
     void remove(Item item, int position);
 
+    ///[UPGRADE#removeByIdentifier(long identifier)]
+    void removeByIdentifier(long identifier, int position);
+
     void removeRange(int position, int itemCount, int preItemCount);
 
     void move(int fromPosition, int toPosition, int preItemCount);

@@ -61,6 +61,19 @@ public class DefaultItemListImpl<Item extends IItem> extends DefaultItemList<Ite
         }
     }
 
+    ///[UPGRADE#removeByIdentifier(long identifier)]
+    @Override
+    public void removeByIdentifier(long identifier, int position) {
+        int adapterPosition = getAdapterPosition(identifier);
+        if (adapterPosition == -1) {
+            return;
+        }
+        mItems.remove(adapterPosition);
+        if (getFastAdapter() != null) {
+            getFastAdapter().notifyAdapterItemRemoved(position);
+        }
+    }
+
     @Override
     public void removeRange(int position, int itemCount, int preItemCount) {
         //global position to relative
