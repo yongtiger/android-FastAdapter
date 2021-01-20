@@ -383,27 +383,7 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             }
             publishResults(mConstraint, performFiltering(mConstraint));
         } else {
-            mItemAdapter.recursive(new AdapterPredicate<Item>() {
-                @Override
-                public boolean apply(@NonNull IAdapter<Item> lastParentAdapter, int lastParentPosition, Item item, int position) {
-                    if (identifier == item.getIdentifier()) {
-                        //if it's a subitem remove it from the parent
-                        if (item instanceof ISubItem) {
-                            //a sub item which is not in the list can be instantly deleted
-                            IExpandable parent = (IExpandable) ((ISubItem) item).getParent();
-                            //parent should not be null, but check in any case..
-                            if (parent != null) {
-                                parent.getSubItems().remove(item);
-                            }
-                        }
-                        if (position != -1) {
-                            //a normal displayed item can only be deleted afterwards
-                            remove(position);
-                        }
-                    }
-                    return false;
-                }
-            }, false);
+            mItemAdapter.removeByIdentifier(identifier);
         }
 
         return mItemAdapter;
