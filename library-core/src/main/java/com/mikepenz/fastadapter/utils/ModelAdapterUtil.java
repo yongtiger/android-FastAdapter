@@ -1,5 +1,6 @@
 package com.mikepenz.fastadapter.utils;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,8 +13,20 @@ import static java.util.Arrays.asList;
 
 public abstract class ModelAdapterUtil {
 
+    public static <Item extends IItem> List<Item> getAdapterOriginalItems(@NonNull ModelAdapter<Item, Item> adapter) {
+        if (adapter.getItemFilter() != null) {
+            if (adapter.getItemFilter().getOriginalItems() == null) {
+                return adapter.getAdapterItems();
+            } else {
+                return adapter.getItemFilter().getOriginalItems();
+            }
+        } else {
+            return adapter.getAdapterItems();
+        }
+    }
+
     public static <Item extends IItem> void add(@Nullable ModelAdapter<Item, Item> adapter, Item... items) {
-        if (adapter == null || items == null || items.length == 0) {
+        if (adapter == null || items.length == 0) {
             return;
         }
 
@@ -35,7 +48,7 @@ public abstract class ModelAdapterUtil {
     }
 
     public static <Item extends IItem> void add(@Nullable ModelAdapter<Item, Item> adapter, int position, Item... items) {
-        if (adapter == null || position == RecyclerView.NO_POSITION || items == null || items.length == 0) {
+        if (adapter == null || position == RecyclerView.NO_POSITION || items.length == 0) {
             return;
         }
 
