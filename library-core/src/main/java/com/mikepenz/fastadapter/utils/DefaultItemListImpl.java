@@ -52,6 +52,15 @@ public class DefaultItemListImpl<Item extends IItem> extends DefaultItemList<Ite
         }
     }
 
+    ///[UPGRADE#remove(Item item)]
+    @Override
+    public void remove(Item item, int position) {
+        mItems.remove(item);
+        if (getFastAdapter() != null) {
+            getFastAdapter().notifyAdapterItemRemoved(position);
+        }
+    }
+
     @Override
     public void removeRange(int position, int itemCount, int preItemCount) {
         //global position to relative

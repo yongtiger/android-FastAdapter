@@ -366,6 +366,22 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
         }
     }
 
+    ///[UPGRADE#remove(Item item)]
+    /**
+     * removes an item
+     *
+     * @param item     the item to remove
+     */
+    public ModelAdapter<?, Item> remove(Item item) {
+        if (mOriginalItems != null) {
+            mOriginalItems.remove(item);
+            publishResults(mConstraint, performFiltering(mConstraint));
+            return mItemAdapter;
+        } else {
+            return mItemAdapter.remove(item);
+        }
+    }
+
     ///[UPGRADE#removeByIdentifier(final long identifier)]
     /**
      * remvoes an item by it's identifier
@@ -406,7 +422,7 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
 
                 ///[FIX#ItemFilter#global position]
 //                mOriginalItems.remove(position - preItemCount);
-                mOriginalItems.remove(getAdapterPosition(mItemAdapter.getAdapterItems().get(position - preItemCount)));
+                mOriginalItems.remove(mItemAdapter.getAdapterItems().get(position - preItemCount));
 
             }
             publishResults(mConstraint, performFiltering(mConstraint));

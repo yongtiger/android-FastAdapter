@@ -489,6 +489,17 @@ public class ModelAdapter<Model, Item extends IItem> extends AbstractAdapter<Ite
         return this;
     }
 
+    ///[UPGRADE#remove(Item item)]
+    /**
+     * removes an item at the given position within the existing icons
+     *
+     * @param item     the item to remove
+     */
+    public ModelAdapter<Model, Item> remove(Item item) {
+        mItems.remove(item, getFastAdapter().getPosition(item));
+        return this;
+    }
+
     /**
      * removes a range of items starting with the given position within the existing icons
      *

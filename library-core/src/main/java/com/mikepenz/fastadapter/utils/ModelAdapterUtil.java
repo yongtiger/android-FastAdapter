@@ -129,15 +129,15 @@ public abstract class ModelAdapterUtil {
         }
     }
 
-    public static <Item extends IItem> void removeRange(@Nullable ModelAdapter<Item, Item> adapter, int position, int itemCount) {
-        if (adapter == null || position == RecyclerView.NO_POSITION || itemCount <= 0) {
+    public static <Item extends IItem> void remove(@Nullable ModelAdapter<Item, Item> adapter, Item item) {
+        if (adapter == null) {
             return;
         }
 
         if (adapter.getItemFilter() == null) {
-            adapter.removeRange(position, itemCount);
+            adapter.remove(item);
         } else {
-            adapter.getItemFilter().removeRange(position, itemCount);
+            adapter.getItemFilter().remove(item);
         }
     }
 
@@ -150,6 +150,18 @@ public abstract class ModelAdapterUtil {
             adapter.removeByIdentifier(identifier);
         } else {
             adapter.getItemFilter().removeByIdentifier(identifier);
+        }
+    }
+
+    public static <Item extends IItem> void removeRange(@Nullable ModelAdapter<Item, Item> adapter, int position, int itemCount) {
+        if (adapter == null || position == RecyclerView.NO_POSITION || itemCount <= 0) {
+            return;
+        }
+
+        if (adapter.getItemFilter() == null) {
+            adapter.removeRange(position, itemCount);
+        } else {
+            adapter.getItemFilter().removeRange(position, itemCount);
         }
     }
 
