@@ -10,8 +10,8 @@ buildscript {
         ]
 
         release = [
-                versionName: "1.0.12",   ///v1.0.12#[FIX#ItemFilter#getAdapterOriginalItems(@NonNull ModelAdapter<Item, Item> adapter)]
-                versionCode: 100012
+                versionName: "1.0.13",   ///v1.0.13#[FIX#ItemFilter#getAdapterOriginalItems(@NonNull ModelAdapter<Item, Item> adapter)]
+                versionCode: 100013
         ]
     }
 
