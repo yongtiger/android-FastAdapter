@@ -26,11 +26,11 @@ public interface IItemList<Item> {
 
     int size();
 
-    void clear(int preItemCount);
+    void clear(int position);
 
     boolean isEmpty();
 
-    void addAll(List<Item> items, int preItemCount);
+    void addAll(List<Item> items, int position);
 
     void set(int position, Item item, int preItemCount);
 

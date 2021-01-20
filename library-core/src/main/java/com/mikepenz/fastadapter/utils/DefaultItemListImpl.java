@@ -105,11 +105,11 @@ public class DefaultItemListImpl<Item extends IItem> extends DefaultItemList<Ite
     }
 
     @Override
-    public void clear(int preItemCount) {
+    public void clear(int position) {
         int size = mItems.size();
         mItems.clear();
         if (getFastAdapter() != null) {
-            getFastAdapter().notifyAdapterItemRangeRemoved(preItemCount, size);
+            getFastAdapter().notifyAdapterItemRangeRemoved(position, size);
         }
     }
 
@@ -127,11 +127,11 @@ public class DefaultItemListImpl<Item extends IItem> extends DefaultItemList<Ite
     }
 
     @Override
-    public void addAll(List<Item> items, int preItemCount) {
+    public void addAll(List<Item> items, int position) {
         int countBefore = mItems.size();
         mItems.addAll(items);
         if (getFastAdapter() != null) {
-            getFastAdapter().notifyAdapterItemRangeInserted(preItemCount + countBefore, items.size());
+            getFastAdapter().notifyAdapterItemRangeInserted(position + countBefore, items.size());
         }
     }
 
