@@ -258,6 +258,7 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             if (mItemAdapter.isUseIdDistributor()) {
                 mItemAdapter.getIdDistributor().checkIds(items);
             }
+
             mOriginalItems.addAll(items);
 
             ///[FIX#ItemFilter#Sort]
@@ -266,6 +267,7 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             if (isPublishResults) {
                 publishResults(mConstraint, performFiltering(mConstraint));
             }
+
             return mItemAdapter;
         } else {
             return mItemAdapter.addInternal(items);
@@ -303,6 +305,7 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             if (mItemAdapter.isUseIdDistributor()) {
                 mItemAdapter.getIdDistributor().checkIds(items);
             }
+
             ///[FIX#ItemFilter#global position]
 //            mOriginalItems.addAll(getAdapterPosition(mItemAdapter.getAdapterItems().get(position)) - mItemAdapter.getFastAdapter().getPreItemCount(position), items);
             mOriginalItems.addAll(getAdapterPosition(mItemAdapter.getAdapterItems().get(position - mItemAdapter.getFastAdapter().getPreItemCount(position))), items);
@@ -313,6 +316,7 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             if (isPublishResults) {
                 publishResults(mConstraint, performFiltering(mConstraint));
             }
+
             return mItemAdapter;
         } else {
             return mItemAdapter.addInternal(position, items);
@@ -335,6 +339,7 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             if (mItemAdapter.isUseIdDistributor()) {
                 mItemAdapter.getIdDistributor().checkIds(items);
             }
+
             mOriginalItems.addAll(position, items);
 
             ///[FIX#ItemFilter#Sort]
@@ -343,6 +348,7 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             if (isPublishResults) {
                 publishResults(mConstraint, performFiltering(mConstraint));
             }
+
             return mItemAdapter;
         } else {
             return mItemAdapter.addInternal(position, items);
@@ -372,6 +378,7 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             if (isPublishResults) {
                 publishResults(mConstraint, performFiltering(mConstraint));
             }
+
             return mItemAdapter;
         } else {
             return mItemAdapter.setInternal(position, item);
@@ -394,10 +401,13 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             if (mItemAdapter.isUseIdDistributor()) {
                 mItemAdapter.getIdDistributor().checkId(item);
             }
+
             mOriginalItems.set(position, item);
+
             if (isPublishResults) {
                 publishResults(mConstraint, performFiltering(mConstraint));
             }
+
             return mItemAdapter;
         } else {
             return mItemAdapter.setInternal(position, item);
@@ -434,6 +444,7 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             if (isPerformFiltering) {
                 performFiltering(mConstraint);
             }
+
             return mItemAdapter;
         } else {
             return mItemAdapter.move(fromPosition, toPosition);
@@ -459,6 +470,7 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             if (isPublishResults) {
                 publishResults(mConstraint, performFiltering(mConstraint));
             }
+
             return mItemAdapter;
         } else {
             return mItemAdapter.remove(position);
@@ -478,9 +490,11 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
     public ModelAdapter<?, Item> removeInOriginalItems(boolean isPublishResults, int position) {
         if (mOriginalItems != null) {
             mOriginalItems.remove(position);
+
             if (isPublishResults) {
                 publishResults(mConstraint, performFiltering(mConstraint));
             }
+
             return mItemAdapter;
         } else {
             return mItemAdapter.removeInOriginalItems(position);
@@ -500,9 +514,11 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
     public ModelAdapter<?, Item> remove(boolean isPublishResults, Item item) {
         if (mOriginalItems != null) {
             mOriginalItems.remove(item);
+
             if (isPublishResults) {
                 publishResults(mConstraint, performFiltering(mConstraint));
             }
+
             return mItemAdapter;
         } else {
             return mItemAdapter.remove(item);
@@ -528,6 +544,7 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
                     break;
                 }
             }
+
             if (isPublishResults) {
                 publishResults(mConstraint, performFiltering(mConstraint));
             }
@@ -561,9 +578,11 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
                 mOriginalItems.remove(mItemAdapter.getAdapterItems().get(position - preItemCount));
 
             }
+
             if (isPublishResults) {
                 publishResults(mConstraint, performFiltering(mConstraint));
             }
+
             return mItemAdapter;
         } else {
             return mItemAdapter.removeRange(position, itemCount);
@@ -589,9 +608,11 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             for (int i = 0; i < saveItemCount; i++) {
                 mOriginalItems.remove(position + i);
             }
+
             if (isPublishResults) {
                 publishResults(mConstraint, performFiltering(mConstraint));
             }
+
             return mItemAdapter;
         } else {
             return mItemAdapter.removeRangeInOriginalItems(position, itemCount);
@@ -607,7 +628,9 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
     public ModelAdapter<?, Item> clear() {
         if (mOriginalItems != null) {
             mOriginalItems.clear();
+
             publishResults(mConstraint, performFiltering(mConstraint));
+
             return mItemAdapter;
         } else {
             return mItemAdapter.clear();
