@@ -89,8 +89,7 @@ public abstract class ModelAdapterUtil {
         add(true, adapter, position, items);
     }
 
-
-
+    @SafeVarargs
     public static <Item extends IItem> void addInOriginalItems(boolean isPublishResults, @Nullable ModelAdapter<Item, Item> adapter, int position, Item... items) {
         if (adapter == null || items.length == 0) {
             return;
@@ -98,6 +97,7 @@ public abstract class ModelAdapterUtil {
 
         addInOriginalItems(adapter, position, asList(items));
     }
+    @SafeVarargs
     public static <Item extends IItem> void addInOriginalItems(@Nullable ModelAdapter<Item, Item> adapter, int position, Item... items) {
         if (adapter == null || items.length == 0) {
             return;

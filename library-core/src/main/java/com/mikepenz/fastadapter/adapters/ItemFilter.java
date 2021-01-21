@@ -375,6 +375,9 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
 //            mOriginalItems.set(getAdapterPosition(mItemAdapter.getAdapterItems().get(position)) - mItemAdapter.getFastAdapter().getPreItemCount(position), item);
             mOriginalItems.set(getAdapterPosition(mItemAdapter.getAdapterItems().get(position - mItemAdapter.getFastAdapter().getPreItemCount(position))), item);
 
+            ///[FIX#ItemFilter#Sort]
+            sortOriginalItems();
+
             if (isPublishResults) {
                 publishResults(mConstraint, performFiltering(mConstraint));
             }
@@ -403,6 +406,9 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             }
 
             mOriginalItems.set(position, item);
+
+            ///[FIX#ItemFilter#Sort]
+            sortOriginalItems();
 
             if (isPublishResults) {
                 publishResults(mConstraint, performFiltering(mConstraint));
