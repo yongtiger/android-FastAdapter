@@ -10,8 +10,8 @@ buildscript {
         ]
 
         release = [
-                versionName: "1.0.18",   ///v1.0.18#[UPGRADE#xxxInOriginalItems()]
-                versionCode: 100018
+                versionName: "1.0.19",   ///v1.0.19#[UPGRADE#getAdapterPosition(int position)]
+                versionCode: 100019
         ]
     }
 

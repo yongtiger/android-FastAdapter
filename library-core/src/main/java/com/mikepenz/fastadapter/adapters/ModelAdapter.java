@@ -259,6 +259,17 @@ public class ModelAdapter<Model, Item extends IItem> extends AbstractAdapter<Ite
         return position + getFastAdapter().getPreItemCountByOrder(getOrder());
     }
 
+    ///[UPGRADE#getAdapterPosition(int position)]
+    /**
+     * returns the relative position if the global position within this adapter was given
+     *
+     * @param position the global position
+     * @return the relative position
+     */
+    public int getAdapterPosition(int position) {
+        return position - getFastAdapter().getPreItemCountByOrder(getOrder());
+    }
+
     /**
      * @param position the relative position
      * @return the item inside this adapter
