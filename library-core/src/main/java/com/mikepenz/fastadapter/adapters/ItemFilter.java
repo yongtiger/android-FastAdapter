@@ -157,10 +157,7 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
 
     ///[isPublishResults]
     public ModelAdapter<?, Item> publishResults() {
-        if (mItemAdapter.getItemFilter() != null) {
-            publishResults(mConstraint, performFiltering(mConstraint));
-        }
-
+        publishResults(mConstraint, performFiltering(mConstraint));
         return mItemAdapter;
     }
 
