@@ -416,13 +416,13 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
      *
      * @param position the relative position
      */
-    public ModelAdapter<?, Item> removeRangeInOriginalItems(int position) {
+    public ModelAdapter<?, Item> removeInOriginalItems(int position) {
         if (mOriginalItems != null) {
             mOriginalItems.remove(position);
             publishResults(mConstraint, performFiltering(mConstraint));
             return mItemAdapter;
         } else {
-            return mItemAdapter.removeRangeInOriginalItems(position);
+            return mItemAdapter.removeInOriginalItems(position);
         }
     }
 
@@ -473,7 +473,6 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
      */
     public ModelAdapter<?, Item> removeRange(int position, int itemCount) {
         if (mOriginalItems != null) {
-            //global position to relative
             int length = mOriginalItems.size();
             int preItemCount = mItemAdapter.getFastAdapter().getPreItemCount(position);
             //make sure we do not delete to many items
@@ -489,6 +488,28 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             return mItemAdapter;
         } else {
             return mItemAdapter.removeRange(position, itemCount);
+        }
+    }
+
+    ///[UPGRADE#xxxInOriginalItems()]
+    /**
+     * removes a range of items starting with the given position within the existing icons
+     *
+     * @param position  the relative position
+     * @param itemCount the count of items which were removed
+     */
+    public ModelAdapter<?, Item> removeRangeInOriginalItems(int position, int itemCount) {
+        if (mOriginalItems != null) {
+            int length = mOriginalItems.size();
+            //make sure we do not delete to many items
+            int saveItemCount = Math.min(itemCount, length - position);
+            for (int i = 0; i < saveItemCount; i++) {
+                mOriginalItems.remove(position + i);
+            }
+            publishResults(mConstraint, performFiltering(mConstraint));
+            return mItemAdapter;
+        } else {
+            return mItemAdapter.removeRangeInOriginalItems(position, itemCount);
         }
     }
 

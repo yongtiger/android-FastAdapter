@@ -170,15 +170,15 @@ public abstract class ModelAdapterUtil {
         }
     }
 
-    public static <Item extends IItem> void removeRangeInOriginalItems(@Nullable ModelAdapter<Item, Item> adapter, int position) {
+    public static <Item extends IItem> void removeInOriginalItems(@Nullable ModelAdapter<Item, Item> adapter, int position) {
         if (adapter == null) {
             return;
         }
 
         if (adapter.getItemFilter() == null) {
-            adapter.removeRangeInOriginalItems(position);
+            adapter.removeInOriginalItems(position);
         } else {
-            adapter.getItemFilter().removeRangeInOriginalItems(position);
+            adapter.getItemFilter().removeInOriginalItems(position);
         }
     }
 
@@ -215,6 +215,18 @@ public abstract class ModelAdapterUtil {
             adapter.removeRange(position, itemCount);
         } else {
             adapter.getItemFilter().removeRange(position, itemCount);
+        }
+    }
+
+    public static <Item extends IItem> void removeRangeInOriginalItems(@Nullable ModelAdapter<Item, Item> adapter, int position, int itemCount) {
+        if (adapter == null || itemCount <= 0) {
+            return;
+        }
+
+        if (adapter.getItemFilter() == null) {
+            adapter.removeRangeInOriginalItems(position, itemCount);
+        } else {
+            adapter.getItemFilter().removeRangeInOriginalItems(position, itemCount);
         }
     }
 

@@ -551,7 +551,7 @@ public class ModelAdapter<Model, Item extends IItem> extends AbstractAdapter<Ite
      *
      * @param position the relative position
      */
-    public ModelAdapter<Model, Item> removeRangeInOriginalItems(int position) {
+    public ModelAdapter<Model, Item> removeInOriginalItems(int position) {
         int preItemCount = getFastAdapter().getPreItemCountByOrder(getOrder());
         mItems.remove(position + preItemCount, preItemCount);
         return this;
@@ -576,6 +576,19 @@ public class ModelAdapter<Model, Item extends IItem> extends AbstractAdapter<Ite
      */
     public ModelAdapter<Model, Item> removeRange(int position, int itemCount) {
         mItems.removeRange(position, itemCount, getFastAdapter().getPreItemCount(position));
+        return this;
+    }
+
+    ///[UPGRADE#xxxInOriginalItems()]
+    /**
+     * removes a range of items starting with the given position within the existing icons
+     *
+     * @param position  the relative position
+     * @param itemCount the count of items which were removed
+     */
+    public ModelAdapter<Model, Item> removeRangeInOriginalItems(int position, int itemCount) {
+        int preItemCount = getFastAdapter().getPreItemCountByOrder(getOrder());
+        mItems.removeRange(position + preItemCount, itemCount, preItemCount);
         return this;
     }
 
