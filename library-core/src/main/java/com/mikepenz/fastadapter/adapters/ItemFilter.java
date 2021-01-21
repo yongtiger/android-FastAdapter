@@ -155,6 +155,12 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
         }
     }
 
+    ///[isPublishResults]
+    public ModelAdapter<?, Item> publishResults() {
+        publishResults(mConstraint, performFiltering(mConstraint));
+        return mItemAdapter;
+    }
+
     /**
      * helper method to get all selections from the ItemAdapter's original item list
      *
@@ -230,9 +236,14 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
      *
      * @param items the items to add
      */
+    ///[isPublishResults]
+    @SafeVarargs
+    public final ModelAdapter<?, Item> add(boolean isPublishResults, Item... items) {
+        return add(isPublishResults, asList(items));
+    }
     @SafeVarargs
     public final ModelAdapter<?, Item> add(Item... items) {
-        return add(asList(items));
+        return add(true, asList(items));
     }
 
     /**
@@ -241,7 +252,8 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
      *
      * @param items the items to add
      */
-    public ModelAdapter<?, Item> add(List<Item> items) {
+    ///[isPublishResults]
+    public ModelAdapter<?, Item> add(boolean isPublishResults, List<Item> items) {
         if (mOriginalItems != null && items.size() > 0) {
             if (mItemAdapter.isUseIdDistributor()) {
                 mItemAdapter.getIdDistributor().checkIds(items);
@@ -251,11 +263,16 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             ///[FIX#ItemFilter#Sort]
             sortOriginalItems();
 
-            publishResults(mConstraint, performFiltering(mConstraint));
+            if (isPublishResults) {
+                publishResults(mConstraint, performFiltering(mConstraint));
+            }
             return mItemAdapter;
         } else {
             return mItemAdapter.addInternal(items);
         }
+    }
+    public ModelAdapter<?, Item> add(List<Item> items) {
+        return add(true, items);
     }
 
     /**
@@ -264,9 +281,14 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
      * @param position the global position
      * @param items    the items to add
      */
+    ///[isPublishResults]
+    @SafeVarargs
+    public final ModelAdapter<?, Item> add(boolean isPublishResults, int position, Item... items) {
+        return add(isPublishResults, position, asList(items));
+    }
     @SafeVarargs
     public final ModelAdapter<?, Item> add(int position, Item... items) {
-        return add(position, asList(items));
+        return add(true, position, asList(items));
     }
 
     /**
@@ -275,7 +297,8 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
      * @param position the global position
      * @param items    the items to add
      */
-    public ModelAdapter<?, Item> add(int position, List<Item> items) {
+    ///[isPublishResults]
+    public ModelAdapter<?, Item> add(boolean isPublishResults, int position, List<Item> items) {
         if (mOriginalItems != null && items.size() > 0) {
             if (mItemAdapter.isUseIdDistributor()) {
                 mItemAdapter.getIdDistributor().checkIds(items);
@@ -287,11 +310,16 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             ///[FIX#ItemFilter#Sort]
             sortOriginalItems();
 
-            publishResults(mConstraint, performFiltering(mConstraint));
+            if (isPublishResults) {
+                publishResults(mConstraint, performFiltering(mConstraint));
+            }
             return mItemAdapter;
         } else {
             return mItemAdapter.addInternal(position, items);
         }
+    }
+    public ModelAdapter<?, Item> add(int position, List<Item> items) {
+        return add(true, position, items);
     }
 
     ///[UPGRADE#xxxInOriginalItems()]
@@ -301,7 +329,8 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
      * @param position the relative position
      * @param items    the items to add
      */
-    public ModelAdapter<?, Item> addInOriginalItems(int position, List<Item> items) {
+    ///[isPublishResults]
+    public ModelAdapter<?, Item> addInOriginalItems(boolean isPublishResults, int position, List<Item> items) {
         if (mOriginalItems != null && items.size() > 0) {
             if (mItemAdapter.isUseIdDistributor()) {
                 mItemAdapter.getIdDistributor().checkIds(items);
@@ -311,11 +340,16 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             ///[FIX#ItemFilter#Sort]
             sortOriginalItems();
 
-            publishResults(mConstraint, performFiltering(mConstraint));
+            if (isPublishResults) {
+                publishResults(mConstraint, performFiltering(mConstraint));
+            }
             return mItemAdapter;
         } else {
             return mItemAdapter.addInternal(position, items);
         }
+    }
+    public ModelAdapter<?, Item> addInOriginalItems(int position, List<Item> items) {
+        return addInOriginalItems(true, position, items);
     }
 
     /**
@@ -324,7 +358,8 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
      * @param position the global position
      * @param item     the item to set
      */
-    public ModelAdapter<?, Item> set(int position, Item item) {
+    ///[isPublishResults]
+    public ModelAdapter<?, Item> set(boolean isPublishResults, int position, Item item) {
         if (mOriginalItems != null) {
             if (mItemAdapter.isUseIdDistributor()) {
                 mItemAdapter.getIdDistributor().checkId(item);
@@ -334,11 +369,16 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
 //            mOriginalItems.set(getAdapterPosition(mItemAdapter.getAdapterItems().get(position)) - mItemAdapter.getFastAdapter().getPreItemCount(position), item);
             mOriginalItems.set(getAdapterPosition(mItemAdapter.getAdapterItems().get(position - mItemAdapter.getFastAdapter().getPreItemCount(position))), item);
 
-            publishResults(mConstraint, performFiltering(mConstraint));
+            if (isPublishResults) {
+                publishResults(mConstraint, performFiltering(mConstraint));
+            }
             return mItemAdapter;
         } else {
             return mItemAdapter.setInternal(position, item);
         }
+    }
+    public ModelAdapter<?, Item> set(int position, Item item) {
+        return set(true, position, item);
     }
 
     ///[UPGRADE#xxxInOriginalItems()]
@@ -348,17 +388,23 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
      * @param position the relative position
      * @param item     the item to set
      */
-    public ModelAdapter<?, Item> setInOriginalItems(int position, Item item) {
+    ///[isPublishResults]
+    public ModelAdapter<?, Item> setInOriginalItems(boolean isPublishResults, int position, Item item) {
         if (mOriginalItems != null) {
             if (mItemAdapter.isUseIdDistributor()) {
                 mItemAdapter.getIdDistributor().checkId(item);
             }
             mOriginalItems.set(position, item);
-            publishResults(mConstraint, performFiltering(mConstraint));
+            if (isPublishResults) {
+                publishResults(mConstraint, performFiltering(mConstraint));
+            }
             return mItemAdapter;
         } else {
             return mItemAdapter.setInternal(position, item);
         }
+    }
+    public ModelAdapter<?, Item> setInOriginalItems(int position, Item item) {
+        return setInOriginalItems(true, position, item);
     }
 
     /**
@@ -368,7 +414,8 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
      * @param toPosition   the global position to which to move
      * @return this
      */
-    public ModelAdapter<?, Item> move(int fromPosition, int toPosition) {
+    ///[isPerformFiltering]
+    public ModelAdapter<?, Item> move(boolean isPerformFiltering, int fromPosition, int toPosition) {
         if (mOriginalItems != null) {
             int preItemCount = mItemAdapter.getFastAdapter().getPreItemCount(fromPosition);
 
@@ -384,11 +431,16 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             mOriginalItems.remove(adjustedFrom);
             mOriginalItems.add(adjustedTo, item);
 
-            performFiltering(mConstraint);
+            if (isPerformFiltering) {
+                performFiltering(mConstraint);
+            }
             return mItemAdapter;
         } else {
             return mItemAdapter.move(fromPosition, toPosition);
         }
+    }
+    public ModelAdapter<?, Item> move(int fromPosition, int toPosition) {
+        return move(true, fromPosition, toPosition);
     }
 
     /**
@@ -396,18 +448,24 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
      *
      * @param position the global position
      */
-    public ModelAdapter<?, Item> remove(int position) {
+    ///[isPublishResults]
+    public ModelAdapter<?, Item> remove(boolean isPublishResults, int position) {
         if (mOriginalItems != null) {
 
             ///[FIX#ItemFilter#global position]
 //            mOriginalItems.remove(getAdapterPosition(mItemAdapter.getAdapterItems().get(position)) - mItemAdapter.getFastAdapter().getPreItemCount(position));
             mOriginalItems.remove(getAdapterPosition(mItemAdapter.getAdapterItems().get(position - mItemAdapter.getFastAdapter().getPreItemCount(position))));
 
-            publishResults(mConstraint, performFiltering(mConstraint));
+            if (isPublishResults) {
+                publishResults(mConstraint, performFiltering(mConstraint));
+            }
             return mItemAdapter;
         } else {
             return mItemAdapter.remove(position);
         }
+    }
+    public ModelAdapter<?, Item> remove(int position) {
+        return remove(true, position);
     }
 
     ///[UPGRADE#xxxInOriginalItems()]
@@ -416,14 +474,20 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
      *
      * @param position the relative position
      */
-    public ModelAdapter<?, Item> removeInOriginalItems(int position) {
+    ///[isPublishResults]
+    public ModelAdapter<?, Item> removeInOriginalItems(boolean isPublishResults, int position) {
         if (mOriginalItems != null) {
             mOriginalItems.remove(position);
-            publishResults(mConstraint, performFiltering(mConstraint));
+            if (isPublishResults) {
+                publishResults(mConstraint, performFiltering(mConstraint));
+            }
             return mItemAdapter;
         } else {
             return mItemAdapter.removeInOriginalItems(position);
         }
+    }
+    public ModelAdapter<?, Item> removeInOriginalItems(int position) {
+        return removeInOriginalItems(true, position);
     }
 
     ///[UPGRADE#remove(Item item)]
@@ -432,14 +496,20 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
      *
      * @param item     the item to remove
      */
-    public ModelAdapter<?, Item> remove(Item item) {
+    ///[isPublishResults]
+    public ModelAdapter<?, Item> remove(boolean isPublishResults, Item item) {
         if (mOriginalItems != null) {
             mOriginalItems.remove(item);
-            publishResults(mConstraint, performFiltering(mConstraint));
+            if (isPublishResults) {
+                publishResults(mConstraint, performFiltering(mConstraint));
+            }
             return mItemAdapter;
         } else {
             return mItemAdapter.remove(item);
         }
+    }
+    public ModelAdapter<?, Item> remove(Item item) {
+        return remove(true, item);
     }
 
     ///[UPGRADE#removeByIdentifier(final long identifier)]
@@ -449,7 +519,8 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
      * @param identifier the identifier to search for
      * @return this
      */
-    public ModelAdapter<?, Item> removeByIdentifier(final long identifier) {
+    ///[isPublishResults]
+    public ModelAdapter<?, Item> removeByIdentifier(boolean isPublishResults, final long identifier) {
         if (mOriginalItems != null) {
             for (Item item : mOriginalItems) {
                 if (item.getIdentifier() == identifier) {
@@ -457,12 +528,17 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
                     break;
                 }
             }
-            publishResults(mConstraint, performFiltering(mConstraint));
+            if (isPublishResults) {
+                publishResults(mConstraint, performFiltering(mConstraint));
+            }
         } else {
             mItemAdapter.removeByIdentifier(identifier);
         }
 
         return mItemAdapter;
+    }
+    public ModelAdapter<?, Item> removeByIdentifier(final long identifier) {
+        return removeByIdentifier(true, identifier);
     }
 
     /**
@@ -471,7 +547,8 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
      * @param position  the global position
      * @param itemCount the count of items which were removed
      */
-    public ModelAdapter<?, Item> removeRange(int position, int itemCount) {
+    ///[isPublishResults]
+    public ModelAdapter<?, Item> removeRange(boolean isPublishResults, int position, int itemCount) {
         if (mOriginalItems != null) {
             int length = mOriginalItems.size();
             int preItemCount = mItemAdapter.getFastAdapter().getPreItemCount(position);
@@ -484,11 +561,16 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
                 mOriginalItems.remove(mItemAdapter.getAdapterItems().get(position - preItemCount));
 
             }
-            publishResults(mConstraint, performFiltering(mConstraint));
+            if (isPublishResults) {
+                publishResults(mConstraint, performFiltering(mConstraint));
+            }
             return mItemAdapter;
         } else {
             return mItemAdapter.removeRange(position, itemCount);
         }
+    }
+    public ModelAdapter<?, Item> removeRange(int position, int itemCount) {
+        return removeRange(true, position, itemCount);
     }
 
     ///[UPGRADE#xxxInOriginalItems()]
@@ -498,7 +580,8 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
      * @param position  the relative position
      * @param itemCount the count of items which were removed
      */
-    public ModelAdapter<?, Item> removeRangeInOriginalItems(int position, int itemCount) {
+    ///[isPublishResults]
+    public ModelAdapter<?, Item> removeRangeInOriginalItems(boolean isPublishResults, int position, int itemCount) {
         if (mOriginalItems != null) {
             int length = mOriginalItems.size();
             //make sure we do not delete to many items
@@ -506,11 +589,16 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             for (int i = 0; i < saveItemCount; i++) {
                 mOriginalItems.remove(position + i);
             }
-            publishResults(mConstraint, performFiltering(mConstraint));
+            if (isPublishResults) {
+                publishResults(mConstraint, performFiltering(mConstraint));
+            }
             return mItemAdapter;
         } else {
             return mItemAdapter.removeRangeInOriginalItems(position, itemCount);
         }
+    }
+    public ModelAdapter<?, Item> removeRangeInOriginalItems(int position, int itemCount) {
+        return removeRangeInOriginalItems(true, position, itemCount);
     }
 
     /**

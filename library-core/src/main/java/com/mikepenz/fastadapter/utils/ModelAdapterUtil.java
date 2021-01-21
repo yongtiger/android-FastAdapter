@@ -25,15 +25,22 @@ public abstract class ModelAdapterUtil {
         }
     }
 
+    public static <Item extends IItem> void add(boolean isPublishResults, @Nullable ModelAdapter<Item, Item> adapter, Item... items) {
+        if (adapter == null || items.length == 0) {
+            return;
+        }
+
+        add(isPublishResults, adapter, asList(items));
+    }
     public static <Item extends IItem> void add(@Nullable ModelAdapter<Item, Item> adapter, Item... items) {
         if (adapter == null || items.length == 0) {
             return;
         }
 
-        add(adapter, asList(items));
+        add(true, adapter, asList(items));
     }
 
-    public static <Item extends IItem> void add(@Nullable ModelAdapter<Item, Item> adapter, @Nullable List<Item> items) {
+    public static <Item extends IItem> void add(boolean isPublishResults, @Nullable ModelAdapter<Item, Item> adapter, @Nullable List<Item> items) {
         if (adapter == null || items == null || items.size() == 0) {
             return;
         }
@@ -43,19 +50,29 @@ public abstract class ModelAdapterUtil {
             adapter.add(items);
         } else {
             ///注意：FastAdapter必须升级为v0.10.7#[FIX#ItemFilter#Sort]以上！否则mOriginalItems无法排序
-            adapter.getItemFilter().add(items);
+            adapter.getItemFilter().add(isPublishResults, items);
         }
     }
+    public static <Item extends IItem> void add(@Nullable ModelAdapter<Item, Item> adapter, @Nullable List<Item> items) {
+        add(true, adapter, items);
+    }
 
+    public static <Item extends IItem> void add(boolean isPublishResults, @Nullable ModelAdapter<Item, Item> adapter, int position, Item... items) {
+        if (adapter == null || position == RecyclerView.NO_POSITION || items.length == 0) {
+            return;
+        }
+
+        add(isPublishResults, adapter, position, asList(items));
+    }
     public static <Item extends IItem> void add(@Nullable ModelAdapter<Item, Item> adapter, int position, Item... items) {
         if (adapter == null || position == RecyclerView.NO_POSITION || items.length == 0) {
             return;
         }
 
-        add(adapter, position, asList(items));
+        add(true, adapter, position, asList(items));
     }
 
-    public static <Item extends IItem> void add(@Nullable ModelAdapter<Item, Item> adapter, int position, @Nullable List<Item> items) {
+    public static <Item extends IItem> void add(boolean isPublishResults, @Nullable ModelAdapter<Item, Item> adapter, int position, @Nullable List<Item> items) {
         if (adapter == null || position == RecyclerView.NO_POSITION || items == null || items.size() == 0) {
             return;
         }
@@ -65,19 +82,31 @@ public abstract class ModelAdapterUtil {
             adapter.add(position, items);
         } else {
             ///注意：FastAdapter必须升级为v0.10.7#[FIX#ItemFilter#Sort]以上！否则mOriginalItems无法排序
-            adapter.getItemFilter().add(position, items);
+            adapter.getItemFilter().add(isPublishResults, position, items);
         }
     }
+    public static <Item extends IItem> void add(@Nullable ModelAdapter<Item, Item> adapter, int position, @Nullable List<Item> items) {
+        add(true, adapter, position, items);
+    }
 
-    public static <Item extends IItem> void addInOriginalItems(@Nullable ModelAdapter<Item, Item> adapter, int position, Item... items) {
+
+
+    public static <Item extends IItem> void addInOriginalItems(boolean isPublishResults, @Nullable ModelAdapter<Item, Item> adapter, int position, Item... items) {
         if (adapter == null || items.length == 0) {
             return;
         }
 
         addInOriginalItems(adapter, position, asList(items));
     }
+    public static <Item extends IItem> void addInOriginalItems(@Nullable ModelAdapter<Item, Item> adapter, int position, Item... items) {
+        if (adapter == null || items.length == 0) {
+            return;
+        }
 
-    public static <Item extends IItem> void addInOriginalItems(@Nullable ModelAdapter<Item, Item> adapter, int position, @Nullable List<Item> items) {
+        addInOriginalItems(true, adapter, position, asList(items));
+    }
+
+    public static <Item extends IItem> void addInOriginalItems(boolean isPublishResults, @Nullable ModelAdapter<Item, Item> adapter, int position, @Nullable List<Item> items) {
         if (adapter == null || items == null || items.size() == 0) {
             return;
         }
@@ -87,11 +116,14 @@ public abstract class ModelAdapterUtil {
             adapter.addInOriginalItems(position, items);
         } else {
             ///注意：FastAdapter必须升级为v0.10.7#[FIX#ItemFilter#Sort]以上！否则mOriginalItems无法排序
-            adapter.getItemFilter().addInOriginalItems(position, items);
+            adapter.getItemFilter().addInOriginalItems(isPublishResults, position, items);
         }
     }
+    public static <Item extends IItem> void addInOriginalItems(@Nullable ModelAdapter<Item, Item> adapter, int position, @Nullable List<Item> items) {
+        addInOriginalItems(true, adapter, position, items);
+    }
 
-    public static <Item extends IItem> void set(@Nullable ModelAdapter<Item, Item> adapter, int position, @Nullable Item item) {
+    public static <Item extends IItem> void set(boolean isPublishResults, @Nullable ModelAdapter<Item, Item> adapter, int position, @Nullable Item item) {
         if (adapter == null || position == RecyclerView.NO_POSITION) {
             return;
         }
@@ -106,17 +138,20 @@ public abstract class ModelAdapterUtil {
             adapter.set(position, item);
         } else {
             ///注意：FastAdapter必须升级为v0.10.7#[FIX#ItemFilter#Sort]以上！否则mOriginalItems无法排序
-            adapter.getItemFilter().set(position, item);
+            adapter.getItemFilter().set(isPublishResults, position, item);
         }
     }
+    public static <Item extends IItem> void set(@Nullable ModelAdapter<Item, Item> adapter, int position, @Nullable Item item) {
+        set(true, adapter, position, item);
+    }
 
-    public static <Item extends IItem> void setInOriginalItems(@Nullable ModelAdapter<Item, Item> adapter, int position, @Nullable Item item) {
+    public static <Item extends IItem> void setInOriginalItems(boolean isPublishResults, @Nullable ModelAdapter<Item, Item> adapter, int position, @Nullable Item item) {
         if (adapter == null) {
             return;
         }
 
         if (item == null) {
-            remove(adapter, position);
+            remove(isPublishResults, adapter, position);
             return;
         }
 
@@ -125,8 +160,11 @@ public abstract class ModelAdapterUtil {
             adapter.setInOriginalItems(position, item);
         } else {
             ///注意：FastAdapter必须升级为v0.10.7#[FIX#ItemFilter#Sort]以上！否则mOriginalItems无法排序
-            adapter.getItemFilter().setInOriginalItems(position, item);
+            adapter.getItemFilter().setInOriginalItems(isPublishResults, position, item);
         }
+    }
+    public static <Item extends IItem> void setInOriginalItems(@Nullable ModelAdapter<Item, Item> adapter, int position, @Nullable Item item) {
+        setInOriginalItems(true, adapter, position, item);
     }
 
     public static <Item extends IItem> void move(@Nullable ModelAdapter<Item, Item> adapter, int fromPosition, int toPosition) {
@@ -158,7 +196,7 @@ public abstract class ModelAdapterUtil {
         }
     }
 
-    public static <Item extends IItem> void remove(@Nullable ModelAdapter<Item, Item> adapter, int position) {
+    public static <Item extends IItem> void remove(boolean isPublishResults, @Nullable ModelAdapter<Item, Item> adapter, int position) {
         if (adapter == null || position == RecyclerView.NO_POSITION) {
             return;
         }
@@ -166,11 +204,14 @@ public abstract class ModelAdapterUtil {
         if (adapter.getItemFilter() == null) {
             adapter.remove(position);
         } else {
-            adapter.getItemFilter().remove(position);
+            adapter.getItemFilter().remove(isPublishResults, position);
         }
     }
+    public static <Item extends IItem> void remove(@Nullable ModelAdapter<Item, Item> adapter, int position) {
+        remove(true, adapter, position);
+    }
 
-    public static <Item extends IItem> void removeInOriginalItems(@Nullable ModelAdapter<Item, Item> adapter, int position) {
+    public static <Item extends IItem> void removeInOriginalItems(boolean isPublishResults, @Nullable ModelAdapter<Item, Item> adapter, int position) {
         if (adapter == null) {
             return;
         }
@@ -178,11 +219,14 @@ public abstract class ModelAdapterUtil {
         if (adapter.getItemFilter() == null) {
             adapter.removeInOriginalItems(position);
         } else {
-            adapter.getItemFilter().removeInOriginalItems(position);
+            adapter.getItemFilter().removeInOriginalItems(isPublishResults, position);
         }
     }
+    public static <Item extends IItem> void removeInOriginalItems(@Nullable ModelAdapter<Item, Item> adapter, int position) {
+        removeInOriginalItems(true, adapter, position);
+    }
 
-    public static <Item extends IItem> void remove(@Nullable ModelAdapter<Item, Item> adapter, Item item) {
+    public static <Item extends IItem> void remove(boolean isPublishResults, @Nullable ModelAdapter<Item, Item> adapter, Item item) {
         if (adapter == null) {
             return;
         }
@@ -190,11 +234,14 @@ public abstract class ModelAdapterUtil {
         if (adapter.getItemFilter() == null) {
             adapter.remove(item);
         } else {
-            adapter.getItemFilter().remove(item);
+            adapter.getItemFilter().remove(isPublishResults, item);
         }
     }
+    public static <Item extends IItem> void remove(@Nullable ModelAdapter<Item, Item> adapter, Item item) {
+        remove(true, adapter, item);
+    }
 
-    public static <Item extends IItem> void removeByIdentifier(@Nullable ModelAdapter<Item, Item> adapter, final long identifier) {
+    public static <Item extends IItem> void removeByIdentifier(boolean isPublishResults, @Nullable ModelAdapter<Item, Item> adapter, final long identifier) {
         if (adapter == null || identifier == -1L) {
             return;
         }
@@ -202,11 +249,14 @@ public abstract class ModelAdapterUtil {
         if (adapter.getItemFilter() == null) {
             adapter.removeByIdentifier(identifier);
         } else {
-            adapter.getItemFilter().removeByIdentifier(identifier);
+            adapter.getItemFilter().removeByIdentifier(isPublishResults, identifier);
         }
     }
+    public static <Item extends IItem> void removeByIdentifier(@Nullable ModelAdapter<Item, Item> adapter, final long identifier) {
+        removeByIdentifier(true, adapter, identifier);
+    }
 
-    public static <Item extends IItem> void removeRange(@Nullable ModelAdapter<Item, Item> adapter, int position, int itemCount) {
+    public static <Item extends IItem> void removeRange(boolean isPublishResults, @Nullable ModelAdapter<Item, Item> adapter, int position, int itemCount) {
         if (adapter == null || position == RecyclerView.NO_POSITION || itemCount <= 0) {
             return;
         }
@@ -214,11 +264,14 @@ public abstract class ModelAdapterUtil {
         if (adapter.getItemFilter() == null) {
             adapter.removeRange(position, itemCount);
         } else {
-            adapter.getItemFilter().removeRange(position, itemCount);
+            adapter.getItemFilter().removeRange(isPublishResults, position, itemCount);
         }
     }
+    public static <Item extends IItem> void removeRange(@Nullable ModelAdapter<Item, Item> adapter, int position, int itemCount) {
+        removeRange(true, adapter, position, itemCount);
+    }
 
-    public static <Item extends IItem> void removeRangeInOriginalItems(@Nullable ModelAdapter<Item, Item> adapter, int position, int itemCount) {
+    public static <Item extends IItem> void removeRangeInOriginalItems(boolean isPublishResults, @Nullable ModelAdapter<Item, Item> adapter, int position, int itemCount) {
         if (adapter == null || itemCount <= 0) {
             return;
         }
@@ -226,8 +279,11 @@ public abstract class ModelAdapterUtil {
         if (adapter.getItemFilter() == null) {
             adapter.removeRangeInOriginalItems(position, itemCount);
         } else {
-            adapter.getItemFilter().removeRangeInOriginalItems(position, itemCount);
+            adapter.getItemFilter().removeRangeInOriginalItems(isPublishResults, position, itemCount);
         }
+    }
+    public static <Item extends IItem> void removeRangeInOriginalItems(@Nullable ModelAdapter<Item, Item> adapter, int position, int itemCount) {
+        removeRangeInOriginalItems(true, adapter,position, itemCount);
     }
 
 }
