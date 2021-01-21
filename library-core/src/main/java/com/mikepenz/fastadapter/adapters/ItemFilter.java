@@ -447,6 +447,9 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             mOriginalItems.remove(adjustedFrom);
             mOriginalItems.add(adjustedTo, item);
 
+            ///[FIX#ItemFilter#Sort]
+            sortOriginalItems();
+
             if (isPerformFiltering) {
                 performFiltering(mConstraint);
             }
