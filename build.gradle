@@ -10,8 +10,8 @@ buildscript {
         ]
 
         release = [
-                versionName: "1.0.25",   ///v1.0.25#[isPublishResults]
-                versionCode: 100025
+                versionName: "1.0.26",   ///v1.0.26#[FIX#item.isSelectable()]
+                versionCode: 100026
         ]
     }
 

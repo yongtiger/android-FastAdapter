@@ -550,6 +550,11 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
      */
 
     public void deselect(Item item, int position, @Nullable Iterator<Integer> entries) {
+        ///[FIX#item.isSelectable()]
+        if (!item.isSelectable()) {
+            return;
+        }
+
         item.withSetSelected(false);
         if (entries != null) {
             entries.remove();
