@@ -14,14 +14,14 @@ import static java.util.Arrays.asList;
 public abstract class ModelAdapterUtil {
 
     public static <Item extends IItem> List<Item> getAdapterOriginalItems(@NonNull ModelAdapter<Item, Item> adapter) {
-        if (adapter.getItemFilter() != null) {
-            if (adapter.getItemFilter().getOriginalItems() == null) {
-                return adapter.getAdapterItems();
-            } else {
-                return adapter.getItemFilter().getOriginalItems();
-            }
-        } else {
+        if (adapter == null) {
+            return null;
+        }
+
+        if (adapter.getItemFilter() == null) {
             return adapter.getAdapterItems();
+        } else {
+            return adapter.getItemFilter().getOriginalItems();
         }
     }
 
