@@ -294,6 +294,30 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
         }
     }
 
+    ///[UPGRADE#xxxInOriginalItems()]
+    /**
+     * add a list of items at the given position within the existing items
+     *
+     * @param position the relative position
+     * @param items    the items to add
+     */
+    public ModelAdapter<?, Item> addInOriginalItems(int position, List<Item> items) {
+        if (mOriginalItems != null && items.size() > 0) {
+            if (mItemAdapter.isUseIdDistributor()) {
+                mItemAdapter.getIdDistributor().checkIds(items);
+            }
+            mOriginalItems.addAll(position, items);
+
+            ///[FIX#ItemFilter#Sort]
+            sortOriginalItems();
+
+            publishResults(mConstraint, performFiltering(mConstraint));
+            return mItemAdapter;
+        } else {
+            return mItemAdapter.addInternal(position, items);
+        }
+    }
+
     /**
      * sets an item at the given position, overwriting the previous item
      *
@@ -310,6 +334,26 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
 //            mOriginalItems.set(getAdapterPosition(mItemAdapter.getAdapterItems().get(position)) - mItemAdapter.getFastAdapter().getPreItemCount(position), item);
             mOriginalItems.set(getAdapterPosition(mItemAdapter.getAdapterItems().get(position - mItemAdapter.getFastAdapter().getPreItemCount(position))), item);
 
+            publishResults(mConstraint, performFiltering(mConstraint));
+            return mItemAdapter;
+        } else {
+            return mItemAdapter.setInternal(position, item);
+        }
+    }
+
+    ///[UPGRADE#xxxInOriginalItems()]
+    /**
+     * sets an item at the given position, overwriting the previous item
+     *
+     * @param position the relative position
+     * @param item     the item to set
+     */
+    public ModelAdapter<?, Item> setInOriginalItems(int position, Item item) {
+        if (mOriginalItems != null) {
+            if (mItemAdapter.isUseIdDistributor()) {
+                mItemAdapter.getIdDistributor().checkId(item);
+            }
+            mOriginalItems.set(position, item);
             publishResults(mConstraint, performFiltering(mConstraint));
             return mItemAdapter;
         } else {
@@ -363,6 +407,22 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             return mItemAdapter;
         } else {
             return mItemAdapter.remove(position);
+        }
+    }
+
+    ///[UPGRADE#xxxInOriginalItems()]
+    /**
+     * removes an item at the given position within the existing icons
+     *
+     * @param position the relative position
+     */
+    public ModelAdapter<?, Item> removeRangeInOriginalItems(int position) {
+        if (mOriginalItems != null) {
+            mOriginalItems.remove(position);
+            publishResults(mConstraint, performFiltering(mConstraint));
+            return mItemAdapter;
+        } else {
+            return mItemAdapter.removeRangeInOriginalItems(position);
         }
     }
 

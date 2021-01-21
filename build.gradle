@@ -10,8 +10,8 @@ buildscript {
         ]
 
         release = [
-                versionName: "1.0.17",   ///v1.0.17#typo
-                versionCode: 100017
+                versionName: "1.0.18",   ///v1.0.18#[UPGRADE#xxxInOriginalItems()]
+                versionCode: 100018
         ]
     }
 

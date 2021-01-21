@@ -69,6 +69,28 @@ public abstract class ModelAdapterUtil {
         }
     }
 
+    public static <Item extends IItem> void addInOriginalItems(@Nullable ModelAdapter<Item, Item> adapter, int position, Item... items) {
+        if (adapter == null || items.length == 0) {
+            return;
+        }
+
+        addInOriginalItems(adapter, position, asList(items));
+    }
+
+    public static <Item extends IItem> void addInOriginalItems(@Nullable ModelAdapter<Item, Item> adapter, int position, @Nullable List<Item> items) {
+        if (adapter == null || items == null || items.size() == 0) {
+            return;
+        }
+
+        ///[FastAdapter#Filter]用mItemAdapter.getItemFilter()的add/remove方法替代mItemAdapter的方法
+        if (adapter.getItemFilter() == null) {
+            adapter.addInOriginalItems(position, items);
+        } else {
+            ///注意：FastAdapter必须升级为v0.10.7#[FIX#ItemFilter#Sort]以上！否则mOriginalItems无法排序
+            adapter.getItemFilter().addInOriginalItems(position, items);
+        }
+    }
+
     public static <Item extends IItem> void set(@Nullable ModelAdapter<Item, Item> adapter, int position, @Nullable Item item) {
         if (adapter == null || position == RecyclerView.NO_POSITION) {
             return;
@@ -85,6 +107,25 @@ public abstract class ModelAdapterUtil {
         } else {
             ///注意：FastAdapter必须升级为v0.10.7#[FIX#ItemFilter#Sort]以上！否则mOriginalItems无法排序
             adapter.getItemFilter().set(position, item);
+        }
+    }
+
+    public static <Item extends IItem> void setInOriginalItems(@Nullable ModelAdapter<Item, Item> adapter, int position, @Nullable Item item) {
+        if (adapter == null) {
+            return;
+        }
+
+        if (item == null) {
+            remove(adapter, position);
+            return;
+        }
+
+        ///[FastAdapter#Filter]用mItemAdapter.getItemFilter()的add/remove方法替代mItemAdapter的方法
+        if (adapter.getItemFilter() == null) {
+            adapter.setInOriginalItems(position, item);
+        } else {
+            ///注意：FastAdapter必须升级为v0.10.7#[FIX#ItemFilter#Sort]以上！否则mOriginalItems无法排序
+            adapter.getItemFilter().setInOriginalItems(position, item);
         }
     }
 
@@ -126,6 +167,18 @@ public abstract class ModelAdapterUtil {
             adapter.remove(position);
         } else {
             adapter.getItemFilter().remove(position);
+        }
+    }
+
+    public static <Item extends IItem> void removeRangeInOriginalItems(@Nullable ModelAdapter<Item, Item> adapter, int position) {
+        if (adapter == null) {
+            return;
+        }
+
+        if (adapter.getItemFilter() == null) {
+            adapter.removeRangeInOriginalItems(position);
+        } else {
+            adapter.getItemFilter().removeRangeInOriginalItems(position);
         }
     }
 

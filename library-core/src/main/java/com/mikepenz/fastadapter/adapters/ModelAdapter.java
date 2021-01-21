@@ -446,6 +446,29 @@ public class ModelAdapter<Model, Item extends IItem> extends AbstractAdapter<Ite
         return this;
     }
 
+    ///[UPGRADE#xxxInOriginalItems()]
+    /**
+     * add a list of items at the given position within the existing items
+     *
+     * @param position the relative position
+     * @param list     the items to add
+     */
+    public ModelAdapter<Model, Item> addInOriginalItems(int position, List<Model> list) {
+        List<Item> items = intercept(list);
+        return addInternalInOriginalItems(position, items);
+    }
+    public ModelAdapter<Model, Item> addInternalInOriginalItems(int position, List<Item> items) {
+        if (mUseIdDistributor) {
+            getIdDistributor().checkIds(items);
+        }
+        if (items.size() > 0) {
+            int preItemCount = getFastAdapter().getPreItemCountByOrder(getOrder());
+            mItems.addAll(position + preItemCount, items, preItemCount);
+            mapPossibleTypes(items);
+        }
+        return this;
+    }
+
     /**
      * sets an item at the given position, overwriting the previous item
      *
@@ -463,6 +486,28 @@ public class ModelAdapter<Model, Item extends IItem> extends AbstractAdapter<Ite
             getIdDistributor().checkId(item);
         }
         mItems.set(position, item, getFastAdapter().getPreItemCount(position));
+        mFastAdapter.registerTypeInstance(item);
+        return this;
+    }
+
+    ///[UPGRADE#xxxInOriginalItems()]
+    /**
+     * sets an item at the given position, overwriting the previous item
+     *
+     * @param position the relative position
+     * @param element  the item to set
+     */
+    public ModelAdapter<Model, Item> setInOriginalItems(int position, Model element) {
+        Item item = intercept(element);
+        if (item == null) return this;
+        return setInternalInOriginalItems(position, item);
+    }
+    public ModelAdapter<Model, Item> setInternalInOriginalItems(int position, Item item) {
+        if (mUseIdDistributor) {
+            getIdDistributor().checkId(item);
+        }
+        int preItemCount = getFastAdapter().getPreItemCountByOrder(getOrder());
+        mItems.set(position + preItemCount, item, preItemCount);
         mFastAdapter.registerTypeInstance(item);
         return this;
     }
@@ -486,6 +531,18 @@ public class ModelAdapter<Model, Item extends IItem> extends AbstractAdapter<Ite
      */
     public ModelAdapter<Model, Item> remove(int position) {
         mItems.remove(position, getFastAdapter().getPreItemCount(position));
+        return this;
+    }
+
+    ///[UPGRADE#xxxInOriginalItems()]
+    /**
+     * removes an item at the given position within the existing icons
+     *
+     * @param position the relative position
+     */
+    public ModelAdapter<Model, Item> removeRangeInOriginalItems(int position) {
+        int preItemCount = getFastAdapter().getPreItemCountByOrder(getOrder());
+        mItems.remove(position + preItemCount, preItemCount);
         return this;
     }
 
