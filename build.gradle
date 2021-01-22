@@ -10,8 +10,8 @@ buildscript {
         ]
 
         release = [
-                versionName: "1.0.33",   ///v1.0.33#typo
-                versionCode: 100033
+                versionName: "1.0.34",   ///v1.0.34#[FIX#ComparableItemListImpl#set(List<Item> items, int preItemCount, @javax.annotation.Nullable IAdapterNotifier adapterNotifier)]
+                versionCode: 100034
         ]
     }
 

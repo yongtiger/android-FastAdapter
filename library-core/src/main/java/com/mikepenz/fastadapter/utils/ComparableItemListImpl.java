@@ -2,6 +2,7 @@ package com.mikepenz.fastadapter.utils;
 
 import androidx.annotation.Nullable;
 
+import com.mikepenz.fastadapter.IAdapterNotifier;
 import com.mikepenz.fastadapter.IItem;
 
 import java.util.ArrayList;
@@ -114,4 +115,33 @@ public class ComparableItemListImpl<Item extends IItem> extends DefaultItemListI
             getFastAdapter().notifyAdapterDataSetChanged();
         }
     }
+
+    ///[FIX#ComparableItemListImpl#set(List<Item> items, int preItemCount, @javax.annotation.Nullable IAdapterNotifier adapterNotifier)]
+    @Override
+    public void set(List<Item> items, int preItemCount, @javax.annotation.Nullable IAdapterNotifier adapterNotifier) {
+        //get sizes
+        int newItemsCount = items.size();
+        int previousItemsCount = mItems.size();
+
+        //make sure the new items list is not a reference of the already mItems list
+        if (items != mItems) {
+            //remove all previous items
+            if (!mItems.isEmpty()) {
+                mItems.clear();
+            }
+
+            //add all new items to the list
+            mItems.addAll(items);
+        }
+        if (mComparator != null) {
+            Collections.sort(mItems, mComparator);
+        }
+        if (getFastAdapter() == null) return;
+        //now properly notify the adapter about the changes
+        if (adapterNotifier == null) {
+            adapterNotifier = IAdapterNotifier.DEFAULT;
+        }
+        adapterNotifier.notify(getFastAdapter(), newItemsCount, previousItemsCount, preItemCount);
+    }
+
 }

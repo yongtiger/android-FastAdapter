@@ -1,17 +1,12 @@
 package com.mikepenz.fastadapter.adapters;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import android.widget.Filter;
 
-import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.IAdapterExtension;
-import com.mikepenz.fastadapter.IExpandable;
 import com.mikepenz.fastadapter.IItem;
 import com.mikepenz.fastadapter.IItemAdapter;
-import com.mikepenz.fastadapter.ISubItem;
 import com.mikepenz.fastadapter.listeners.ItemFilterListener;
-import com.mikepenz.fastadapter.utils.AdapterPredicate;
 import com.mikepenz.fastadapter.utils.ComparableItemListImpl;
 
 import java.util.ArrayList;
