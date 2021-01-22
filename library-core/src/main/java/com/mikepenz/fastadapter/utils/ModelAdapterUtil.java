@@ -18,7 +18,7 @@ public abstract class ModelAdapterUtil {
             return null;
         }
 
-        if (adapter.getItemFilter() == null) {
+        if (adapter.getItemFilter() == null || adapter.getItemFilter().getOriginalItems() == null) {
             return adapter.getAdapterItems();
         } else {
             return adapter.getItemFilter().getOriginalItems();
