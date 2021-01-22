@@ -68,7 +68,7 @@ public class ComparableItemListImpl<Item extends IItem> extends DefaultItemListI
             Collections.sort(mItems, mComparator);
             ///[UPGRADE#ComparableItemListImpl#withComparator(@Nullable Comparator<Item> comparator, boolean sortNow, boolean notify)]
 //            getFastAdapter().notifyAdapterDataSetChanged();
-            if(notify) {
+            if (notify) {
                 getFastAdapter().notifyAdapterDataSetChanged();
             }
         }
@@ -111,7 +111,7 @@ public class ComparableItemListImpl<Item extends IItem> extends DefaultItemListI
         if (mComparator != null) {
             Collections.sort(mItems, mComparator);
         }
-        if(notify) {
+        if (notify) {
             getFastAdapter().notifyAdapterDataSetChanged();
         }
     }

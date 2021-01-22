@@ -256,9 +256,6 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
 
             mOriginalItems.addAll(items);
 
-            ///[FIX#ItemFilter#Sort]
-            sortOriginalItems();
-
             if (isPublishResults) {
                 publishResults(mConstraint, performFiltering(mConstraint));
             }
@@ -305,9 +302,6 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
 //            mOriginalItems.addAll(getAdapterPosition(mItemAdapter.getAdapterItems().get(position)) - mItemAdapter.getFastAdapter().getPreItemCount(position), items);
             mOriginalItems.addAll(getAdapterPosition(mItemAdapter.getAdapterItems().get(position - mItemAdapter.getFastAdapter().getPreItemCount(position))), items);
 
-            ///[FIX#ItemFilter#Sort]
-            sortOriginalItems();
-
             if (isPublishResults) {
                 publishResults(mConstraint, performFiltering(mConstraint));
             }
@@ -336,9 +330,6 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             }
 
             mOriginalItems.addAll(position, items);
-
-            ///[FIX#ItemFilter#Sort]
-            sortOriginalItems();
 
             if (isPublishResults) {
                 publishResults(mConstraint, performFiltering(mConstraint));
@@ -370,9 +361,6 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
 //            mOriginalItems.set(getAdapterPosition(mItemAdapter.getAdapterItems().get(position)) - mItemAdapter.getFastAdapter().getPreItemCount(position), item);
             mOriginalItems.set(getAdapterPosition(mItemAdapter.getAdapterItems().get(position - mItemAdapter.getFastAdapter().getPreItemCount(position))), item);
 
-            ///[FIX#ItemFilter#Sort]
-            sortOriginalItems();
-
             if (isPublishResults) {
                 publishResults(mConstraint, performFiltering(mConstraint));
             }
@@ -401,9 +389,6 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             }
 
             mOriginalItems.set(position, item);
-
-            ///[FIX#ItemFilter#Sort]
-            sortOriginalItems();
 
             if (isPublishResults) {
                 publishResults(mConstraint, performFiltering(mConstraint));
@@ -441,9 +426,6 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
             Item item = mOriginalItems.get(adjustedFrom);
             mOriginalItems.remove(adjustedFrom);
             mOriginalItems.add(adjustedTo, item);
-
-            ///[FIX#ItemFilter#Sort]
-            sortOriginalItems();
 
             if (isPerformFiltering) {
                 performFiltering(mConstraint);
