@@ -95,7 +95,7 @@ public abstract class ModelAdapterUtil {
             return;
         }
 
-        addInOriginalItems(adapter, position, asList(items));
+        addInOriginalItems(isPublishResults, adapter, position, asList(items));
     }
     @SafeVarargs
     public static <Item extends IItem> void addInOriginalItems(@Nullable ModelAdapter<Item, Item> adapter, int position, Item... items) {

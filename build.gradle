@@ -10,8 +10,8 @@ buildscript {
         ]
 
         release = [
-                versionName: "1.0.29",   ///v1.0.29#[FIX#ItemFilter]getAdapterOriginalItems(@NonNull ModelAdapter<Item, Item> adapter)
-                versionCode: 100029
+                versionName: "1.0.30",   ///v1.0.30#typo
+                versionCode: 100030
         ]
     }
 
@@ -21,7 +21,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.1'
+        classpath 'com.android.tools.build:gradle:4.1.2'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.5'
     }
