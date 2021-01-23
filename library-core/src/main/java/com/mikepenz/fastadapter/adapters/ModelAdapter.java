@@ -457,24 +457,24 @@ public class ModelAdapter<Model, Item extends IItem> extends AbstractAdapter<Ite
         return this;
     }
 
-    ///[UPGRADE#xxxInOriginalItems()]
+    ///[UPGRADE#xxxInAdapter()]
     /**
      * add a list of items at the given position within the existing items
      *
-     * @param position the relative position
+     * @param index the relative position
      * @param list     the items to add
      */
-    public ModelAdapter<Model, Item> addInOriginalItems(int position, List<Model> list) {
+    public ModelAdapter<Model, Item> addInAdapter(int index, List<Model> list) {
         List<Item> items = intercept(list);
-        return addInternalInOriginalItems(position, items);
+        return addInternalInAdapter(index, items);
     }
-    public ModelAdapter<Model, Item> addInternalInOriginalItems(int position, List<Item> items) {
+    public ModelAdapter<Model, Item> addInternalInAdapter(int index, List<Item> items) {
         if (mUseIdDistributor) {
             getIdDistributor().checkIds(items);
         }
         if (items.size() > 0) {
             int preItemCount = getFastAdapter().getPreItemCountByOrder(getOrder());
-            mItems.addAll(position + preItemCount, items, preItemCount);
+            mItems.addAll(index + preItemCount, items, preItemCount);
             mapPossibleTypes(items);
         }
         return this;
@@ -501,24 +501,24 @@ public class ModelAdapter<Model, Item extends IItem> extends AbstractAdapter<Ite
         return this;
     }
 
-    ///[UPGRADE#xxxInOriginalItems()]
+    ///[UPGRADE#xxxInAdapter()]
     /**
      * sets an item at the given position, overwriting the previous item
      *
-     * @param position the relative position
+     * @param index the relative position
      * @param element  the item to set
      */
-    public ModelAdapter<Model, Item> setInOriginalItems(int position, Model element) {
+    public ModelAdapter<Model, Item> setInAdapter(int index, Model element) {
         Item item = intercept(element);
         if (item == null) return this;
-        return setInternalInOriginalItems(position, item);
+        return setInternalInAdapter(index, item);
     }
-    public ModelAdapter<Model, Item> setInternalInOriginalItems(int position, Item item) {
+    public ModelAdapter<Model, Item> setInternalInAdapter(int index, Item item) {
         if (mUseIdDistributor) {
             getIdDistributor().checkId(item);
         }
         int preItemCount = getFastAdapter().getPreItemCountByOrder(getOrder());
-        mItems.set(position + preItemCount, item, preItemCount);
+        mItems.set(index + preItemCount, item, preItemCount);
         mFastAdapter.registerTypeInstance(item);
         return this;
     }
@@ -545,15 +545,15 @@ public class ModelAdapter<Model, Item extends IItem> extends AbstractAdapter<Ite
         return this;
     }
 
-    ///[UPGRADE#xxxInOriginalItems()]
+    ///[UPGRADE#xxxInAdapter()]
     /**
      * removes an item at the given position within the existing icons
      *
-     * @param position the relative position
+     * @param index the relative position
      */
-    public ModelAdapter<Model, Item> removeInOriginalItems(int position) {
+    public ModelAdapter<Model, Item> removeInAdapter(int index) {
         int preItemCount = getFastAdapter().getPreItemCountByOrder(getOrder());
-        mItems.remove(position + preItemCount, preItemCount);
+        mItems.remove(index + preItemCount, preItemCount);
         return this;
     }
 
@@ -579,16 +579,16 @@ public class ModelAdapter<Model, Item extends IItem> extends AbstractAdapter<Ite
         return this;
     }
 
-    ///[UPGRADE#xxxInOriginalItems()]
+    ///[UPGRADE#xxxInAdapter()]
     /**
      * removes a range of items starting with the given position within the existing icons
      *
-     * @param position  the relative position
+     * @param index  the relative position
      * @param itemCount the count of items which were removed
      */
-    public ModelAdapter<Model, Item> removeRangeInOriginalItems(int position, int itemCount) {
+    public ModelAdapter<Model, Item> removeRangeInAdapter(int index, int itemCount) {
         int preItemCount = getFastAdapter().getPreItemCountByOrder(getOrder());
-        mItems.removeRange(position + preItemCount, itemCount, preItemCount);
+        mItems.removeRange(index + preItemCount, itemCount, preItemCount);
         return this;
     }
 

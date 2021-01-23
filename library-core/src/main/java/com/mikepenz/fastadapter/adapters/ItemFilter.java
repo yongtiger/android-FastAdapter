@@ -315,21 +315,21 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
         return add(true, position, items);
     }
 
-    ///[UPGRADE#xxxInOriginalItems()]
+    ///[UPGRADE#xxxInAdapter()]
     /**
      * add a list of items at the given position within the existing items
      *
-     * @param position the relative position
+     * @param index the relative position
      * @param items    the items to add
      */
     ///[isPublishResults]
-    public ModelAdapter<?, Item> addInOriginalItems(boolean isPublishResults, int position, List<Item> items) {
+    public ModelAdapter<?, Item> addInAdapter(boolean isPublishResults, int index, List<Item> items) {
         if (mOriginalItems != null && items.size() > 0) {
             if (mItemAdapter.isUseIdDistributor()) {
                 mItemAdapter.getIdDistributor().checkIds(items);
             }
 
-            mOriginalItems.addAll(position, items);
+            mOriginalItems.addAll(index, items);
 
             if (isPublishResults) {
                 publishResults(mConstraint, performFiltering(mConstraint));
@@ -337,11 +337,11 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
 
             return mItemAdapter;
         } else {
-            return mItemAdapter.addInternal(position, items);
+            return mItemAdapter.addInternal(index, items);
         }
     }
-    public ModelAdapter<?, Item> addInOriginalItems(int position, List<Item> items) {
-        return addInOriginalItems(true, position, items);
+    public ModelAdapter<?, Item> addInAdapter(int index, List<Item> items) {
+        return addInAdapter(true, index, items);
     }
 
     /**
@@ -374,21 +374,21 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
         return set(true, position, item);
     }
 
-    ///[UPGRADE#xxxInOriginalItems()]
+    ///[UPGRADE#xxxInAdapter()]
     /**
      * sets an item at the given position, overwriting the previous item
      *
-     * @param position the relative position
+     * @param index the relative position
      * @param item     the item to set
      */
     ///[isPublishResults]
-    public ModelAdapter<?, Item> setInOriginalItems(boolean isPublishResults, int position, Item item) {
+    public ModelAdapter<?, Item> setInAdapter(boolean isPublishResults, int index, Item item) {
         if (mOriginalItems != null) {
             if (mItemAdapter.isUseIdDistributor()) {
                 mItemAdapter.getIdDistributor().checkId(item);
             }
 
-            mOriginalItems.set(position, item);
+            mOriginalItems.set(index, item);
 
             if (isPublishResults) {
                 publishResults(mConstraint, performFiltering(mConstraint));
@@ -396,11 +396,11 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
 
             return mItemAdapter;
         } else {
-            return mItemAdapter.setInternal(position, item);
+            return mItemAdapter.setInternal(index, item);
         }
     }
-    public ModelAdapter<?, Item> setInOriginalItems(int position, Item item) {
-        return setInOriginalItems(true, position, item);
+    public ModelAdapter<?, Item> setInAdapter(int index, Item item) {
+        return setInAdapter(true, index, item);
     }
 
     /**
@@ -466,16 +466,16 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
         return remove(true, position);
     }
 
-    ///[UPGRADE#xxxInOriginalItems()]
+    ///[UPGRADE#xxxInAdapter()]
     /**
      * removes an item at the given position within the existing icons
      *
-     * @param position the relative position
+     * @param index the relative position
      */
     ///[isPublishResults]
-    public ModelAdapter<?, Item> removeInOriginalItems(boolean isPublishResults, int position) {
+    public ModelAdapter<?, Item> removeInAdapter(boolean isPublishResults, int index) {
         if (mOriginalItems != null) {
-            mOriginalItems.remove(position);
+            mOriginalItems.remove(index);
 
             if (isPublishResults) {
                 publishResults(mConstraint, performFiltering(mConstraint));
@@ -483,11 +483,11 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
 
             return mItemAdapter;
         } else {
-            return mItemAdapter.removeInOriginalItems(position);
+            return mItemAdapter.removeInAdapter(index);
         }
     }
-    public ModelAdapter<?, Item> removeInOriginalItems(int position) {
-        return removeInOriginalItems(true, position);
+    public ModelAdapter<?, Item> removeInAdapter(int index) {
+        return removeInAdapter(true, index);
     }
 
     ///[UPGRADE#remove(Item item)]
@@ -578,21 +578,20 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
         return removeRange(true, position, itemCount);
     }
 
-    ///[UPGRADE#xxxInOriginalItems()]
     /**
      * removes a range of items starting with the given position within the existing icons
      *
-     * @param position  the relative position
+     * @param index  the relative position
      * @param itemCount the count of items which were removed
      */
     ///[isPublishResults]
-    public ModelAdapter<?, Item> removeRangeInOriginalItems(boolean isPublishResults, int position, int itemCount) {
+    public ModelAdapter<?, Item> removeRangeInAdapter(boolean isPublishResults, int index, int itemCount) {
         if (mOriginalItems != null) {
             int length = mOriginalItems.size();
             //make sure we do not delete to many items
-            int saveItemCount = Math.min(itemCount, length - position);
+            int saveItemCount = Math.min(itemCount, length - index);
             for (int i = 0; i < saveItemCount; i++) {
-                mOriginalItems.remove(position + i);
+                mOriginalItems.remove(index + i);
             }
 
             if (isPublishResults) {
@@ -601,11 +600,11 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
 
             return mItemAdapter;
         } else {
-            return mItemAdapter.removeRangeInOriginalItems(position, itemCount);
+            return mItemAdapter.removeRangeInAdapter(index, itemCount);
         }
     }
-    public ModelAdapter<?, Item> removeRangeInOriginalItems(int position, int itemCount) {
-        return removeRangeInOriginalItems(true, position, itemCount);
+    public ModelAdapter<?, Item> removeRangeInAdapter(int index, int itemCount) {
+        return removeRangeInAdapter(true, index, itemCount);
     }
 
     /**

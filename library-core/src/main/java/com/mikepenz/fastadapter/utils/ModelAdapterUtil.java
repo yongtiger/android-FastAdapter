@@ -1,6 +1,5 @@
 package com.mikepenz.fastadapter.utils;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,7 +12,7 @@ import static java.util.Arrays.asList;
 
 public abstract class ModelAdapterUtil {
 
-    public static <Item extends IItem> List<Item> getAdapterOriginalItems(@NonNull ModelAdapter<Item, Item> adapter) {
+    public static <Item extends IItem> List<Item> getAdapterOriginalItems(@Nullable ModelAdapter<Item, Item> adapter) {
         if (adapter == null) {
             return null;
         }
@@ -90,37 +89,37 @@ public abstract class ModelAdapterUtil {
     }
 
     @SafeVarargs
-    public static <Item extends IItem> void addInOriginalItems(boolean isPublishResults, @Nullable ModelAdapter<Item, Item> adapter, int position, Item... items) {
+    public static <Item extends IItem> void addInAdapter(boolean isPublishResults, @Nullable ModelAdapter<Item, Item> adapter, int index, Item... items) {
         if (adapter == null || items.length == 0) {
             return;
         }
 
-        addInOriginalItems(isPublishResults, adapter, position, asList(items));
+        addInAdapter(isPublishResults, adapter, index, asList(items));
     }
     @SafeVarargs
-    public static <Item extends IItem> void addInOriginalItems(@Nullable ModelAdapter<Item, Item> adapter, int position, Item... items) {
+    public static <Item extends IItem> void addInAdapter(@Nullable ModelAdapter<Item, Item> adapter, int index, Item... items) {
         if (adapter == null || items.length == 0) {
             return;
         }
 
-        addInOriginalItems(true, adapter, position, asList(items));
+        addInAdapter(true, adapter, index, asList(items));
     }
 
-    public static <Item extends IItem> void addInOriginalItems(boolean isPublishResults, @Nullable ModelAdapter<Item, Item> adapter, int position, @Nullable List<Item> items) {
+    public static <Item extends IItem> void addInAdapter(boolean isPublishResults, @Nullable ModelAdapter<Item, Item> adapter, int index, @Nullable List<Item> items) {
         if (adapter == null || items == null || items.size() == 0) {
             return;
         }
 
         ///[FastAdapter#Filter]用mItemAdapter.getItemFilter()的add/remove方法替代mItemAdapter的方法
         if (adapter.getItemFilter() == null) {
-            adapter.addInOriginalItems(position, items);
+            adapter.addInAdapter(index, items);
         } else {
             ///注意：FastAdapter必须升级为v0.10.7#[FIX#ItemFilter#Sort]以上！否则mOriginalItems无法排序
-            adapter.getItemFilter().addInOriginalItems(isPublishResults, position, items);
+            adapter.getItemFilter().addInAdapter(isPublishResults, index, items);
         }
     }
-    public static <Item extends IItem> void addInOriginalItems(@Nullable ModelAdapter<Item, Item> adapter, int position, @Nullable List<Item> items) {
-        addInOriginalItems(true, adapter, position, items);
+    public static <Item extends IItem> void addInAdapter(@Nullable ModelAdapter<Item, Item> adapter, int index, @Nullable List<Item> items) {
+        addInAdapter(true, adapter, index, items);
     }
 
     public static <Item extends IItem> void set(boolean isPublishResults, @Nullable ModelAdapter<Item, Item> adapter, int position, @Nullable Item item) {
@@ -145,26 +144,26 @@ public abstract class ModelAdapterUtil {
         set(true, adapter, position, item);
     }
 
-    public static <Item extends IItem> void setInOriginalItems(boolean isPublishResults, @Nullable ModelAdapter<Item, Item> adapter, int position, @Nullable Item item) {
+    public static <Item extends IItem> void setInAdapter(boolean isPublishResults, @Nullable ModelAdapter<Item, Item> adapter, int index, @Nullable Item item) {
         if (adapter == null) {
             return;
         }
 
         if (item == null) {
-            remove(isPublishResults, adapter, position);
+            remove(isPublishResults, adapter, index);
             return;
         }
 
         ///[FastAdapter#Filter]用mItemAdapter.getItemFilter()的add/remove方法替代mItemAdapter的方法
         if (adapter.getItemFilter() == null) {
-            adapter.setInOriginalItems(position, item);
+            adapter.setInAdapter(index, item);
         } else {
             ///注意：FastAdapter必须升级为v0.10.7#[FIX#ItemFilter#Sort]以上！否则mOriginalItems无法排序
-            adapter.getItemFilter().setInOriginalItems(isPublishResults, position, item);
+            adapter.getItemFilter().setInAdapter(isPublishResults, index, item);
         }
     }
-    public static <Item extends IItem> void setInOriginalItems(@Nullable ModelAdapter<Item, Item> adapter, int position, @Nullable Item item) {
-        setInOriginalItems(true, adapter, position, item);
+    public static <Item extends IItem> void setInAdapter(@Nullable ModelAdapter<Item, Item> adapter, int index, @Nullable Item item) {
+        setInAdapter(true, adapter, index, item);
     }
 
     public static <Item extends IItem> void move(@Nullable ModelAdapter<Item, Item> adapter, int fromPosition, int toPosition) {
@@ -214,19 +213,19 @@ public abstract class ModelAdapterUtil {
         remove(true, adapter, position);
     }
 
-    public static <Item extends IItem> void removeInOriginalItems(boolean isPublishResults, @Nullable ModelAdapter<Item, Item> adapter, int position) {
+    public static <Item extends IItem> void removeInAdapter(boolean isPublishResults, @Nullable ModelAdapter<Item, Item> adapter, int index) {
         if (adapter == null) {
             return;
         }
 
         if (adapter.getItemFilter() == null) {
-            adapter.removeInOriginalItems(position);
+            adapter.removeInAdapter(index);
         } else {
-            adapter.getItemFilter().removeInOriginalItems(isPublishResults, position);
+            adapter.getItemFilter().removeInAdapter(isPublishResults, index);
         }
     }
-    public static <Item extends IItem> void removeInOriginalItems(@Nullable ModelAdapter<Item, Item> adapter, int position) {
-        removeInOriginalItems(true, adapter, position);
+    public static <Item extends IItem> void removeInAdapter(@Nullable ModelAdapter<Item, Item> adapter, int index) {
+        removeInAdapter(true, adapter, index);
     }
 
     public static <Item extends IItem> void remove(boolean isPublishResults, @Nullable ModelAdapter<Item, Item> adapter, Item item) {
@@ -274,19 +273,19 @@ public abstract class ModelAdapterUtil {
         removeRange(true, adapter, position, itemCount);
     }
 
-    public static <Item extends IItem> void removeRangeInOriginalItems(boolean isPublishResults, @Nullable ModelAdapter<Item, Item> adapter, int position, int itemCount) {
+    public static <Item extends IItem> void removeRangeInAdapter(boolean isPublishResults, @Nullable ModelAdapter<Item, Item> adapter, int index, int itemCount) {
         if (adapter == null || itemCount <= 0) {
             return;
         }
 
         if (adapter.getItemFilter() == null) {
-            adapter.removeRangeInOriginalItems(position, itemCount);
+            adapter.removeRangeInAdapter(index, itemCount);
         } else {
-            adapter.getItemFilter().removeRangeInOriginalItems(isPublishResults, position, itemCount);
+            adapter.getItemFilter().removeRangeInAdapter(isPublishResults, index, itemCount);
         }
     }
-    public static <Item extends IItem> void removeRangeInOriginalItems(@Nullable ModelAdapter<Item, Item> adapter, int position, int itemCount) {
-        removeRangeInOriginalItems(true, adapter,position, itemCount);
+    public static <Item extends IItem> void removeRangeInAdapter(@Nullable ModelAdapter<Item, Item> adapter, int index, int itemCount) {
+        removeRangeInAdapter(true, adapter,index, itemCount);
     }
 
 }
