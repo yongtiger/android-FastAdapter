@@ -696,4 +696,5 @@ public class ModelAdapter<Model, Item extends IItem> extends AbstractAdapter<Ite
         }
         return selections;
     }
+
 }

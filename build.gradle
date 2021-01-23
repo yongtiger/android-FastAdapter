@@ -10,8 +10,8 @@ buildscript {
         ]
 
         release = [
-                versionName: "1.0.39",   ///v1.0.39#typo
-                versionCode: 100039
+                versionName: "1.0.40",   ///v1.0.40#typo
+                versionCode: 100040
         ]
     }
 
