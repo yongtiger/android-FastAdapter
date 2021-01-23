@@ -611,16 +611,22 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
     /**
      * removes all items of this adapter
      */
-    public ModelAdapter<?, Item> clear() {
+    ///[isPublishResults]
+    public ModelAdapter<?, Item> clear(boolean isPublishResults) {
         if (mOriginalItems != null) {
             mOriginalItems.clear();
 
-            publishResults(mConstraint, performFiltering(mConstraint));
+            if (isPublishResults) {
+                publishResults(mConstraint, performFiltering(mConstraint));
+            }
 
             return mItemAdapter;
         } else {
             return mItemAdapter.clear();
         }
+    }
+    public ModelAdapter<?, Item> clear() {
+        return clear(true);
     }
 
     ///[UPGRADE#ItemFilter#reset()]

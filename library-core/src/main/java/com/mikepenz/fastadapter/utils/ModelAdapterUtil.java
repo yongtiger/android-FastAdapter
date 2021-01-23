@@ -184,7 +184,7 @@ public abstract class ModelAdapterUtil {
         }
     }
 
-    public static <Item extends IItem> void clear(@Nullable ModelAdapter<Item, Item> adapter) {
+    public static <Item extends IItem> void clear(boolean isPublishResults, @Nullable ModelAdapter<Item, Item> adapter) {
         if (adapter == null) {
             return;
         }
@@ -192,8 +192,11 @@ public abstract class ModelAdapterUtil {
         if (adapter.getItemFilter() == null) {
             adapter.clear();
         } else {
-            adapter.getItemFilter().clear();
+            adapter.getItemFilter().clear(isPublishResults);
         }
+    }
+    public static <Item extends IItem> void clear(@Nullable ModelAdapter<Item, Item> adapter) {
+        clear(true, adapter);
     }
 
     public static <Item extends IItem> void remove(boolean isPublishResults, @Nullable ModelAdapter<Item, Item> adapter, int position) {
