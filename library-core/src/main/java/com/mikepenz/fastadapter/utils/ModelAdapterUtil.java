@@ -11,6 +11,7 @@ import java.util.List;
 import static java.util.Arrays.asList;
 
 public abstract class ModelAdapterUtil {
+
     public static <Item extends IItem> List<Item> getAdapterOriginalItems(@Nullable ModelAdapter<Item, Item> adapter) {
         if (adapter == null) {
             return null;
