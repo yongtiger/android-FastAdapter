@@ -337,7 +337,7 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
 
             return mItemAdapter;
         } else {
-            return mItemAdapter.addInternal(index, items);
+            return mItemAdapter.addInternalInAdapter(index, items);
         }
     }
     public ModelAdapter<?, Item> addInAdapter(int index, List<Item> items) {
@@ -396,7 +396,7 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
 
             return mItemAdapter;
         } else {
-            return mItemAdapter.setInternal(index, item);
+            return mItemAdapter.setInternalInAdapter(index, item);
         }
     }
     public ModelAdapter<?, Item> setInAdapter(int index, Item item) {
