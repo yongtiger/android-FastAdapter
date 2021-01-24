@@ -685,7 +685,7 @@ public class ModelAdapter<Model, Item extends IItem> extends AbstractAdapter<Ite
     /**
      * helper method to get all selections from the given adapter
      *
-     * @return a Set with the selected items out of all items  in the given adapter (not the listed ones)
+     * @return a Set with the selected items out of all items in the given adapter (not the listed ones)
      */
     public Set<Item> getSelectedItems() {
         Set<Item> selections = new HashSet<>();
