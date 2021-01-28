@@ -22,6 +22,7 @@ public interface ISwipeable<T, Item extends IItem> {
     ///[UPGRADE#ISwipeable]
     int getSwipedDirection();
     void setSwipedDirection(int swipedDirection);
+
     Runnable getSwipedAction();
     void setSwipedAction(Runnable action);
 
