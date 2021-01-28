@@ -10,8 +10,8 @@ buildscript {
         ]
 
         release = [
-                versionName: "1.0.43",   ///v1.0.43#[UPGRADE#mItemFilter = new ItemFilter]
-                versionCode: 100043
+                versionName: "1.0.44",   ///v1.0.44#[UPGRADE#ISwipeable]
+                versionCode: 100044
         ]
     }
 

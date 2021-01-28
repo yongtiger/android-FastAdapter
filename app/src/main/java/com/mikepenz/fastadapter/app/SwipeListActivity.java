@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.IItemAdapter;
+import com.mikepenz.fastadapter.adapters.ItemFilter;
 import com.mikepenz.fastadapter.app.items.SwipeableItem;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter.listeners.OnClickListener;
@@ -76,6 +77,9 @@ public class SwipeListActivity extends AppCompatActivity implements ItemTouchCal
                 return false;
             }
         });
+
+        ///[UPGRADE#mItemFilter = new ItemFilter]
+        fastItemAdapter.getItemAdapter().withItemFilter(new ItemFilter<SwipeableItem, SwipeableItem>(fastItemAdapter.getItemAdapter()));
 
         //configure the itemAdapter
         fastItemAdapter.getItemFilter().withFilterPredicate(new IItemAdapter.Predicate<SwipeableItem>() {

@@ -22,7 +22,9 @@ import android.widget.Toast;
 import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.IItemAdapter;
 import com.mikepenz.fastadapter.adapters.ItemAdapter;
+import com.mikepenz.fastadapter.adapters.ItemFilter;
 import com.mikepenz.fastadapter.app.items.SimpleItem;
+import com.mikepenz.fastadapter.app.items.SwipeableItem;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter.listeners.ItemFilterListener;
 import com.mikepenz.fastadapter.listeners.OnClickListener;
@@ -83,6 +85,9 @@ public class EndlessScrollListActivity extends AppCompatActivity implements Item
                 return false;
             }
         });
+
+        ///[UPGRADE#mItemFilter = new ItemFilter]
+        fastItemAdapter.getItemAdapter().withItemFilter(new ItemFilter<SimpleItem, SimpleItem>(fastItemAdapter.getItemAdapter()));
 
         //configure the itemAdapter
         fastItemAdapter.getItemFilter().withFilterPredicate(new IItemAdapter.Predicate<SimpleItem>() {

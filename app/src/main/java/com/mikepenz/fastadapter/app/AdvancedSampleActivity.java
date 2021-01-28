@@ -19,8 +19,10 @@ import com.mikepenz.fastadapter.IAdapterExtension;
 import com.mikepenz.fastadapter.IExpandable;
 import com.mikepenz.fastadapter.IItem;
 import com.mikepenz.fastadapter.adapters.ItemAdapter;
+import com.mikepenz.fastadapter.adapters.ItemFilter;
 import com.mikepenz.fastadapter.app.adapters.StickyHeaderAdapter;
 import com.mikepenz.fastadapter.app.items.SimpleItem;
+import com.mikepenz.fastadapter.app.items.SwipeableItem;
 import com.mikepenz.fastadapter.app.items.expandable.SimpleSubExpandableItem;
 import com.mikepenz.fastadapter.app.items.expandable.SimpleSubItem;
 import com.mikepenz.fastadapter.expandable.ExpandableExtension;
@@ -76,6 +78,9 @@ public class AdvancedSampleActivity extends AppCompatActivity {
         mHeaderAdapter = items();
         mItemAdapter = items();
         StickyHeaderAdapter<IItem> stickyHeaderAdapter = new StickyHeaderAdapter<>();
+
+        ///[UPGRADE#mItemFilter = new ItemFilter]
+        mItemAdapter.withItemFilter(new ItemFilter<IItem, IItem>(mItemAdapter));
 
         //we also want the expandable feature
         mExpandableExtension = new ExpandableExtension<>();

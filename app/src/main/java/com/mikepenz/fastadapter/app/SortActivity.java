@@ -19,7 +19,9 @@ import android.widget.Toast;
 
 import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.IAdapter;
+import com.mikepenz.fastadapter.IItem;
 import com.mikepenz.fastadapter.adapters.ItemAdapter;
+import com.mikepenz.fastadapter.adapters.ItemFilter;
 import com.mikepenz.fastadapter.app.items.SimpleItem;
 import com.mikepenz.fastadapter.listeners.OnClickListener;
 import com.mikepenz.fastadapter.utils.ComparableItemListImpl;
@@ -111,6 +113,9 @@ public class SortActivity extends AppCompatActivity {
             //Set the default so
             sortingStrategy = SORT_NONE;
         }
+
+        ///[UPGRADE#mItemFilter = new ItemFilter]
+        itemAdapter.withItemFilter(new ItemFilter<SimpleItem, SimpleItem>(itemAdapter));
 
         //initial filling of the list
         itemAdapter.setNewList(generateUnsortedList());

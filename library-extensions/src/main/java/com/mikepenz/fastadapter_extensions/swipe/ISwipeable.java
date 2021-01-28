@@ -18,4 +18,11 @@ public interface ISwipeable<T, Item extends IItem> {
      * @return this
      */
     T withIsSwipeable(boolean swipeable);
+
+    ///[UPGRADE#ISwipeable]
+    int getSwipedDirection();
+    void setSwipedDirection(int swipedDirection);
+    Runnable getSwipedAction();
+    void setSwipedAction(Runnable action);
+
 }

@@ -14,7 +14,9 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.mikepenz.fastadapter.IAdapter;
+import com.mikepenz.fastadapter.adapters.ItemFilter;
 import com.mikepenz.fastadapter.app.items.RealmSampleUserItem;
+import com.mikepenz.fastadapter.app.items.SimpleItem;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter.listeners.OnClickListener;
 import com.mikepenz.fastadapter.select.SelectExtension;
@@ -67,6 +69,9 @@ public class RealmActivity extends AppCompatActivity {
 //        mFastItemAdapter.withAllowDeselection(false);
 //        mFastItemAdapter.select(0);
         mFastItemAdapter.getExtension(SelectExtension.class).select(0);
+
+        ///[UPGRADE#mItemFilter = new ItemFilter]
+        mFastItemAdapter.getItemAdapter().withItemFilter(new ItemFilter<RealmSampleUserItem, RealmSampleUserItem>(mFastItemAdapter.getItemAdapter()));
 
         //get our recyclerView and do basic setup
         RecyclerView rv = (RecyclerView) findViewById(R.id.rv);

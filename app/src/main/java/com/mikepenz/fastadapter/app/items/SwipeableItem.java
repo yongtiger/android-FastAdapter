@@ -79,10 +79,20 @@ public class SwipeableItem extends AbstractItem<SwipeableItem, SwipeableItem.Vie
         return this;
     }
 
+    ///[UPGRADE#ISwipeable]
+    @Override
+    public int getSwipedDirection() {
+        return this.swipedDirection;
+    }
+    @Override
     public void setSwipedDirection(int swipedDirection) {
         this.swipedDirection = swipedDirection;
     }
-
+    @Override
+    public Runnable getSwipedAction() {
+        return this.swipedAction;
+    }
+    @Override
     public void setSwipedAction(Runnable action) {
         this.swipedAction = action;
     }
