@@ -161,8 +161,10 @@ public class ModelAdapter<Model, Item extends IItem> extends AbstractAdapter<Ite
         return mUseIdDistributor;
     }
 
+    ///[UPGRADE#mItemFilter = new ItemFilter]
     //filters the items
-    private ItemFilter<Model, Item> mItemFilter = new ItemFilter<>(this);
+//    private ItemFilter<Model, Item> mItemFilter = new ItemFilter<>(this);
+    private ItemFilter<Model, Item> mItemFilter;
 
     /**
      * allows you to define your own Filter implementation instead of the default `ItemFilter`
