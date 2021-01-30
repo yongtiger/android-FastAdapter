@@ -13,7 +13,7 @@ import static java.util.Arrays.asList;
 
 public abstract class ModelAdapterUtil {
 
-    public static <Item extends IItem> void compareAdapter(@Nullable ModelAdapter<Item, Item> adapter, @Nullable Comparator<Item> comparator) {
+    public static <Item extends IItem> void compare(@Nullable ModelAdapter<Item, Item> adapter, @Nullable Comparator<Item> comparator) {
         if (adapter == null || adapter.getItemList() == null || !(adapter.getItemList() instanceof ComparableItemListImpl)) {
             return;
         }

@@ -10,8 +10,8 @@ buildscript {
         ]
 
         release = [
-                versionName: "1.0.46",   ///v1.0.46#[UPGRADE#ModelAdapterUtil#compareAdapter()]
-                versionCode: 100046
+                versionName: "1.0.47",   ///v1.0.47#[UPGRADE#ModelAdapterUtil#compareAdapter()]
+                versionCode: 100047
         ]
     }
 
