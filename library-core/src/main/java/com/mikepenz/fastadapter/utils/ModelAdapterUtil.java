@@ -6,11 +6,27 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.mikepenz.fastadapter.IItem;
 import com.mikepenz.fastadapter.adapters.ModelAdapter;
 
+import java.util.Comparator;
 import java.util.List;
 
 import static java.util.Arrays.asList;
 
 public abstract class ModelAdapterUtil {
+
+    public static <Item extends IItem> void compareAdapter(@Nullable ModelAdapter<Item, Item> adapter, @Nullable Comparator<Item> comparator) {
+        if (adapter == null || adapter.getItemList() == null || !(adapter.getItemList() instanceof ComparableItemListImpl)) {
+            return;
+        }
+
+        ///注意：withComparator(getComparator(), true, false)的第三个参数！为了不重复进行FastAdapter().notifyAdapterDataSetChanged()
+        if (adapter.getItemFilter() == null || adapter.getItemFilter().getOriginalItems() == null) {
+            ((ComparableItemListImpl<Item>) adapter.getItemList()).withComparator(comparator, true, true);
+        } else {
+            ((ComparableItemListImpl<Item>) adapter.getItemList()).withComparator(comparator, false, false);
+            adapter.getItemFilter().sortOriginalItems();
+            adapter.getItemFilter().publishResults();
+        }
+    }
 
     public static <Item extends IItem> List<Item> getAdapterOriginalItems(@Nullable ModelAdapter<Item, Item> adapter) {
         if (adapter == null) {
