@@ -1,17 +1,98 @@
 package com.mikepenz.fastadapter.utils;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.IItem;
 import com.mikepenz.fastadapter.adapters.ModelAdapter;
+import com.mikepenz.fastadapter.select.SelectExtension;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 import static java.util.Arrays.asList;
 
 public abstract class ModelAdapterUtil {
+
+    public static <Item extends IItem> Set<Item> getSelectedItems(@Nullable ModelAdapter<Item, Item> adapter, @NonNull FastAdapter<Item> fastAdapter) {
+        final Set<Item> selectedItems;
+        if (adapter == null) {
+            selectedItems = fastAdapter.getSelectedItems();
+        } else {
+            if (adapter.getItemFilter() == null) {
+                ///[FIX#ItemFilter/ModelAdapter#getSelections()/getSelectedItems()]
+                selectedItems = adapter.getSelectedItems();
+            } else {
+                selectedItems = adapter.getItemFilter().getSelectedItems();
+            }
+        }
+
+        return selectedItems;
+    }
+
+    public static <Item extends IItem> Set<Integer> getSelections(@Nullable ModelAdapter<Item, Item> adapter, @NonNull FastAdapter<Item> fastAdapter) {
+        final Set<Integer> selections;
+        if (adapter == null) {
+            selections = fastAdapter.getSelections();
+        } else {
+            if (adapter.getItemFilter() == null) {
+                ///[FIX#ItemFilter/ModelAdapter#getSelections()/getSelectedItems()]
+                selections = adapter.getSelections();
+            } else {
+                selections = adapter.getItemFilter().getSelections();
+            }
+        }
+
+        return selections;
+    }
+
+    public static <Item extends IItem> void selectAll(@Nullable ModelAdapter<Item, Item> adapter, @NonNull FastAdapter<Item> fastAdapter) {
+        final SelectExtension<Item> selectExtension = fastAdapter.getExtension(SelectExtension.class);
+        if (selectExtension == null) {
+            return;
+        }
+
+        if (adapter == null) {
+            selectExtension.select(true);
+        } else {
+            for (Item item : adapter.getAdapterItems()) {
+                selectExtension.select(fastAdapter.getPosition(item));
+            }
+        }
+    }
+
+    public static <Item extends IItem> void deselectAll(@Nullable ModelAdapter<Item, Item> adapter, @NonNull FastAdapter<Item> fastAdapter) {
+        final SelectExtension<Item> selectExtension = fastAdapter.getExtension(SelectExtension.class);
+        if (selectExtension == null) {
+            return;
+        }
+
+        if (adapter == null) {
+            selectExtension.deselect();
+        } else {
+            for (Item item : adapter.getAdapterItems()) {
+                selectExtension.deselect(fastAdapter.getPosition(item));
+            }
+        }
+    }
+
+    public static <Item extends IItem> void toggleAll(@Nullable ModelAdapter<Item, Item> adapter, @NonNull FastAdapter<Item> fastAdapter) {
+        final SelectExtension<Item> selectExtension = fastAdapter.getExtension(SelectExtension.class);
+        if (selectExtension == null) {
+            return;
+        }
+
+        if (adapter == null) {
+            selectExtension.toggleSelection();
+        } else {
+            for (Item item : adapter.getAdapterItems()) {
+                selectExtension.toggleSelection(fastAdapter.getPosition(item));
+            }
+        }
+    }
 
     public static <Item extends IItem> void compare(@Nullable ModelAdapter<Item, Item> adapter, @Nullable Comparator<Item> comparator) {
         if (adapter == null || adapter.getItemList() == null || !(adapter.getItemList() instanceof ComparableItemListImpl)) {
