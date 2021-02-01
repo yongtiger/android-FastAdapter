@@ -16,6 +16,7 @@ import java.util.Set;
 import static java.util.Arrays.asList;
 
 public abstract class ModelAdapterUtil {
+
     public static <Item extends IItem> List<Item> getSelectedItems(@Nullable ModelAdapter<Item, Item> adapter, @NonNull FastAdapter<Item> fastAdapter) {
         final List<Item> selectedItems;
         if (adapter == null) {

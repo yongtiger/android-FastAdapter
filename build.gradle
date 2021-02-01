@@ -10,8 +10,8 @@ buildscript {
         ]
 
         release = [
-                versionName: "1.0.52",   ///v1.0.52#[FIX#Set<Item>改为List<Item>]
-                versionCode: 100052
+                versionName: "1.0.53",   ///v1.0.53#[FIX#Set<Item>改为List<Item>]
+                versionCode: 100053
         ]
     }
 
