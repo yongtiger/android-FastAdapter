@@ -179,13 +179,13 @@ public class SubItemUtil {
     public static <T extends IItem & IExpandable> int countSelectedSubItems(final FastAdapter adapter, T header) {
         SelectExtension extension = (SelectExtension) adapter.getExtension(SelectExtension.class);
         if (extension != null) {
-            Set<IItem> selections = extension.getSelectedItems();
+            List<IItem> selections = extension.getSelectedItems();
             return countSelectedSubItems(selections, header);
         }
         return 0;
     }
 
-    public static <T extends IItem & IExpandable> int countSelectedSubItems(Set<IItem> selections, T header) {
+    public static <T extends IItem & IExpandable> int countSelectedSubItems(List<IItem> selections, T header) {
         int count = 0;
         List<IItem> subItems = header.getSubItems();
         int items = header.getSubItems() != null ? header.getSubItems().size() : 0;
