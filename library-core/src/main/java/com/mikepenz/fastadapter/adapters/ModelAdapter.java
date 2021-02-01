@@ -689,8 +689,8 @@ public class ModelAdapter<Model, Item extends IItem> extends AbstractAdapter<Ite
      *
      * @return a Set with the selected items out of all items in the given adapter (not the listed ones)
      */
-    public Set<Item> getSelectedItems() {
-        Set<Item> selections = new HashSet<>();
+    public List<Item> getSelectedItems() {
+        List<Item> selections = new ArrayList<>();
         for (Item selection : getFastAdapter().getSelectedItems()) {
             if (getFastAdapter().getAdapter(getFastAdapter().getPosition(selection)) == this) {
                 selections.add(selection);

@@ -184,9 +184,9 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
      *
      * @return a Set with the selected items out of all items in this itemAdapter (not the listed ones)
      */
-    public Set<Item> getSelectedItems() {
+    public List<Item> getSelectedItems() {
         if (mOriginalItems != null) {
-            Set<Item> selections = new HashSet<>();
+            List<Item> selections = new ArrayList<>();
             for (int i = 0, size = mOriginalItems.size(); i < size; i++) {
                 Item item = mOriginalItems.get(i);
                 if (item.isSelected()) {

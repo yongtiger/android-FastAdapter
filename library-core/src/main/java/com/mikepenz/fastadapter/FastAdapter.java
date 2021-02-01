@@ -1106,7 +1106,7 @@ public class FastAdapter<Item extends IItem> extends RecyclerView.Adapter<Recycl
      * @deprecated deprecated in favor of {@link SelectExtension#getSelectedItems()} , Retrieve it via {@link #getExtension(Class)}
      */
     @Deprecated
-    public Set<Item> getSelectedItems() {
+    public List<Item> getSelectedItems() {
         return mSelectExtension.getSelectedItems();
     }
 

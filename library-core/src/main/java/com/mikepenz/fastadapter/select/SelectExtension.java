@@ -158,7 +158,7 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
             return;
         }
 
-        Set<Item> selections = mFastAdapter.getSelectedItems();
+        List<Item> selections = mFastAdapter.getSelectedItems();
         long[] selectionsArray = new long[selections.size()];
         int i = 0;
         for (Item item : selections) {
@@ -245,8 +245,8 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
     /**
      * @return a set with all items which are currently selected (includes subitems)
      */
-    public Set<Item> getSelectedItems() {
-        final Set<Item> items = new ArraySet<>();
+    public List<Item> getSelectedItems() {
+        final List<Item> items = new ArrayList<>();
         mFastAdapter.recursive(new AdapterPredicate<Item>() {
             @Override
             public boolean apply(@NonNull IAdapter<Item> lastParentAdapter, int lastParentPosition, Item item, int position) {
@@ -318,7 +318,7 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
         } else {
             if (!mMultiSelect) {
                 //we have to separately handle deselection here because if we toggle the current item we do not want to deselect this first!
-                Set<Item> selections = getSelectedItems();
+                List<Item> selections = getSelectedItems();
                 selections.remove(item);
                 deselectByItems(selections);
             }
@@ -605,7 +605,7 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
     /**
      * @param items the set of items to deselect. They require a identifier.
      */
-    public void deselectByItems(final Set<Item> items) {
+    public void deselectByItems(final List<Item> items) {
         mFastAdapter.recursive(new AdapterPredicate<Item>() {
             @Override
             public boolean apply(@NonNull IAdapter<Item> lastParentAdapter, int lastParentPosition, Item item, int position) {
