@@ -236,8 +236,8 @@ public class ModelAdapter<Model, Item extends IItem> extends AbstractAdapter<Ite
      * @return the relative position
      */
     @Override
-    public int getAdapterPosition(Item item) {
-        return getAdapterPosition(item.getIdentifier());
+    public int getAdapterIndex(Item item) {
+        return getAdapterIndex(item.getIdentifier());
     }
 
     /**
@@ -247,8 +247,8 @@ public class ModelAdapter<Model, Item extends IItem> extends AbstractAdapter<Ite
      * @return the relative position
      */
     @Override
-    public int getAdapterPosition(long identifier) {
-        return mItems.getAdapterPosition(identifier);
+    public int getAdapterIndex(long identifier) {
+        return mItems.getAdapterIndex(identifier);
     }
 
     /**
@@ -268,7 +268,7 @@ public class ModelAdapter<Model, Item extends IItem> extends AbstractAdapter<Ite
      * @param position the global position
      * @return the relative position
      */
-    public int getAdapterPosition(int position) {
+    public int getAdapterIndex(int position) {
         return position - getFastAdapter().getPreItemCountByOrder(getOrder());
     }
 

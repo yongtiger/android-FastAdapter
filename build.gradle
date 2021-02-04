@@ -10,8 +10,8 @@ buildscript {
         ]
 
         release = [
-                versionName: "1.0.59",   ///v1.0.59#FIX#ModelAdapterUtil#mItemAdapters#removeItems
-                versionCode: 100059
+                versionName: "1.1.0",   ///v1.1.0#public void itemSwiped(final int position, long identifier, int direction)
+                versionCode: 101000
         ]
     }
 

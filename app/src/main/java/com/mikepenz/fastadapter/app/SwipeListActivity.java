@@ -220,7 +220,7 @@ public class SwipeListActivity extends AppCompatActivity implements ItemTouchCal
     @Override
     ///[FIX#SimpleSwipeCallback#itemSwiped(long identifier, int direction)]
 //    public void itemSwiped(int position, int direction) {
-    public void itemSwiped(long identifier, int direction) {
+    public void itemSwiped(final int position, long identifier, int direction) {
         // -- Option 1: Direct action --
         //do something when swiped such as: select, remove, update, ...:
         //A) fastItemAdapter.select(position);
@@ -229,8 +229,8 @@ public class SwipeListActivity extends AppCompatActivity implements ItemTouchCal
 
         // -- Option 2: Delayed action --
         ///[FIX#SimpleSwipeCallback#itemSwiped(long identifier, int direction)]
-//        final SwipeableItem item = fastItemAdapter.getItem(position);
-        final SwipeableItem item = fastItemAdapter.getItemById(identifier).first;
+        final SwipeableItem item = fastItemAdapter.getItem(position);
+//        final SwipeableItem item = fastItemAdapter.getItemById(identifier).first;
         if (item == null) {
             return;
         }
@@ -243,12 +243,12 @@ public class SwipeListActivity extends AppCompatActivity implements ItemTouchCal
             @Override
             public void run() {
                 item.setSwipedAction(null);
-                int position = fastItemAdapter.getAdapterPosition(item);
-                if (position != RecyclerView.NO_POSITION) {
+                int relativePosition = fastItemAdapter.getAdapterIndex(item);
+                if (relativePosition != -1) {
                     //this sample uses a filter. If a filter is used we should use the methods provided by the filter (to make sure filter and normal state is updated)
                     ///[FIX#SimpleSwipeCallback#itemSwiped(long identifier, int direction)]
-//                    fastItemAdapter.getItemFilter().remove(position);
-                    fastItemAdapter.getItemFilter().removeByIdentifier(item.getIdentifier());
+                    fastItemAdapter.getItemFilter().remove(position);
+//                    fastItemAdapter.getItemFilter().removeByIdentifier(item.getIdentifier());
                 }
             }
         };
@@ -260,15 +260,12 @@ public class SwipeListActivity extends AppCompatActivity implements ItemTouchCal
             public void run() {
                 rv.removeCallbacks(removeRunnable);
                 item.setSwipedDirection(0);
-                int position = fastItemAdapter.getAdapterPosition(item);
-                if (position != RecyclerView.NO_POSITION) {
+                int relativePosition = fastItemAdapter.getAdapterIndex(item);
+                if (relativePosition != -1) {
                     fastItemAdapter.notifyItemChanged(position);
                 }
             }
         });
-
-        ///[FIX#SimpleSwipeCallback#itemSwiped(long identifier, int direction)]
-        int position = fastItemAdapter.getAdapterPosition(item);
 
         fastItemAdapter.notifyItemChanged(position);
 

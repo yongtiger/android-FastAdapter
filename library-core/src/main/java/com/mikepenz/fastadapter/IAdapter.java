@@ -53,10 +53,10 @@ public interface IAdapter<Item extends IItem> {
     List<Item> getAdapterItems();
 
     /**
-     * @param position the relative position
+     * @param index the relative position
      * @return the item at the given relative position within this adapter
      */
-    Item getAdapterItem(int position);
+    Item getAdapterItem(int index);
 
     /**
      * Searches for the given item and calculates its relative position
@@ -64,7 +64,7 @@ public interface IAdapter<Item extends IItem> {
      * @param item the item which is searched for
      * @return the relative position
      */
-    int getAdapterPosition(Item item);
+    int getAdapterIndex(Item item);
 
     /**
      * Searches for the given item and calculates its relative position
@@ -72,7 +72,7 @@ public interface IAdapter<Item extends IItem> {
      * @param identifier the identifier of an item which is searched for
      * @return the relative position
      */
-    int getAdapterPosition(long identifier);
+    int getAdapterIndex(long identifier);
 
 
     /**

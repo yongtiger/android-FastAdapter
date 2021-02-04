@@ -197,7 +197,7 @@ public class ExpandableMultiselectDeleteSampleActivity extends AppCompatActivity
                 if (item instanceof SimpleSubItem) {
                     IItem headerItem = ((SimpleSubItem) item).getParent();
                     if (headerItem != null) {
-                        int pos = fastItemAdapter.getAdapterPosition(headerItem);
+                        int pos = fastItemAdapter.getGlobalPosition(fastItemAdapter.getAdapterIndex(headerItem));
                         // Important: notify the header directly, not via the notifyadapterItemChanged!
                         // we just want to update the view and we are sure, nothing else has to be done
                         fastItemAdapter.notifyItemChanged(pos);

@@ -88,8 +88,18 @@ public class FastItemAdapter<Item extends IItem> extends FastAdapter<Item> {
      * @param item the item which is searched for
      * @return the relative position
      */
-    public int getAdapterPosition(Item item) {
-        return getItemAdapter().getAdapterPosition(item);
+    public int getAdapterIndex(Item item) {
+        return getItemAdapter().getAdapterIndex(item);
+    }
+
+    /**
+     * Searches for the given identifier and calculates its relative position
+     *
+     * @param identifier the identifier of an item which is searched for
+     * @return the relative position
+     */
+    public int getAdapterIndex(long identifier) {
+        return getItemAdapter().getAdapterIndex(identifier);
     }
 
     /**
@@ -109,8 +119,8 @@ public class FastItemAdapter<Item extends IItem> extends FastAdapter<Item> {
      * @param position the global position
      * @return the relative position
      */
-    public int getAdapterPosition(int position) {
-        return getItemAdapter().getAdapterPosition(position);
+    public int getAdapterIndex(int position) {
+        return getItemAdapter().getAdapterIndex(position);
     }
 
     /**

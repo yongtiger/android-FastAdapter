@@ -44,7 +44,7 @@ public abstract class ModelAdapterUtil {
             positions.addAll(getAllAdapterItemPositions(mItemAdapters));
         } else {
             for (Item item : adapter.getAdapterItems()) {
-                positions.add(adapter.getGlobalPosition(adapter.getAdapterPosition(item))); ///[时间复杂度]O(adapter个数 + adapter中item个数)
+                positions.add(adapter.getGlobalPosition(adapter.getAdapterIndex(item))); ///[时间复杂度]O(adapter个数 + adapter中item个数)
             }
         }
 
@@ -65,7 +65,7 @@ public abstract class ModelAdapterUtil {
         final Set<Integer> positions = new ArraySet<>();
         for (ItemAdapter<Item> itemAdapter : mItemAdapters) {
             for (Item item : itemAdapter.getAdapterItems()) {
-                positions.add(itemAdapter.getGlobalPosition(itemAdapter.getAdapterPosition(item)));
+                positions.add(itemAdapter.getGlobalPosition(itemAdapter.getAdapterIndex(item)));
             }
         }
         return positions;

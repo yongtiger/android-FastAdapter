@@ -35,7 +35,7 @@ public class DefaultItemListImpl<Item extends IItem> extends DefaultItemList<Ite
     }
 
     @Override
-    public int getAdapterPosition(long identifier) {
+    public int getAdapterIndex(long identifier) {
         for (int i = 0, size = mItems.size(); i < size; i++) {
             if (mItems.get(i).getIdentifier() == identifier) {
                 return i;
@@ -64,7 +64,7 @@ public class DefaultItemListImpl<Item extends IItem> extends DefaultItemList<Ite
     ///[UPGRADE#removeByIdentifier(long identifier)]
     @Override
     public void removeByIdentifier(long identifier, int position) {
-        int adapterPosition = getAdapterPosition(identifier);
+        int adapterPosition = getAdapterIndex(identifier);
         if (adapterPosition == -1) {
             return;
         }

@@ -29,7 +29,7 @@ public class SimpleSwipeCallback extends ItemTouchHelper.SimpleCallback {
 //         * @param direction direction the item was swiped
 //         */
 //        void itemSwiped(int position, int direction);
-        void itemSwiped(long identifier, int direction);
+        void itemSwiped(int position, long identifier, int direction);
 
         ///[UPGRADE#onSwiping()]
         void onSwiping(SimpleSwipeCallback simpleSwipeCallback, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,
@@ -127,12 +127,10 @@ public class SimpleSwipeCallback extends ItemTouchHelper.SimpleCallback {
         viewHolder.itemView.setTranslationX(0);
         viewHolder.itemView.setTranslationY(0);
         ///[FIX#SimpleSwipeCallback#itemSwiped(long identifier, int direction)]
-//        int position = viewHolder.getAdapterPosition();
-//        if (position != RecyclerView.NO_POSITION) {
-//            itemSwipeCallback.itemSwiped(position, direction);
-//        }
-        if (viewHolder.getItemId() != -1L) {
-            itemSwipeCallback.itemSwiped(viewHolder.getItemId(), direction);
+        int position = viewHolder.getAdapterPosition();
+        long itemId = viewHolder.getItemId();
+        if (position != RecyclerView.NO_POSITION && itemId != -1L) {
+            itemSwipeCallback.itemSwiped(position, viewHolder.getItemId(), direction);
         }
     }
 

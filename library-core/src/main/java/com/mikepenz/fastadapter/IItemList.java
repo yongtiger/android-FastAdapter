@@ -10,7 +10,7 @@ import javax.annotation.Nullable;
 
 public interface IItemList<Item> {
 
-    int getAdapterPosition(long identifier);
+    int getAdapterIndex(long identifier);
 
     void remove(int position, int preItemCount);
 

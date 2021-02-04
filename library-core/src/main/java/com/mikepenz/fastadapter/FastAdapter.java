@@ -831,7 +831,7 @@ public class FastAdapter<Item extends IItem> extends RecyclerView.Adapter<Recycl
                 continue;
             }
 
-            int relativePosition = adapter.getAdapterPosition(identifier);
+            int relativePosition = adapter.getAdapterIndex(identifier);
             if (relativePosition != -1) {
                 return position + relativePosition;
             }
