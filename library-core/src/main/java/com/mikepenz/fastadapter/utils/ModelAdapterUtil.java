@@ -135,7 +135,7 @@ public abstract class ModelAdapterUtil {
         }
     }
     public static <Item extends IItem> void removeItems(@Nullable List<ItemAdapter<Item>> mItemAdapters, @Nullable ModelAdapter<Item, Item> adapter, @Nullable List<Item> items) {
-        removeItems(false, mItemAdapters, adapter, items);
+        removeItems(true, mItemAdapters, adapter, items);
     }
 
 
@@ -346,13 +346,35 @@ public abstract class ModelAdapterUtil {
         addInAdapter(true, adapter, index, items);
     }
 
+    public static <Item extends IItem> void set(boolean isPublishResults, @Nullable ModelAdapter<Item, Item> adapter, @Nullable List<Item> items) {
+        if (adapter == null) {
+            return;
+        }
+
+        if (items == null) {
+            clear(isPublishResults, adapter);
+            return;
+        }
+
+        ///[FastAdapter#Filter]用mItemAdapter.getItemFilter()的add/remove方法替代mItemAdapter的方法
+        if (adapter.getItemFilter() == null) {
+            adapter.set(items);
+        } else {
+            ///注意：FastAdapter必须升级为v0.10.7#[FIX#ItemFilter#Sort]以上！否则mOriginalItems无法排序
+            adapter.getItemFilter().set(isPublishResults, items);
+        }
+    }
+    public static <Item extends IItem> void set(@Nullable ModelAdapter<Item, Item> adapter, @Nullable List<Item> items) {
+        set(true, adapter, items);
+    }
+
     public static <Item extends IItem> void set(boolean isPublishResults, @Nullable ModelAdapter<Item, Item> adapter, int position, @Nullable Item item) {
         if (adapter == null || position == RecyclerView.NO_POSITION) {
             return;
         }
 
         if (item == null) {
-            remove(adapter, position);
+            remove(isPublishResults, adapter, position);
             return;
         }
 

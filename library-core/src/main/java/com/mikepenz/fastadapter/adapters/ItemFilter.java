@@ -344,6 +344,35 @@ public class ItemFilter<Model, Item extends IItem> extends Filter {
         return addInAdapter(true, index, items);
     }
 
+    ///[UPGRADE#set(List<Model> items)]
+    /**
+     * set a new list of items and apply it to the existing list (clear - add) for this adapter
+     * NOTE may consider using setNewList if the items list is a reference to the list which is used inside the adapter
+     *
+     * @param items the items to set
+     */
+    public ModelAdapter<?, Item> set(boolean isPublishResults, List<Item> items) {
+        if (mOriginalItems != null) {
+            if (mItemAdapter.isUseIdDistributor()) {
+                mItemAdapter.getIdDistributor().checkIds(items);
+            }
+
+            mOriginalItems.clear();
+            mOriginalItems.addAll(items);
+
+            if (isPublishResults) {
+                publishResults(mConstraint, performFiltering(mConstraint));
+            }
+
+            return mItemAdapter;
+        } else {
+            return mItemAdapter.setInternal(items, true, null);
+        }
+    }
+    public ModelAdapter<?, Item> set(List<Item> items) {
+        return set(true, items);
+    }
+
     /**
      * sets an item at the given position, overwriting the previous item
      *
