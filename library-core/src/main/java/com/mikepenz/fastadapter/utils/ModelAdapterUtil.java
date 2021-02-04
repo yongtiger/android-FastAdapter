@@ -120,9 +120,9 @@ public abstract class ModelAdapterUtil {
                 }
             }
         } else {
-            if (items == null || items.isEmpty()) {
+            if (items == null) {
                 clear(isPublishResults, adapter);
-            } else {
+            } else if (!items.isEmpty()){
                 for (Item item : items) {
                     remove(false, mItemAdapters, adapter, item);
                 }
