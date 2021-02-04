@@ -244,6 +244,7 @@ public abstract class ModelAdapterUtil {
     }
 
 
+    @SafeVarargs
     public static <Item extends IItem> void add(boolean isPublishResults, @Nullable ModelAdapter<Item, Item> adapter, Item... items) {
         if (adapter == null || items.length == 0) {
             return;
@@ -251,6 +252,7 @@ public abstract class ModelAdapterUtil {
 
         add(isPublishResults, adapter, asList(items));
     }
+    @SafeVarargs
     public static <Item extends IItem> void add(@Nullable ModelAdapter<Item, Item> adapter, Item... items) {
         if (adapter == null || items.length == 0) {
             return;
@@ -276,6 +278,7 @@ public abstract class ModelAdapterUtil {
         add(true, adapter, items);
     }
 
+    @SafeVarargs
     public static <Item extends IItem> void add(boolean isPublishResults, @Nullable ModelAdapter<Item, Item> adapter, int position, Item... items) {
         if (adapter == null || position == RecyclerView.NO_POSITION || items.length == 0) {
             return;
@@ -283,6 +286,7 @@ public abstract class ModelAdapterUtil {
 
         add(isPublishResults, adapter, position, asList(items));
     }
+    @SafeVarargs
     public static <Item extends IItem> void add(@Nullable ModelAdapter<Item, Item> adapter, int position, Item... items) {
         if (adapter == null || position == RecyclerView.NO_POSITION || items.length == 0) {
             return;

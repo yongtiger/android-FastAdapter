@@ -10,8 +10,8 @@ buildscript {
         ]
 
         release = [
-                versionName: "1.1.2",   ///v1.1.2#ModelAdapterUtil#public static <Item extends IItem> void removeItems(boolean isPublishResults, @Nullable List<ItemAdapter<Item>> mItemAdapters, @Nullable ModelAdapter<Item, Item> adapter, @Nullable List<Item> items)
-                versionCode: 10102
+                versionName: "1.1.3",   ///v1.1.3#ModelAdapterUtil#@SafeVarargs
+                versionCode: 10103
         ]
     }
 
