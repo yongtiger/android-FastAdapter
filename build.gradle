@@ -10,8 +10,8 @@ buildscript {
         ]
 
         release = [
-                versionName: "1.0.54",   ///v1.0.54#ModelAdapterUtil#mItemAdapters
-                versionCode: 100054
+                versionName: "1.0.55",   ///v1.0.55#ModelAdapterUtil#mItemAdapters#removeItems
+                versionCode: 100055
         ]
     }
 

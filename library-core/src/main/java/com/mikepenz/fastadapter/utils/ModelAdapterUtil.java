@@ -106,6 +106,25 @@ public abstract class ModelAdapterUtil {
         remove(true, mItemAdapters, adapter, item);
     }
 
+    public static <Item extends IItem> void removeItems(boolean isPublishResults, @Nullable List<ItemAdapter<Item>> mItemAdapters, @Nullable ModelAdapter<Item, Item> adapter, @Nullable List<Item> items) {
+        if (mItemAdapters == null && adapter == null || items == null || items.isEmpty()) {
+            return;
+        }
+
+        if (adapter == null) {
+            for (ItemAdapter<Item> itemAdapter : mItemAdapters) {
+                removeItems(isPublishResults, mItemAdapters, itemAdapter, items);
+            }
+        } else {
+            for (Item item : items) {
+                remove(isPublishResults,mItemAdapters, adapter, item);
+            }
+        }
+    }
+    public static <Item extends IItem> void removeItems(@Nullable List<ItemAdapter<Item>> mItemAdapters, @Nullable ModelAdapter<Item, Item> adapter, @Nullable List<Item> items) {
+        removeItems(false, mItemAdapters, adapter, items);
+    }
+
 
     @NonNull
     public static <Item extends IItem> List<Item> getSelectedItems(@Nullable ModelAdapter<Item, Item> adapter, @NonNull FastAdapter<Item> fastAdapter) {
