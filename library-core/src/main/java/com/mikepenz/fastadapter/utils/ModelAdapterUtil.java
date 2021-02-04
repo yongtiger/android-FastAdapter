@@ -116,7 +116,13 @@ public abstract class ModelAdapterUtil {
             }
         } else {
             for (Item item : items) {
-                remove(isPublishResults,mItemAdapters, adapter, item);
+                remove(false, mItemAdapters, adapter, item);
+            }
+
+            if (isPublishResults) {
+                if (adapter.getItemFilter() != null) {
+                    adapter.getItemFilter().publishResults();
+                }
             }
         }
     }
