@@ -2,13 +2,16 @@ package com.mikepenz.fastadapter.utils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.collection.ArraySet;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.IItem;
+import com.mikepenz.fastadapter.adapters.ItemAdapter;
 import com.mikepenz.fastadapter.adapters.ModelAdapter;
 import com.mikepenz.fastadapter.select.SelectExtension;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
@@ -17,6 +20,94 @@ import static java.util.Arrays.asList;
 
 public abstract class ModelAdapterUtil {
 
+    @NonNull
+    public static <Item extends IItem> List<Item> getAdapterItems(@Nullable List<ItemAdapter<Item>> mItemAdapters, @Nullable ItemAdapter<Item> adapter) {
+        if (mItemAdapters == null && adapter == null) {
+            return new ArrayList<>();
+        }
+
+        if (adapter == null) {
+            return getAllAdapterItems(mItemAdapters);
+        } else {
+            return adapter.getAdapterItems();
+        }
+    }
+
+    @NonNull
+    public static <Item extends IItem> Set<Integer> getAdapterItemPositions(@Nullable List<ItemAdapter<Item>> mItemAdapters, @Nullable ItemAdapter<Item> adapter) {
+        final Set<Integer> positions = new ArraySet<>();
+        if (mItemAdapters == null && adapter == null) {
+            return positions;
+        }
+
+        if (adapter == null) {
+            positions.addAll(getAllAdapterItemPositions(mItemAdapters));
+        } else {
+            for (Item item : adapter.getAdapterItems()) {
+                positions.add(adapter.getGlobalPosition(adapter.getAdapterPosition(item))); ///[时间复杂度]O(adapter个数 + adapter中item个数)
+            }
+        }
+
+        return positions;
+    }
+
+    @NonNull
+    public static <Item extends IItem> List<Item> getAllAdapterItems(@NonNull List<ItemAdapter<Item>> mItemAdapters) {
+        final List<Item> items = new ArrayList<>();
+        for (ItemAdapter<Item> itemAdapter : mItemAdapters) {
+            items.addAll(itemAdapter.getAdapterItems());
+        }
+        return items;
+    }
+
+    @NonNull
+    public static <Item extends IItem> Set<Integer> getAllAdapterItemPositions(@NonNull List<ItemAdapter<Item>> mItemAdapters) {
+        final Set<Integer> positions = new ArraySet<>();
+        for (ItemAdapter<Item> itemAdapter : mItemAdapters) {
+            for (Item item : itemAdapter.getAdapterItems()) {
+                positions.add(itemAdapter.getGlobalPosition(itemAdapter.getAdapterPosition(item)));
+            }
+        }
+        return positions;
+    }
+
+    public static <Item extends IItem> void clear(boolean isPublishResults, @Nullable List<ItemAdapter<Item>> mItemAdapters, @Nullable ModelAdapter<Item, Item> adapter) {
+        if (mItemAdapters == null && adapter == null) {
+            return;
+        }
+
+        if (adapter == null) {
+            for (ItemAdapter<Item> itemAdapter : mItemAdapters) {
+                clear(isPublishResults, itemAdapter);
+            }
+        } else {
+            clear(isPublishResults, adapter);
+        }
+    }
+
+    public static <Item extends IItem> void clear(@Nullable List<ItemAdapter<Item>> mItemAdapters, @Nullable ModelAdapter<Item, Item> adapter) {
+        clear(true, mItemAdapters, adapter);
+    }
+
+    public static <Item extends IItem> void remove(boolean isPublishResults, @Nullable List<ItemAdapter<Item>> mItemAdapters, @Nullable ModelAdapter<Item, Item> adapter, Item item) {
+        if (mItemAdapters == null && adapter == null) {
+            return;
+        }
+
+        if (adapter == null) {
+            for (ItemAdapter<Item> itemAdapter : mItemAdapters) {
+                remove(isPublishResults, itemAdapter, item);
+            }
+        } else {
+            remove(isPublishResults, adapter, item);
+        }
+    }
+    public static <Item extends IItem> void remove(@Nullable List<ItemAdapter<Item>> mItemAdapters, @Nullable ModelAdapter<Item, Item> adapter, Item item) {
+        remove(true, mItemAdapters, adapter, item);
+    }
+
+
+    @NonNull
     public static <Item extends IItem> List<Item> getSelectedItems(@Nullable ModelAdapter<Item, Item> adapter, @NonNull FastAdapter<Item> fastAdapter) {
         final List<Item> selectedItems;
         if (adapter == null) {
@@ -33,6 +124,7 @@ public abstract class ModelAdapterUtil {
         return selectedItems;
     }
 
+    @NonNull
     public static <Item extends IItem> Set<Integer> getSelections(@Nullable ModelAdapter<Item, Item> adapter, @NonNull FastAdapter<Item> fastAdapter) {
         final Set<Integer> selections;
         if (adapter == null) {
@@ -94,8 +186,9 @@ public abstract class ModelAdapterUtil {
         }
     }
 
-    public static <Item extends IItem> void compare(@Nullable ModelAdapter<Item, Item> adapter, @Nullable Comparator<Item> comparator) {
-        if (adapter == null || adapter.getItemList() == null || !(adapter.getItemList() instanceof ComparableItemListImpl)) {
+
+    public static <Item extends IItem> void compare(@NonNull ModelAdapter<Item, Item> adapter, @Nullable Comparator<Item> comparator) {
+        if (adapter.getItemList() == null || !(adapter.getItemList() instanceof ComparableItemListImpl)) {
             return;
         }
 
@@ -109,17 +202,15 @@ public abstract class ModelAdapterUtil {
         }
     }
 
-    public static <Item extends IItem> List<Item> getAdapterOriginalItems(@Nullable ModelAdapter<Item, Item> adapter) {
-        if (adapter == null) {
-            return null;
-        }
 
+    public static <Item extends IItem> List<Item> getAdapterOriginalItems(@NonNull ModelAdapter<Item, Item> adapter) {
         if (adapter.getItemFilter() == null || adapter.getItemFilter().getOriginalItems() == null) {
             return adapter.getAdapterItems();
         } else {
             return adapter.getItemFilter().getOriginalItems();
         }
     }
+
 
     public static <Item extends IItem> void add(boolean isPublishResults, @Nullable ModelAdapter<Item, Item> adapter, Item... items) {
         if (adapter == null || items.length == 0) {
@@ -280,18 +371,14 @@ public abstract class ModelAdapterUtil {
         }
     }
 
-    public static <Item extends IItem> void clear(boolean isPublishResults, @Nullable ModelAdapter<Item, Item> adapter) {
-        if (adapter == null) {
-            return;
-        }
-
+    public static <Item extends IItem> void clear(boolean isPublishResults, @NonNull ModelAdapter<Item, Item> adapter) {
         if (adapter.getItemFilter() == null) {
             adapter.clear();
         } else {
             adapter.getItemFilter().clear(isPublishResults);
         }
     }
-    public static <Item extends IItem> void clear(@Nullable ModelAdapter<Item, Item> adapter) {
+    public static <Item extends IItem> void clear(@NonNull ModelAdapter<Item, Item> adapter) {
         clear(true, adapter);
     }
 
