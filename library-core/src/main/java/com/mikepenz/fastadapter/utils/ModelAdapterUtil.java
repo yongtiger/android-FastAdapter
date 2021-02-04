@@ -122,7 +122,7 @@ public abstract class ModelAdapterUtil {
         } else {
             if (items == null) {
                 clear(isPublishResults, adapter);
-            } else if (!items.isEmpty()){
+            } else if (!items.isEmpty()) {
                 for (Item item : items) {
                     remove(false, itemAdapters, adapter, item);
                 }
