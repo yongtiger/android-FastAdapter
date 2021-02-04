@@ -21,27 +21,27 @@ import static java.util.Arrays.asList;
 public abstract class ModelAdapterUtil {
 
     @NonNull
-    public static <Item extends IItem> List<Item> getAdapterItems(@Nullable List<ItemAdapter<Item>> mItemAdapters, @Nullable ItemAdapter<Item> adapter) {
-        if (mItemAdapters == null && adapter == null) {
+    public static <Item extends IItem> List<Item> getAdapterItems(@Nullable List<ItemAdapter<Item>> itemAdapters, @Nullable ItemAdapter<Item> adapter) {
+        if (itemAdapters == null && adapter == null) {
             return new ArrayList<>();
         }
 
         if (adapter == null) {
-            return getAllAdapterItems(mItemAdapters);
+            return getAllAdapterItems(itemAdapters);
         } else {
             return adapter.getAdapterItems();
         }
     }
 
     @NonNull
-    public static <Item extends IItem> Set<Integer> getAdapterItemPositions(@Nullable List<ItemAdapter<Item>> mItemAdapters, @Nullable ItemAdapter<Item> adapter) {
+    public static <Item extends IItem> Set<Integer> getAdapterItemPositions(@Nullable List<ItemAdapter<Item>> itemAdapters, @Nullable ItemAdapter<Item> adapter) {
         final Set<Integer> positions = new ArraySet<>();
-        if (mItemAdapters == null && adapter == null) {
+        if (itemAdapters == null && adapter == null) {
             return positions;
         }
 
         if (adapter == null) {
-            positions.addAll(getAllAdapterItemPositions(mItemAdapters));
+            positions.addAll(getAllAdapterItemPositions(itemAdapters));
         } else {
             for (Item item : adapter.getAdapterItems()) {
                 positions.add(adapter.getGlobalPosition(adapter.getAdapterIndex(item))); ///[时间复杂度]O(adapter个数 + adapter中item个数)
@@ -52,18 +52,18 @@ public abstract class ModelAdapterUtil {
     }
 
     @NonNull
-    public static <Item extends IItem> List<Item> getAllAdapterItems(@NonNull List<ItemAdapter<Item>> mItemAdapters) {
+    public static <Item extends IItem> List<Item> getAllAdapterItems(@NonNull List<ItemAdapter<Item>> itemAdapters) {
         final List<Item> items = new ArrayList<>();
-        for (ItemAdapter<Item> itemAdapter : mItemAdapters) {
+        for (ItemAdapter<Item> itemAdapter : itemAdapters) {
             items.addAll(itemAdapter.getAdapterItems());
         }
         return items;
     }
 
     @NonNull
-    public static <Item extends IItem> Set<Integer> getAllAdapterItemPositions(@NonNull List<ItemAdapter<Item>> mItemAdapters) {
+    public static <Item extends IItem> Set<Integer> getAllAdapterItemPositions(@NonNull List<ItemAdapter<Item>> itemAdapters) {
         final Set<Integer> positions = new ArraySet<>();
-        for (ItemAdapter<Item> itemAdapter : mItemAdapters) {
+        for (ItemAdapter<Item> itemAdapter : itemAdapters) {
             for (Item item : itemAdapter.getAdapterItems()) {
                 positions.add(itemAdapter.getGlobalPosition(itemAdapter.getAdapterIndex(item)));
             }
@@ -71,13 +71,13 @@ public abstract class ModelAdapterUtil {
         return positions;
     }
 
-    public static <Item extends IItem> void clear(boolean isPublishResults, @Nullable List<ItemAdapter<Item>> mItemAdapters, @Nullable ModelAdapter<Item, Item> adapter) {
-        if (mItemAdapters == null && adapter == null) {
+    public static <Item extends IItem> void clear(boolean isPublishResults, @Nullable List<ItemAdapter<Item>> itemAdapters, @Nullable ModelAdapter<Item, Item> adapter) {
+        if (itemAdapters == null && adapter == null) {
             return;
         }
 
         if (adapter == null) {
-            for (ItemAdapter<Item> itemAdapter : mItemAdapters) {
+            for (ItemAdapter<Item> itemAdapter : itemAdapters) {
                 clear(isPublishResults, itemAdapter);
             }
         } else {
@@ -85,38 +85,38 @@ public abstract class ModelAdapterUtil {
         }
     }
 
-    public static <Item extends IItem> void clear(@Nullable List<ItemAdapter<Item>> mItemAdapters, @Nullable ModelAdapter<Item, Item> adapter) {
-        clear(true, mItemAdapters, adapter);
+    public static <Item extends IItem> void clear(@Nullable List<ItemAdapter<Item>> itemAdapters, @Nullable ModelAdapter<Item, Item> adapter) {
+        clear(true, itemAdapters, adapter);
     }
 
-    public static <Item extends IItem> void remove(boolean isPublishResults, @Nullable List<ItemAdapter<Item>> mItemAdapters, @Nullable ModelAdapter<Item, Item> adapter, Item item) {
-        if (mItemAdapters == null && adapter == null) {
+    public static <Item extends IItem> void remove(boolean isPublishResults, @Nullable List<ItemAdapter<Item>> itemAdapters, @Nullable ModelAdapter<Item, Item> adapter, Item item) {
+        if (itemAdapters == null && adapter == null) {
             return;
         }
 
         if (adapter == null) {
-            for (ItemAdapter<Item> itemAdapter : mItemAdapters) {
+            for (ItemAdapter<Item> itemAdapter : itemAdapters) {
                 remove(isPublishResults, itemAdapter, item);
             }
         } else {
             remove(isPublishResults, adapter, item);
         }
     }
-    public static <Item extends IItem> void remove(@Nullable List<ItemAdapter<Item>> mItemAdapters, @Nullable ModelAdapter<Item, Item> adapter, Item item) {
-        remove(true, mItemAdapters, adapter, item);
+    public static <Item extends IItem> void remove(@Nullable List<ItemAdapter<Item>> itemAdapters, @Nullable ModelAdapter<Item, Item> adapter, Item item) {
+        remove(true, itemAdapters, adapter, item);
     }
 
-    public static <Item extends IItem> void removeItems(boolean isPublishResults, @Nullable List<ItemAdapter<Item>> mItemAdapters, @Nullable ModelAdapter<Item, Item> adapter, @Nullable List<Item> items) {
-        if (mItemAdapters == null && adapter == null) {
+    public static <Item extends IItem> void removeItems(boolean isPublishResults, @Nullable List<ItemAdapter<Item>> itemAdapters, @Nullable ModelAdapter<Item, Item> adapter, @Nullable List<Item> items) {
+        if (itemAdapters == null && adapter == null) {
             return;
         }
 
         if (adapter == null) {
-            for (ItemAdapter<Item> itemAdapter : mItemAdapters) {
+            for (ItemAdapter<Item> itemAdapter : itemAdapters) {
                 if (items == null || items.isEmpty()) {
                     clear(isPublishResults, itemAdapter);
                 } else {
-                    removeItems(isPublishResults, mItemAdapters, itemAdapter, items);
+                    removeItems(isPublishResults, itemAdapters, itemAdapter, items);
                 }
             }
         } else {
@@ -124,7 +124,7 @@ public abstract class ModelAdapterUtil {
                 clear(isPublishResults, adapter);
             } else if (!items.isEmpty()){
                 for (Item item : items) {
-                    remove(false, mItemAdapters, adapter, item);
+                    remove(false, itemAdapters, adapter, item);
                 }
 
                 if (isPublishResults) {
@@ -135,8 +135,8 @@ public abstract class ModelAdapterUtil {
             }
         }
     }
-    public static <Item extends IItem> void removeItems(@Nullable List<ItemAdapter<Item>> mItemAdapters, @Nullable ModelAdapter<Item, Item> adapter, @Nullable List<Item> items) {
-        removeItems(true, mItemAdapters, adapter, items);
+    public static <Item extends IItem> void removeItems(@Nullable List<ItemAdapter<Item>> itemAdapters, @Nullable ModelAdapter<Item, Item> adapter, @Nullable List<Item> items) {
+        removeItems(true, itemAdapters, adapter, items);
     }
 
 
