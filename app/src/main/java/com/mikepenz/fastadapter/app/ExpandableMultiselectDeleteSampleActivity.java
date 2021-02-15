@@ -28,12 +28,13 @@ import com.mikepenz.fastadapter_extensions.ActionModeHelper;
 import com.mikepenz.fastadapter_extensions.RangeSelectorHelper;
 import com.mikepenz.fastadapter_extensions.utilities.SubItemUtil;
 import com.mikepenz.iconics.context.IconicsLayoutInflater;
-import com.mikepenz.itemanimators.SlideDownAlphaAnimator;
 import com.mikepenz.materialize.MaterializeBuilder;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+import cc.brainbook.android.itemanimator.SlideDownAlphaAnimator;
 
 public class ExpandableMultiselectDeleteSampleActivity extends AppCompatActivity {
     //save our FastAdapter

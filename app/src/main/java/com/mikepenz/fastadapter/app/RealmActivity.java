@@ -16,18 +16,17 @@ import android.widget.Toast;
 import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.adapters.ItemFilter;
 import com.mikepenz.fastadapter.app.items.RealmSampleUserItem;
-import com.mikepenz.fastadapter.app.items.SimpleItem;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter.listeners.OnClickListener;
 import com.mikepenz.fastadapter.select.SelectExtension;
 import com.mikepenz.iconics.IconicsDrawable;
-import com.mikepenz.itemanimators.AlphaInAnimator;
 import com.mikepenz.material_design_iconic_typeface_library.MaterialDesignIconic;
 import com.mikepenz.materialize.MaterializeBuilder;
 
 import java.util.LinkedList;
 import java.util.List;
 
+import cc.brainbook.android.itemanimator.AlphaInAnimator;
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
 import io.realm.RealmResults;

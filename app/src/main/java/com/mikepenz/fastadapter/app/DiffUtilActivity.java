@@ -18,7 +18,6 @@ import com.mikepenz.fastadapter.app.items.SimpleItem;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter.commons.utils.FastAdapterDiffUtil;
 import com.mikepenz.iconics.IconicsDrawable;
-import com.mikepenz.itemanimators.AlphaInAnimator;
 import com.mikepenz.material_design_iconic_typeface_library.MaterialDesignIconic;
 import com.mikepenz.materialize.MaterializeBuilder;
 
@@ -27,6 +26,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Callable;
 
+import cc.brainbook.android.itemanimator.AlphaInAnimator;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;

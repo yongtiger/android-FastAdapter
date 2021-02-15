@@ -17,13 +17,14 @@ import com.mikepenz.fastadapter.expandable.ExpandableExtension;
 import com.mikepenz.iconics.Iconics;
 import com.mikepenz.iconics.context.IconicsLayoutInflater;
 import com.mikepenz.iconics.typeface.ITypeface;
-import com.mikepenz.itemanimators.SlideDownAlphaAnimator;
 import com.mikepenz.materialize.MaterializeBuilder;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import cc.brainbook.android.itemanimator.SlideDownAlphaAnimator;
 
 public class IconGridActivity extends AppCompatActivity {
     //save our FastAdapter

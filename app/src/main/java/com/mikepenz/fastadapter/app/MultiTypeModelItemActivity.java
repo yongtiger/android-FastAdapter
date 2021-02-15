@@ -17,7 +17,6 @@ import com.mikepenz.fastadapter.app.model.RightIconModel;
 import com.mikepenz.fastadapter.app.model.RightModelIconItem;
 import com.mikepenz.iconics.Iconics;
 import com.mikepenz.iconics.typeface.ITypeface;
-import com.mikepenz.itemanimators.SlideDownAlphaAnimator;
 import com.mikepenz.materialize.MaterializeBuilder;
 
 import java.util.ArrayList;
@@ -25,6 +24,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import cc.brainbook.android.itemanimator.SlideDownAlphaAnimator;
 
 public class MultiTypeModelItemActivity extends AppCompatActivity {
     //save our FastAdapter

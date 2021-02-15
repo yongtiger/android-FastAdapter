@@ -17,7 +17,6 @@ import com.mikepenz.fastadapter.app.model.IconModel;
 import com.mikepenz.fastadapter.app.model.ModelIconItem;
 import com.mikepenz.iconics.Iconics;
 import com.mikepenz.iconics.typeface.ITypeface;
-import com.mikepenz.itemanimators.SlideDownAlphaAnimator;
 import com.mikepenz.materialize.MaterializeBuilder;
 import com.turingtechnologies.materialscrollbar.CustomIndicator;
 import com.turingtechnologies.materialscrollbar.DragScrollBar;
@@ -27,6 +26,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import cc.brainbook.android.itemanimator.SlideDownAlphaAnimator;
 
 public class ModelItemActivity extends AppCompatActivity {
     //save our FastAdapter

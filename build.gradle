@@ -10,8 +10,8 @@ buildscript {
         ]
 
         release = [
-                versionName: "1.1.15",   ///v1.1.15#library中移除'com.github.yongtiger:android-Materialize:v1.2.4'
-                versionCode: 10115
+                versionName: "1.1.16",   ///v1.1.16#implementation 'com.github.yongtiger:android-ItemAnimator:v0.0.2'
+                versionCode: 10116
         ]
     }
 

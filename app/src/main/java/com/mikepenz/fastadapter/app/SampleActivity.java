@@ -23,7 +23,6 @@ import com.mikepenz.fastadapter.app.dummy.ImageDummyData;
 import com.mikepenz.fastadapter.app.items.SimpleImageItem;
 import com.mikepenz.fastadapter.select.SelectExtension;
 import com.mikepenz.iconics.IconicsDrawable;
-import com.mikepenz.itemanimators.SlideDownAlphaAnimator;
 import com.mikepenz.material_design_iconic_typeface_library.MaterialDesignIconic;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
@@ -33,6 +32,8 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 import java.util.Arrays;
 import java.util.List;
+
+import cc.brainbook.android.itemanimator.SlideDownAlphaAnimator;
 
 public class SampleActivity extends AppCompatActivity {
 

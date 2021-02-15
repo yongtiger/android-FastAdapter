@@ -15,13 +15,14 @@ import com.mikepenz.fastadapter.app.items.expandable.SimpleSubItem;
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter.expandable.ExpandableExtension;
 import com.mikepenz.iconics.context.IconicsLayoutInflater;
-import com.mikepenz.itemanimators.SlideDownAlphaAnimator;
 import com.mikepenz.materialize.MaterializeBuilder;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import cc.brainbook.android.itemanimator.SlideDownAlphaAnimator;
 
 public class ExpandableSampleActivity extends AppCompatActivity {
     //save our FastAdapter

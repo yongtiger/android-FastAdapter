@@ -44,6 +44,12 @@ android {
     lintOptions {
         abortOnError false
     }
+
+    ///[FIX BUG#Static interface methods are only supported starting with Android N (--min-api 24): lambda$static$0()]
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -81,9 +87,12 @@ dependencies {
         exclude group: "com.mikepenz"
     }
 
-    //used to provide different itemAnimators for the RecyclerView
-    //https://github.com/mikepenz/ItemAnimators
-    implementation 'com.mikepenz:itemanimators:1.1.0'
+    ///[RecyclerView Animators#Item Animation]
+    ///https://github.com/mikepenz/ItemAnimators
+    ///Note: does not animate items on scroll, just when added, removed, moved, or changed
+//    api 'com.mikepenz:itemanimators:1.1.0'
+    implementation 'com.github.yongtiger:android-ItemAnimator:v0.0.2'
+
     //used to generate the Open Source section
     //https://github.com/mikepenz/AboutLibraries
     implementation('com.mikepenz:aboutlibraries:6.2.3') {
