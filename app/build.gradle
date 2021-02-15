@@ -76,9 +76,11 @@ dependencies {
     //used to generate the drawer on the left
     //https://github.com/mikepenz/MaterialDrawer
     implementation('com.mikepenz:materialdrawer:6.1.2') {   ///Note: 6.1.2 is latest version of Java&AndroidX
+//    implementation('com.mikepenz:materialdrawer:8.3.3') {
         transitive = true
         exclude group: "com.mikepenz"
     }
+
     //used to provide different itemAnimators for the RecyclerView
     //https://github.com/mikepenz/ItemAnimators
     implementation 'com.mikepenz:itemanimators:1.1.0'
@@ -132,7 +134,7 @@ dependencies {
 
     configurations.all {
         resolutionStrategy.force "androidx.appcompat:appcompat:1.2.0"
-        resolutionStrategy.force "com.google.android.material:material:1.2.0"
+        resolutionStrategy.force "com.google.android.material:material:1.3.0"
         resolutionStrategy.force "androidx.recyclerview:recyclerview:1.1.0"
         resolutionStrategy.force "androidx.cardview:cardview:1.0.0"
 

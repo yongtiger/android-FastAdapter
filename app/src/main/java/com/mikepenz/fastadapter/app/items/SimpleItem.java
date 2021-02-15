@@ -130,8 +130,10 @@ public class SimpleItem extends AbstractItem<SimpleItem, SimpleItem.ViewHolder> 
 
             //set the text for the name
             StringHolder.applyTo(item.name, name);
+//            StringHolder.Companion.applyTo(item.name, name);    ///[com.mikepenz:materialdrawer:8.3.3]
             //set the text for the description or hide
             StringHolder.applyToOrHide(item.description, description);
+//            StringHolder.Companion.applyToOrHide(item.description, description);    ///[com.mikepenz:materialdrawer:8.3.3]
         }
 
         @Override

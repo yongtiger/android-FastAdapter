@@ -10,8 +10,8 @@ buildscript {
         ]
 
         release = [
-                versionName: "1.1.12",   ///v1.1.12#implementation  'com.github.yongtiger:android-Materialize:v1.2.4'
-                versionCode: 10112
+                versionName: "1.1.13",   ///v1.1.13#com.mikepenz:materialdrawer:6.1.2
+                versionCode: 10113
         ]
     }
 
