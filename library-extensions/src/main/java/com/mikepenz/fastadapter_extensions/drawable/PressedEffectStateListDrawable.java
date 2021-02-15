@@ -12,7 +12,6 @@ import android.graphics.drawable.StateListDrawable;
 
 @SuppressLint("InlinedApi")
 public class PressedEffectStateListDrawable extends StateListDrawable {
-
     private int color;
     private int selectionColor;
 

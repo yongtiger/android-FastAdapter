@@ -10,8 +10,8 @@ buildscript {
         ]
 
         release = [
-                versionName: "1.1.14",   ///v1.1.14#library中移除'com.github.yongtiger:android-Materialize:v1.2.4'
-                versionCode: 10114
+                versionName: "1.1.15",   ///v1.1.15#library中移除'com.github.yongtiger:android-Materialize:v1.2.4'
+                versionCode: 10115
         ]
     }
 
