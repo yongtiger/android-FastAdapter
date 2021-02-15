@@ -11,9 +11,11 @@ import android.widget.TextView;
 
 import com.mikepenz.fastadapter.commons.utils.FastAdapterUIUtils;
 import com.mikepenz.fastadapter.items.AbstractItem;
+import com.mikepenz.fastadapter_extensions.holder.ImageHolder;
+import com.mikepenz.fastadapter_extensions.holder.StringHolder;
 import com.mikepenz.library_extensions.R;
-import com.mikepenz.materialize.holder.ImageHolder;
-import com.mikepenz.materialize.holder.StringHolder;
+//import com.mikepenz.materialize.holder.ImageHolder;
+//import com.mikepenz.materialize.holder.StringHolder;
 
 import java.util.List;
 
