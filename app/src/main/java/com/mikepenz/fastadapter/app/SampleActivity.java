@@ -34,6 +34,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import cc.brainbook.android.itemanimator.SlideDownAlphaAnimator;
+import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 
 public class SampleActivity extends AppCompatActivity {
 
@@ -169,7 +170,11 @@ public class SampleActivity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.rv);
         //mRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(mFastAdapter);
+
+        ///[RecyclerView Animators#Scroll Animation]
+//        mRecyclerView.setAdapter(mFastAdapter);
+        mRecyclerView.setAdapter(new ScaleInAnimationAdapter(mFastAdapter));
+
         mRecyclerView.setItemAnimator(new SlideDownAlphaAnimator());
         mRecyclerView.getItemAnimator().setAddDuration(500);
         mRecyclerView.getItemAnimator().setRemoveDuration(500);

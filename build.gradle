@@ -10,8 +10,8 @@ buildscript {
         ]
 
         release = [
-                versionName: "1.1.16",   ///v1.1.16#implementation 'com.github.yongtiger:android-ItemAnimator:v0.0.2'
-                versionCode: 10116
+                versionName: "1.1.17",   ///v1.1.17#[RecyclerView Animators#Scroll Animation]
+                versionCode: 10117
         ]
     }
 

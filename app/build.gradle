@@ -93,6 +93,10 @@ dependencies {
 //    api 'com.mikepenz:itemanimators:1.1.0'
     implementation 'com.github.yongtiger:android-ItemAnimator:v0.0.2'
 
+    ///[RecyclerView Animators#Scroll Animation]
+    ///https://github.com/wasabeef/recyclerview-animators
+    implementation 'jp.wasabeef:recyclerview-animators:3.0.0'   ///Note: 3.0.0以上为Kotlin，且仅支持API 21+
+
     //used to generate the Open Source section
     //https://github.com/mikepenz/AboutLibraries
     implementation('com.mikepenz:aboutlibraries:6.2.3') {
