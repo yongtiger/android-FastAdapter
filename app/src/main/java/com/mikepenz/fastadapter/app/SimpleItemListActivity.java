@@ -22,8 +22,10 @@ import android.widget.Toast;
 
 import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.IAdapter;
+import com.mikepenz.fastadapter.IItem;
 import com.mikepenz.fastadapter.IItemAdapter;
 import com.mikepenz.fastadapter.adapters.ItemAdapter;
+import com.mikepenz.fastadapter.adapters.ItemFilter;
 import com.mikepenz.fastadapter.app.adapters.FastScrollIndicatorAdapter;
 import com.mikepenz.fastadapter.app.items.SimpleItem;
 import com.mikepenz.fastadapter.listeners.ItemFilterListener;
@@ -86,6 +88,8 @@ public class SimpleItemListActivity extends AppCompatActivity implements ItemTou
         });
 
         //configure the itemAdapter
+        ///[UPGRADE#mItemFilter = new ItemFilter]
+        itemAdapter.withItemFilter(new ItemFilter<SimpleItem, SimpleItem>(itemAdapter));
         itemAdapter.getItemFilter().withFilterPredicate(new IItemAdapter.Predicate<SimpleItem>() {
             @Override
             public boolean filter(SimpleItem item, CharSequence constraint) {

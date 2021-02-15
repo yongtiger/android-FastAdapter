@@ -6,7 +6,7 @@ import android.view.View;
 
 import java.util.List;
 
-import javax.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 /**
  * Created by mikepenz on 04/06/2017.

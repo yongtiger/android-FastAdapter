@@ -9,7 +9,7 @@ import com.mikepenz.fastadapter.R;
 
 import java.util.List;
 
-import javax.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 public abstract class CustomEventHook<Item extends IItem> implements EventHook<Item> {
     /**

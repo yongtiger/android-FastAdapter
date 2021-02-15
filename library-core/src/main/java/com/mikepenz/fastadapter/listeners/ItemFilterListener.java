@@ -4,7 +4,7 @@ import com.mikepenz.fastadapter.IItem;
 
 import java.util.List;
 
-import javax.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 /**
  * interface for the ItemFilterListener

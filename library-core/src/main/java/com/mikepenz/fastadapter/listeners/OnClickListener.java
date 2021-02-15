@@ -5,7 +5,7 @@ import android.view.View;
 import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.IItem;
 
-import javax.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 public interface OnClickListener<Item extends IItem> {
     /**

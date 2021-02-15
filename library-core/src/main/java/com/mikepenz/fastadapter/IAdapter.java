@@ -2,7 +2,7 @@ package com.mikepenz.fastadapter;
 
 import java.util.List;
 
-import javax.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 /**
  * Created by mikepenz on 27.12.15.

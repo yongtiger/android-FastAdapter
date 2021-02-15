@@ -1,6 +1,6 @@
 package com.mikepenz.fastadapter;
 
-import javax.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 /**
  * Created by flisar on 21.09.2016.

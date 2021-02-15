@@ -3,15 +3,15 @@ buildscript {
     ext {
         setup = [
                 compileSdk : 30,
-                buildTools : "30.0.0",
+                buildTools : "30.0.2",
 //                minSdk     : 14,
                 minSdk     : 16,    ///Note: cannot be smaller than version 16 declared in library [io.realm:realm-android-library:7.0.3]
                 targetSdk  : 30
         ]
 
         release = [
-                versionName: "1.1.10",   ///v1.1.10#FIX#ModelAdapterUtil#removeItems()
-                versionCode: 10110
+                versionName: "1.1.11",   ///v1.1.11#implementation  'com.github.yongtiger:android-Materialize:v1.2.4'
+                versionCode: 10111
         ]
     }
 
@@ -22,7 +22,10 @@ buildscript {
 
     dependencies {
         classpath 'com.android.tools.build:gradle:4.1.2'
+
+        ///[jitpack#publish]https://jitpack.io/docs/ANDROID/
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.5'
     }
 }

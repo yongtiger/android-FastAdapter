@@ -118,7 +118,7 @@ public class ComparableItemListImpl<Item extends IItem> extends DefaultItemListI
 
     ///[FIX#ComparableItemListImpl#set(List<Item> items, int preItemCount, @javax.annotation.Nullable IAdapterNotifier adapterNotifier)]
     @Override
-    public void set(List<Item> items, int preItemCount, @javax.annotation.Nullable IAdapterNotifier adapterNotifier) {
+    public void set(List<Item> items, int preItemCount, @Nullable IAdapterNotifier adapterNotifier) {
         //get sizes
         int newItemsCount = items.size();
         int previousItemsCount = mItems.size();

@@ -9,7 +9,7 @@ import com.mikepenz.fastadapter.IItem;
 
 import java.util.List;
 
-import javax.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 public abstract class TouchEventHook<Item extends IItem> implements EventHook<Item> {
     public abstract boolean onTouch(View v, MotionEvent event, int position, FastAdapter<Item> fastAdapter, Item item);
