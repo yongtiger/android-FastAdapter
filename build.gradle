@@ -3,7 +3,7 @@ buildscript {
     ext {
         setup = [
                 compileSdk : 30,
-                buildTools : "30.0.2",
+                buildTools : "30.0.3",
 //                minSdk     : 14,
                 minSdk     : 16,    ///Note: cannot be smaller than version 16 declared in library [io.realm:realm-android-library:7.0.3]
                 targetSdk  : 30
