@@ -120,8 +120,8 @@ dependencies {
     ///[FIX#MaterialScrollBar]
     //Used to provide the FastScrollBar
     //https://github.com/krimin-killr21/MaterialScrollBar
-//    implementation 'com.turingtechnologies.materialscrollbar:lib:10.0.1'
-    implementation 'com.github.turing-tech:MaterialScrollBar:13.3.0'    ///Note: only support 13.3.0!
+    implementation 'com.github.turing-tech:MaterialScrollBar:13.3.4'    ///Note: only support 13.3.4! jitpack error at 13.4.x!
+//    implementation 'com.github.turing-tech:MaterialScrollBar:13.4.1'  ///jitpack error!
 
     //https://github.com/JakeWharton/butterknife
     implementation 'com.jakewharton:butterknife:10.2.1'
