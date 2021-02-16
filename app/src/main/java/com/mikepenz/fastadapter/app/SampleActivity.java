@@ -172,9 +172,10 @@ public class SampleActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         ///[RecyclerView Animators#Scroll Animation]
-//        mRecyclerView.setAdapter(mFastAdapter);
-        mRecyclerView.setAdapter(new ScaleInAnimationAdapter(mFastAdapter));
+        mRecyclerView.setAdapter(mFastAdapter);
+//        mRecyclerView.setAdapter(new ScaleInAnimationAdapter(mFastAdapter));
 
+        ///[RecyclerView Animators#Item Animation]
         mRecyclerView.setItemAnimator(new SlideDownAlphaAnimator());
         mRecyclerView.getItemAnimator().setAddDuration(500);
         mRecyclerView.getItemAnimator().setRemoveDuration(500);
