@@ -172,13 +172,16 @@ public class SampleActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         ///[RecyclerView Animators#Scroll Animation]
-        mRecyclerView.setAdapter(mFastAdapter);
-//        mRecyclerView.setAdapter(new ScaleInAnimationAdapter(mFastAdapter));
+//        mRecyclerView.setAdapter(mFastAdapter);
+        mRecyclerView.setAdapter(new ScaleInAnimationAdapter(mFastAdapter));
 
         ///[RecyclerView Animators#Item Animation]
         mRecyclerView.setItemAnimator(new SlideDownAlphaAnimator());
         mRecyclerView.getItemAnimator().setAddDuration(500);
         mRecyclerView.getItemAnimator().setRemoveDuration(500);
+
+        ///[RecyclerView Animators]如果设置了AnimationAdapter或ItemAnimator，则必须FastAdapter.withLegacyBindViewMode(true)，否则出现异常：The bindView method of this item should set the `Tag` on its itemView，并且item可能显示不完整！
+        mFastAdapter.withLegacyBindViewMode(true);
 
         //if we do this. the first added items will be animated :D
         new Handler().postDelayed(new Runnable() {
