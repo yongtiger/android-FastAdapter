@@ -1382,7 +1382,7 @@ public class FastAdapter<Item extends IItem> extends RecyclerView.Adapter<Recycl
     @SuppressWarnings("unchecked")
     public static <Item extends IItem> Item getHolderAdapterItem(@Nullable RecyclerView.ViewHolder holder) {
         if (holder != null) {
-            Object tag = holder.itemView.getTag(com.mikepenz.fastadapter.R.id.fastadapter_item_adapter);
+            Object tag = holder.itemView.getTag(R.id.fastadapter_item_adapter);
             if (tag instanceof FastAdapter) {
                 FastAdapter fastAdapter = ((FastAdapter) tag);
                 int pos = fastAdapter.getHolderAdapterPosition(holder);
@@ -1404,7 +1404,7 @@ public class FastAdapter<Item extends IItem> extends RecyclerView.Adapter<Recycl
     @SuppressWarnings("unchecked")
     public static <Item extends IItem> Item getHolderAdapterItem(@Nullable RecyclerView.ViewHolder holder, int position) {
         if (holder != null) {
-            Object tag = holder.itemView.getTag(com.mikepenz.fastadapter.R.id.fastadapter_item_adapter);
+            Object tag = holder.itemView.getTag(R.id.fastadapter_item_adapter);
             if (tag instanceof FastAdapter) {
                 return (Item) ((FastAdapter) tag).getItem(position);
             }
@@ -1421,7 +1421,7 @@ public class FastAdapter<Item extends IItem> extends RecyclerView.Adapter<Recycl
     @SuppressWarnings("unchecked")
     public static <Item extends IItem> Item getHolderAdapterItemTag(@Nullable RecyclerView.ViewHolder holder) {
         if (holder != null) {
-            Object item = holder.itemView.getTag(com.mikepenz.fastadapter.R.id.fastadapter_item);
+            Object item = holder.itemView.getTag(R.id.fastadapter_item);
             ///[FIX#The bindView method of this item should set the `Tag` on its itemView]
             ///https://github.com/mikepenz/FastAdapter/issues/725
 //            if (item instanceof FastAdapter) {
