@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -180,8 +181,12 @@ public class SampleActivity extends AppCompatActivity {
         mRecyclerView.getItemAnimator().setAddDuration(500);
         mRecyclerView.getItemAnimator().setRemoveDuration(500);
 
-        ///[RecyclerView Animators]如果设置了AnimationAdapter或ItemAnimator，则必须FastAdapter.withLegacyBindViewMode(true)，否则出现异常：The bindView method of this item should set the `Tag` on its itemView，并且item可能显示不完整！
-        mFastAdapter.withLegacyBindViewMode(true);
+        ///[RecyclerView Animators]如果设置了AnimationAdapter或非继承FastAdapter（ItemAnimator或FastScrollIndicatorAdapter）
+        ///则必须FastAdapter.withLegacyBindViewMode(true)，否则出现异常：The bindView method of this item should set the `Tag` on its itemView，并且item可能显示不完整！
+        if (mRecyclerView.getItemAnimator() != null && mRecyclerView.getItemAnimator().getClass() != DefaultItemAnimator.class
+                || !(mRecyclerView.getAdapter() instanceof FastAdapter)) {
+            mFastAdapter.withLegacyBindViewMode(true);
+        }
 
         //if we do this. the first added items will be animated :D
         new Handler().postDelayed(new Runnable() {

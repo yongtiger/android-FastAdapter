@@ -10,8 +10,8 @@ buildscript {
         ]
 
         release = [
-                versionName: "1.1.18",   ///v1.1.18#[RecyclerView Animators]如果设置了AnimationAdapter或ItemAnimator，则必须FastAdapter.withLegacyBindViewMode(true)，否则出现异常：The bindView method of this item should set the `Tag` on its itemView，并且item可能显示不完整！
-                versionCode: 10118
+                versionName: "1.1.19",   ///v1.1.19#[RecyclerView Animators]如果设置了AnimationAdapter或非继承FastAdapter（ItemAnimator或FastScrollIndicatorAdapter）则必须FastAdapter.withLegacyBindViewMode(true)，否则出现异常：The bindView method of this item should set the `Tag` on its itemView，并且item可能显示不完整！
+                versionCode: 10119
         ]
     }
 
