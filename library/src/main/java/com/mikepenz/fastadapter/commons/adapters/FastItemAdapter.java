@@ -105,11 +105,11 @@ public class FastItemAdapter<Item extends IItem> extends FastAdapter<Item> {
     /**
      * returns the global position if the relative position within this adapter was given
      *
-     * @param position the relative position
+     * @param index the relative position
      * @return the global position
      */
-    public int getGlobalPosition(int position) {
-        return getItemAdapter().getGlobalPosition(position);
+    public int getGlobalPosition(int index) {
+        return getItemAdapter().getGlobalPosition(index);
     }
 
     ///[UPGRADE#getAdapterPosition(int position)]

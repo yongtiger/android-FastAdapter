@@ -10,8 +10,8 @@ buildscript {
         ]
 
         release = [
-                versionName: "1.1.20",   ///v1.1.20#implementation 'com.github.turing-tech:MaterialScrollBar:13.3.4'    ///Note: only support 13.3.4! jitpack error at 13.4.x!
-                versionCode: 10120
+                versionName: "1.1.21",   ///v1.1.21#typo
+                versionCode: 10121
         ]
     }
 
