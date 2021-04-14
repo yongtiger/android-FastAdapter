@@ -117,7 +117,7 @@ public class ExpandableMultiselectDeleteSampleActivity extends AppCompatActivity
                 });
 
         // provide a custom title provider that even shows the count of sub items
-        mActionModeHelper = new ActionModeHelper<>(fastItemAdapter, R.menu.cab, new ActionBarCallBack())
+        mActionModeHelper = new ActionModeHelper<>(fastItemAdapter, new ActionBarCallBack(), R.menu.cab)
                 .withTitleProvider(new ActionModeHelper.ActionModeTitleProvider() {
                     @Override
                     public String getTitle(int selected) {

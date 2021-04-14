@@ -119,7 +119,7 @@ public class MultiselectSampleActivity extends AppCompatActivity {
         });
 
         //we init our ActionModeHelper
-        mActionModeHelper = new ActionModeHelper<>(mFastAdapter, R.menu.cab, new ActionBarCallBack());
+        mActionModeHelper = new ActionModeHelper<>(mFastAdapter, new ActionBarCallBack(), R.menu.cab);
 
         //get our recyclerView and do basic setup
         RecyclerView rv = (RecyclerView) findViewById(R.id.rv);

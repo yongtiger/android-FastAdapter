@@ -19,7 +19,7 @@ public class ActionModeHelper<Item extends IItem> {
     private SelectExtension<Item> mSelectExtension;
 
     @MenuRes
-    private int mCabMenu;
+    private Integer[] mCabMenu;
 
     private ActionMode.Callback mInternalCallback;
     private ActionMode.Callback mCallback;
@@ -32,10 +32,10 @@ public class ActionModeHelper<Item extends IItem> {
     private ActionItemClickedListener actionItemClickedListener = null;
 
     public ActionModeHelper(FastAdapter<Item> fastAdapter, int cabMenu) {
-        this(fastAdapter, cabMenu, (ActionItemClickedListener) null);
+        this(fastAdapter, (ActionItemClickedListener) null, cabMenu);
     }
 
-    public ActionModeHelper(FastAdapter<Item> fastAdapter, int cabMenu, ActionItemClickedListener actionItemClickedListener) {
+    public ActionModeHelper(FastAdapter<Item> fastAdapter, ActionItemClickedListener actionItemClickedListener, Integer... cabMenu) {
         this.mFastAdapter = fastAdapter;
         this.mCabMenu = cabMenu;
         this.mInternalCallback = new ActionBarCallBack();
@@ -48,7 +48,7 @@ public class ActionModeHelper<Item extends IItem> {
     }
 
 
-    public ActionModeHelper(FastAdapter<Item> fastAdapter, int cabMenu, ActionMode.Callback callback) {
+    public ActionModeHelper(FastAdapter<Item> fastAdapter, ActionMode.Callback callback, Integer... cabMenu) {
         this.mFastAdapter = fastAdapter;
         this.mCabMenu = cabMenu;
         this.mCallback = callback;
@@ -239,7 +239,9 @@ public class ActionModeHelper<Item extends IItem> {
 
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-            mode.getMenuInflater().inflate(mCabMenu, menu);
+            for (int cabMenu : mCabMenu) {
+                mode.getMenuInflater().inflate(cabMenu, menu);
+            }
 
             //as we are now in the actionMode a single click is fine for multiSelection
             mFastAdapter.withSelectOnLongClick(false);
