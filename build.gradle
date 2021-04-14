@@ -10,8 +10,8 @@ buildscript {
         ]
 
         release = [
-                versionName: "1.1.22",   ///v1.1.22#ActionModeHelper#public ActionModeHelper(FastAdapter<Item> fastAdapter, ActionMode.Callback callback, Integer... cabMenu)
-                versionCode: 10122
+                versionName: "1.1.23",   ///v1.1.23#ActionModeHelper#public ActionModeHelper(FastAdapter<Item> fastAdapter, ActionMode.Callback callback, Integer... cabMenu)
+                versionCode: 10123
         ]
     }
 

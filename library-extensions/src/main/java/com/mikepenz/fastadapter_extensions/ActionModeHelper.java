@@ -1,6 +1,7 @@
 package com.mikepenz.fastadapter_extensions;
 
 import androidx.annotation.MenuRes;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
 import android.view.Menu;
@@ -35,7 +36,7 @@ public class ActionModeHelper<Item extends IItem> {
         this(fastAdapter, (ActionItemClickedListener) null, cabMenu);
     }
 
-    public ActionModeHelper(FastAdapter<Item> fastAdapter, ActionItemClickedListener actionItemClickedListener, Integer... cabMenu) {
+    public ActionModeHelper(@NonNull FastAdapter<Item> fastAdapter, ActionItemClickedListener actionItemClickedListener, Integer... cabMenu) {
         this.mFastAdapter = fastAdapter;
         this.mCabMenu = cabMenu;
         this.mInternalCallback = new ActionBarCallBack();
@@ -48,7 +49,7 @@ public class ActionModeHelper<Item extends IItem> {
     }
 
 
-    public ActionModeHelper(FastAdapter<Item> fastAdapter, ActionMode.Callback callback, Integer... cabMenu) {
+    public ActionModeHelper(@NonNull FastAdapter<Item> fastAdapter, ActionMode.Callback callback, Integer... cabMenu) {
         this.mFastAdapter = fastAdapter;
         this.mCabMenu = cabMenu;
         this.mCallback = callback;
@@ -158,7 +159,7 @@ public class ActionModeHelper<Item extends IItem> {
     }
 
     ///[UPGRADE#ActionModeHelper#startSupportActionMode()]
-    public ActionMode startSupportActionMode(AppCompatActivity act) {
+    public ActionMode startSupportActionMode(@NonNull AppCompatActivity act) {
         mActionMode = act.startSupportActionMode(mInternalCallback);
         return mActionMode;
     }
