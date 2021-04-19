@@ -273,12 +273,12 @@ public class ModelAdapter<Model, Item extends IItem> extends AbstractAdapter<Ite
     }
 
     /**
-     * @param position the relative position
+     * @param index the relative position
      * @return the item inside this adapter
      */
     @Override
-    public Item getAdapterItem(int position) {
-        return mItems.get(position);
+    public Item getAdapterItem(int index) {
+        return mItems.get(index);
     }
 
     /**
