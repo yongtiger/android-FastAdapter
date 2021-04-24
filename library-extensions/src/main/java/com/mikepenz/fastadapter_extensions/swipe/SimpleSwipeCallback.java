@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import android.view.View;
@@ -81,7 +82,7 @@ public class SimpleSwipeCallback extends ItemTouchHelper.SimpleCallback {
         return this;
     }
 
-    public SimpleSwipeCallback withHorizontalMarginDp(Context ctx, int dp) {
+    public SimpleSwipeCallback withHorizontalMarginDp(@NonNull Context ctx, int dp) {
         return withHorizontalMarginPx((int) (ctx.getResources().getDisplayMetrics().density * dp));
     }
 
@@ -110,7 +111,7 @@ public class SimpleSwipeCallback extends ItemTouchHelper.SimpleCallback {
 
     ///[FIX#getSwipeDirs()]
     @Override
-    public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+    public int getSwipeDirs(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
         IItem item = FastAdapter.getHolderAdapterItem(viewHolder);
         if (item.isEnabled() && item instanceof ISwipeable && ((ISwipeable) item).isSwipeable()) {
             return super.getSwipeDirs(recyclerView, viewHolder);
@@ -120,7 +121,7 @@ public class SimpleSwipeCallback extends ItemTouchHelper.SimpleCallback {
     }
 
     @Override
-    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+    public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
         viewHolder.itemView.setTranslationX(0);
         viewHolder.itemView.setTranslationY(0);
         ///[FIX#SimpleSwipeCallback#itemSwiped(long identifier, int direction)]
@@ -139,7 +140,7 @@ public class SimpleSwipeCallback extends ItemTouchHelper.SimpleCallback {
 
     //Inspired/modified from: https://github.com/nemanja-kovacevic/recycler-view-swipe-to-delete/blob/master/app/src/main/java/net/nemanjakovacevic/recyclerviewswipetodelete/MainActivity.java
     @Override
-    public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+    public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
         View itemView = viewHolder.itemView;
         if (viewHolder.getAdapterPosition() == RecyclerView.NO_POSITION) {
             return;

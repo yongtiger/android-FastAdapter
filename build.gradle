@@ -10,8 +10,8 @@ buildscript {
         ]
 
         release = [
-                versionName: "1.1.25",   ///v1.1.25#FIX#getSwipeDirs()#item.isEnabled() && item instanceof ISwipeable && ((ISwipeable) item).isSwipeable()
-                versionCode: 10125
+                versionName: "1.1.26",   ///v1.1.26#FIX#getSwipeDirs()#item.isEnabled() && item instanceof ISwipeable && ((ISwipeable) item).isSwipeable()
+                versionCode: 10126
         ]
     }
 
