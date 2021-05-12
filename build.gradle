@@ -10,8 +10,8 @@ buildscript {
         ]
 
         release = [
-                versionName: "1.1.26",   ///v1.1.26#FIX#getSwipeDirs()#item.isEnabled() && item instanceof ISwipeable && ((ISwipeable) item).isSwipeable()
-                versionCode: 10126
+                versionName: "1.1.27",   ///v1.1.27#FIX#resolutionStrategy.force "androidx.recyclerview:recyclerview:1.2.0"
+                versionCode: 10127
         ]
     }
 
