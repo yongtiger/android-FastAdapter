@@ -174,19 +174,14 @@ public class SampleActivity extends AppCompatActivity {
 
         ///[RecyclerView Animators#Scroll Animation]
 //        mRecyclerView.setAdapter(mFastAdapter);
+        //////??????[BUG#注意：使用'jp.wasabeef:recyclerview-animators'时，Item会显示不全！因为AnimationAdapter中没有onBindHolder(holder, position, payload)]
+        ///https://github.com/mikepenz/FastAdapter/issues/184
         mRecyclerView.setAdapter(new ScaleInAnimationAdapter(mFastAdapter));
 
         ///[RecyclerView Animators#Item Animation]
         mRecyclerView.setItemAnimator(new SlideDownAlphaAnimator());
         mRecyclerView.getItemAnimator().setAddDuration(500);
         mRecyclerView.getItemAnimator().setRemoveDuration(500);
-
-        ///[RecyclerView Animators]如果设置了AnimationAdapter或非继承FastAdapter（ItemAnimator或FastScrollIndicatorAdapter）
-        ///则必须FastAdapter.withLegacyBindViewMode(true)，否则出现异常：The bindView method of this item should set the `Tag` on its itemView，并且item可能显示不完整！
-        if (mRecyclerView.getItemAnimator() != null && mRecyclerView.getItemAnimator().getClass() != DefaultItemAnimator.class
-                || !(mRecyclerView.getAdapter() instanceof FastAdapter)) {
-            mFastAdapter.withLegacyBindViewMode(true);
-        }
 
         //if we do this. the first added items will be animated :D
         new Handler().postDelayed(new Runnable() {
