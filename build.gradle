@@ -10,8 +10,8 @@ buildscript {
         ]
 
         release = [
-                versionName: "1.1.29",   ///v1.1.29#[BUG#注意：使用'jp.wasabeef:recyclerview-animators'时，Item会显示不全！因为AnimationAdapter中没有onBindHolder(holder, position, payload)]
-                versionCode: 10129
+                versionName: "1.1.30",   ///v1.1.30#使用com.github.yongtiger:android-RecyclerViewAnimators
+                versionCode: 10130
         ]
     }
 

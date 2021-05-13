@@ -95,7 +95,10 @@ dependencies {
 
     ///[RecyclerView Animators#Scroll Animation]
     ///https://github.com/wasabeef/recyclerview-animators
-    implementation 'jp.wasabeef:recyclerview-animators:3.0.0'   ///Note: 3.0.0以上为Kotlin，且仅支持API 21+
+//    implementation 'jp.wasabeef:recyclerview-animators:3.0.0'   ///Note: 3.0.0以上为Kotlin，且仅支持API 21+
+    ///注意：使用'jp.wasabeef:recyclerview-animators'时，Item会显示不全！因为AnimationAdapter中没有onBindHolder(holder, position, payload)
+    ///https://github.com/mikepenz/FastAdapter/issues/184
+    implementation 'com.github.yongtiger:android-RecyclerViewAnimators:v0.0.5'
 
     //used to generate the Open Source section
     //https://github.com/mikepenz/AboutLibraries

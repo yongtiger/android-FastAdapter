@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,7 +34,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import cc.brainbook.android.itemanimator.SlideDownAlphaAnimator;
-import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
+import cc.brainbook.android.recyclerviewanimators.animators.adapters.ScaleInAnimationAdapter;
 
 public class SampleActivity extends AppCompatActivity {
 
@@ -174,8 +173,9 @@ public class SampleActivity extends AppCompatActivity {
 
         ///[RecyclerView Animators#Scroll Animation]
 //        mRecyclerView.setAdapter(mFastAdapter);
-        //////??????[BUG#注意：使用'jp.wasabeef:recyclerview-animators'时，Item会显示不全！因为AnimationAdapter中没有onBindHolder(holder, position, payload)]
+        ///注意：使用'jp.wasabeef:recyclerview-animators'时，Item会显示不全！因为AnimationAdapter中没有onBindHolder(holder, position, payload)
         ///https://github.com/mikepenz/FastAdapter/issues/184
+        ///应该使用'com.github.yongtiger:android-RecyclerViewAnimators:v0.0.3'
         mRecyclerView.setAdapter(new ScaleInAnimationAdapter(mFastAdapter));
 
         ///[RecyclerView Animators#Item Animation]
