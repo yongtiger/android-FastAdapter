@@ -10,8 +10,8 @@ buildscript {
         ]
 
         release = [
-                versionName: "1.1.35",   ///v1.1.35#public void itemSwiped(final int position, IItem item, int direction)
-                versionCode: 10135
+                versionName: "1.1.36",   ///v1.1.36#public void itemSwiped(final int position, IItem item, int direction)
+                versionCode: 10136
         ]
     }
 
