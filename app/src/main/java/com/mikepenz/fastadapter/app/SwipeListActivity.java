@@ -234,9 +234,9 @@ public class SwipeListActivity extends AppCompatActivity implements ItemTouchCal
         ///[FIX#SimpleSwipeCallback#itemSwiped(long identifier, int direction)]
 //        final SwipeableItem item = fastItemAdapter.getItem(position);
 //        final SwipeableItem item = fastItemAdapter.getItemById(identifier).first;
-//        if (item == null || item.getIdentifier() == -1L || !(item instanceof SwipeableItem)) {
-//            return;
-//        }
+        if (!(item instanceof SwipeableItem) || item.getIdentifier() == -1L) {
+            return;
+        }
 
         final SwipeableItem swipeableItem = (SwipeableItem) item;
         swipeableItem.setSwipedDirection(direction);
