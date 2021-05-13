@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.ItemTouchHelper;
+
+import android.util.Log;
 import android.view.View;
 
 import com.mikepenz.fastadapter.FastAdapter;
@@ -129,6 +131,9 @@ public class SimpleSwipeCallback extends ItemTouchHelper.SimpleCallback {
         ///[FIX#SimpleSwipeCallback#itemSwiped(long identifier, int direction)]
         int position = viewHolder.getAdapterPosition();
         IItem item = FastAdapter.getHolderAdapterItemTag(viewHolder);
+        if (item == null) {
+            Log.e("FastAdapter", "The bindView method of this item should set the `Tag` on its itemView (https://github.com/mikepenz/FastAdapter/blob/develop/library-core/src/main/java/com/mikepenz/fastadapter/items/AbstractItem.java#L189)");
+        }
 //        long itemId = viewHolder.getItemId();   ///注意：当hasStableIds为false时，只能得到-1L，因此弃用此方法！
         if (position != RecyclerView.NO_POSITION && item instanceof ISwipeable && item.getIdentifier() != -1L) {
             itemSwipeCallback.itemSwiped(position, item, direction);
