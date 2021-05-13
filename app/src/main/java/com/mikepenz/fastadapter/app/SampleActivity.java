@@ -265,4 +265,5 @@ public class SampleActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
+
 }
