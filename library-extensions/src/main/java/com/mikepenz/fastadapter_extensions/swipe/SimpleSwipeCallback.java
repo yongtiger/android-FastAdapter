@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import android.view.View;
@@ -30,7 +31,8 @@ public class SimpleSwipeCallback extends ItemTouchHelper.SimpleCallback {
 //         * @param direction direction the item was swiped
 //         */
 //        void itemSwiped(int position, int direction);
-        void itemSwiped(int position, long identifier, int direction);
+//        void itemSwiped(int position, long identifier, int direction);
+        void itemSwiped(int position, IItem item, int direction);
 
         ///[UPGRADE#onSwiping()]
         void onSwiping(SimpleSwipeCallback simpleSwipeCallback, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,
@@ -126,9 +128,10 @@ public class SimpleSwipeCallback extends ItemTouchHelper.SimpleCallback {
         viewHolder.itemView.setTranslationY(0);
         ///[FIX#SimpleSwipeCallback#itemSwiped(long identifier, int direction)]
         int position = viewHolder.getAdapterPosition();
-        long itemId = viewHolder.getItemId();
-        if (position != RecyclerView.NO_POSITION && itemId != -1L) {
-            itemSwipeCallback.itemSwiped(position, viewHolder.getItemId(), direction);
+        IItem item = FastAdapter.getHolderAdapterItemTag(viewHolder);
+//        long itemId = viewHolder.getItemId();   ///注意：当hasStableIds为false时，只能得到-1L，因此弃用此方法！
+        if (position != RecyclerView.NO_POSITION && item instanceof ISwipeable && item.getIdentifier() != -1L) {
+            itemSwipeCallback.itemSwiped(position, item, direction);
         }
     }
 

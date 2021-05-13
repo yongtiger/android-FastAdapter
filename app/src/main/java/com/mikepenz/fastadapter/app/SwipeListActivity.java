@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.mikepenz.fastadapter.IAdapter;
+import com.mikepenz.fastadapter.IItem;
 import com.mikepenz.fastadapter.IItemAdapter;
 import com.mikepenz.fastadapter.adapters.ItemFilter;
 import com.mikepenz.fastadapter.app.items.SwipeableItem;
@@ -28,6 +29,7 @@ import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter.listeners.OnClickListener;
 import com.mikepenz.fastadapter_extensions.drag.ItemTouchCallback;
 import com.mikepenz.fastadapter_extensions.drag.SimpleDragCallback;
+import com.mikepenz.fastadapter_extensions.swipe.ISwipeable;
 import com.mikepenz.fastadapter_extensions.swipe.SimpleSwipeCallback;
 import com.mikepenz.fastadapter_extensions.swipe.SimpleSwipeDragCallback;
 import com.mikepenz.fastadapter_extensions.utilities.DragDropUtil;
@@ -220,7 +222,8 @@ public class SwipeListActivity extends AppCompatActivity implements ItemTouchCal
     @Override
     ///[FIX#SimpleSwipeCallback#itemSwiped(long identifier, int direction)]
 //    public void itemSwiped(int position, int direction) {
-    public void itemSwiped(final int position, long identifier, int direction) {
+//    public void itemSwiped(final int position, long identifier, int direction) {
+    public void itemSwiped(final int position, IItem item, int direction) {
         // -- Option 1: Direct action --
         //do something when swiped such as: select, remove, update, ...:
         //A) fastItemAdapter.select(position);
@@ -229,21 +232,22 @@ public class SwipeListActivity extends AppCompatActivity implements ItemTouchCal
 
         // -- Option 2: Delayed action --
         ///[FIX#SimpleSwipeCallback#itemSwiped(long identifier, int direction)]
-        final SwipeableItem item = fastItemAdapter.getItem(position);
+//        final SwipeableItem item = fastItemAdapter.getItem(position);
 //        final SwipeableItem item = fastItemAdapter.getItemById(identifier).first;
-        if (item == null) {
-            return;
-        }
+//        if (item == null || item.getIdentifier() == -1L || !(item instanceof SwipeableItem)) {
+//            return;
+//        }
 
-        item.setSwipedDirection(direction);
+        final SwipeableItem swipeableItem = (SwipeableItem) item;
+        swipeableItem.setSwipedDirection(direction);
 
         // This can vary depending on direction but remove & archive simulated here both results in
         // removal from list
         final Runnable removeRunnable = new Runnable() {
             @Override
             public void run() {
-                item.setSwipedAction(null);
-                int relativePosition = fastItemAdapter.getAdapterIndex(item);
+                swipeableItem.setSwipedAction(null);
+                int relativePosition = fastItemAdapter.getAdapterIndex(swipeableItem);
                 if (relativePosition != -1) {
                     //this sample uses a filter. If a filter is used we should use the methods provided by the filter (to make sure filter and normal state is updated)
                     ///[FIX#SimpleSwipeCallback#itemSwiped(long identifier, int direction)]
@@ -255,12 +259,12 @@ public class SwipeListActivity extends AppCompatActivity implements ItemTouchCal
         final View rv = findViewById(R.id.rv);
         rv.postDelayed(removeRunnable, 3000);
 
-        item.setSwipedAction(new Runnable() {
+        swipeableItem.setSwipedAction(new Runnable() {
             @Override
             public void run() {
                 rv.removeCallbacks(removeRunnable);
-                item.setSwipedDirection(0);
-                int relativePosition = fastItemAdapter.getAdapterIndex(item);
+                swipeableItem.setSwipedDirection(0);
+                int relativePosition = fastItemAdapter.getAdapterIndex(swipeableItem);
                 if (relativePosition != -1) {
                     fastItemAdapter.notifyItemChanged(position);
                 }
