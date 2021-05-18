@@ -10,8 +10,8 @@ buildscript {
         ]
 
         release = [
-                versionName: "1.1.36",   ///v1.1.36#public void itemSwiped(final int position, IItem item, int direction)
-                versionCode: 10136
+                versionName: "1.2.0",   ///v1.2.0#[UPGRADE#tag]例如：在ViewHolder中由FastAdapter的Tag来设置不同的布局（如列表编辑模式）
+                versionCode: 10200
         ]
     }
 

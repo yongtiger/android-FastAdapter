@@ -137,6 +137,15 @@ public class FastAdapter<Item extends IItem> extends RecyclerView.Adapter<Recycl
         return mTypeInstanceCache;
     }
 
+    ///[UPGRADE#tag]
+    protected Object mTag;
+    public void setTag(@NonNull Object object) {
+        this.mTag = object;
+    }
+    public Object getTag() {
+        return mTag;
+    }
+
     /**
      * creates a new FastAdapter with the provided adapters
      * if adapters is null, a default ItemAdapter is defined
