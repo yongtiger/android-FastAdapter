@@ -137,7 +137,7 @@ public class FastAdapter<Item extends IItem> extends RecyclerView.Adapter<Recycl
         return mTypeInstanceCache;
     }
 
-    ///[UPGRADE#tag]
+    ///[UPGRADE#tag]例如：在ViewHolder中由FastAdapter的Tag来设置不同的布局（如列表编辑模式）
     protected Object mTag;
     public void setTag(@NonNull Object object) {
         this.mTag = object;
