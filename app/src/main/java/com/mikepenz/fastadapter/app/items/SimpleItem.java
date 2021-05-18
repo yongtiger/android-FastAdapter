@@ -107,26 +107,19 @@ public class SimpleItem extends AbstractItem<SimpleItem, SimpleItem.ViewHolder> 
             super(view);
             ButterKnife.bind(this, view);
             this.view = view;
+        }
+
+        @Override
+        public void bindView(@NonNull SimpleItem item, @NonNull List<Object> payloads) {
+            itemView.setSelected(item.isSelected());
 
             ///[FIX#UIUtils.setBackground]
             //get the context
             Context ctx = itemView.getContext();
 
             //set the background for the item
-//            UIUtils.setBackground(itemView, FastAdapterUIUtils.getSelectableBackground(ctx, Color.RED, true));
-            ViewCompat.setBackground(itemView, FastAdapterUIUtils.getSelectableBackground(ctx, Color.RED, true));
-        }
-
-        @Override
-        public void bindView(@NonNull SimpleItem item, @NonNull List<Object> payloads) {
-            ///[FIX#UIUtils.setBackground]
-            itemView.setSelected(item.isSelected());
-//            //get the context
-//            Context ctx = itemView.getContext();
-//
-//            //set the background for the item
-////            UIUtils.setBackground(view, FastAdapterUIUtils.getSelectableBackground(ctx, Color.RED, true));
-//            ViewCompat.setBackground(view, FastAdapterUIUtils.getSelectableBackground(ctx, Color.RED, true));
+//            UIUtils.setBackground(view, FastAdapterUIUtils.getSelectableBackground(ctx, Color.RED, true));
+            ViewCompat.setBackground(view, FastAdapterUIUtils.getSelectableBackground(ctx, Color.RED, true));
 
             //set the text for the name
             StringHolder.applyTo(item.name, name);

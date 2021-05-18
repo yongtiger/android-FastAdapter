@@ -10,8 +10,8 @@ buildscript {
         ]
 
         release = [
-                versionName: "1.2.1",   ///v1.2.1#[UPGRADE#tag]例如：在ViewHolder中由FastAdapter的Tag来设置不同的布局（如列表编辑模式）
-                versionCode: 10201
+                versionName: "1.2.2",   ///v1.2.2#[FIX#UIUtils.setBackground]
+                versionCode: 10202
         ]
     }
 
