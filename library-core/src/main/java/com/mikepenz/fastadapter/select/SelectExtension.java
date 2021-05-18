@@ -434,7 +434,11 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
 
         item.withSetSelected(true);
 
-        mFastAdapter.notifyItemChanged(position);
+        ///[FIX#if position is -1, won't notify the adapter]
+//        mFastAdapter.notifyItemChanged(position);
+        if (position >= 0) {
+            mFastAdapter.notifyItemChanged(position);
+        }
 
         if (mSelectionListener != null)
             mSelectionListener.onSelectionChanged(item, true);

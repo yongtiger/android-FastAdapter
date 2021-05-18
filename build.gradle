@@ -10,8 +10,8 @@ buildscript {
         ]
 
         release = [
-                versionName: "1.2.2",   ///v1.2.2#[FIX#UIUtils.setBackground]
-                versionCode: 10202
+                versionName: "1.2.3",   ///v1.2.3#[FIX#if position is -1, won't notify the adapter]
+                versionCode: 10203
         ]
     }
 
