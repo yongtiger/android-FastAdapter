@@ -105,13 +105,6 @@ public class SimpleItem extends AbstractItem<SimpleItem, SimpleItem.ViewHolder> 
 
         public ViewHolder(View view) {
             super(view);
-            ButterKnife.bind(this, view);
-            this.view = view;
-        }
-
-        @Override
-        public void bindView(@NonNull SimpleItem item, @NonNull List<Object> payloads) {
-            itemView.setSelected(item.isSelected());
 
             ///[FIX#UIUtils.setBackground]
             //get the context
@@ -120,6 +113,14 @@ public class SimpleItem extends AbstractItem<SimpleItem, SimpleItem.ViewHolder> 
             //set the background for the item
 //            UIUtils.setBackground(view, FastAdapterUIUtils.getSelectableBackground(ctx, Color.RED, true));
             ViewCompat.setBackground(view, FastAdapterUIUtils.getSelectableBackground(ctx, Color.RED, true));
+
+            ButterKnife.bind(this, view);
+            this.view = view;
+        }
+
+        @Override
+        public void bindView(@NonNull SimpleItem item, @NonNull List<Object> payloads) {
+            itemView.setSelected(item.isSelected());
 
             //set the text for the name
             StringHolder.applyTo(item.name, name);
