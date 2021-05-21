@@ -116,7 +116,7 @@ public class SimpleSwipeCallback extends ItemTouchHelper.SimpleCallback {
     @Override
     public int getSwipeDirs(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
         IItem item = FastAdapter.getHolderAdapterItem(viewHolder);
-        if (item.isEnabled() && item instanceof ISwipeable && ((ISwipeable) item).isSwipeable()) {
+        if (item instanceof ISwipeable && item.isEnabled() && ((ISwipeable) item).isSwipeable()) {
             return super.getSwipeDirs(recyclerView, viewHolder);
         } else {
             return 0;

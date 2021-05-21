@@ -10,8 +10,8 @@ buildscript {
         ]
 
         release = [
-                versionName: "1.2.4",   ///v1.2.4#[FIX#UIUtils.setBackground]
-                versionCode: 10204
+                versionName: "1.2.5",   ///v1.2.5#FIX#SimpleSwipeCallback#getSwipeDirs()
+                versionCode: 10205
         ]
     }
 
