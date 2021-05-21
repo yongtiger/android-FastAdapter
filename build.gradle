@@ -10,8 +10,8 @@ buildscript {
         ]
 
         release = [
-                versionName: "1.2.5",   ///v1.2.5#FIX#SimpleSwipeCallback#getSwipeDirs()
-                versionCode: 10205
+                versionName: "1.2.6",   ///v1.2.6#FIX#SimpleSwipeCallback#getSwipeDirs()
+                versionCode: 10206
         ]
     }
 

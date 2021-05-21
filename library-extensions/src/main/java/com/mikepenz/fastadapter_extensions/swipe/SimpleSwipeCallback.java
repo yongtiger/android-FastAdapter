@@ -16,7 +16,6 @@ import android.view.View;
 import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.IItem;
 
-
 /**
  * Created by Mattias on 2016-02-13.
  */
