@@ -53,8 +53,8 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.recyclerview:recyclerview:1.2.0'
+    implementation 'androidx.appcompat:appcompat:1.3.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.multidex:multidex:2.0.1'
@@ -91,14 +91,14 @@ dependencies {
     ///https://github.com/mikepenz/ItemAnimators
     ///Note: does not animate items on scroll, just when added, removed, moved, or changed
 //    api 'com.mikepenz:itemanimators:1.1.0'
-    implementation 'com.github.yongtiger:android-ItemAnimator:v0.0.2'
+    implementation 'com.github.yongtiger:android-ItemAnimator:v0.0.5'
 
     ///[RecyclerView Animators#Scroll Animation]
     ///https://github.com/wasabeef/recyclerview-animators
 //    implementation 'jp.wasabeef:recyclerview-animators:3.0.0'   ///Note: 3.0.0以上为Kotlin，且仅支持API 21+
     ///注意：使用'jp.wasabeef:recyclerview-animators'时，Item会显示不全！因为AnimationAdapter中没有onBindHolder(holder, position, payload)
     ///https://github.com/mikepenz/FastAdapter/issues/184
-    implementation 'com.github.yongtiger:android-RecyclerViewAnimators:v0.0.10'
+    implementation 'com.github.yongtiger:android-RecyclerViewAnimators:v0.0.11'
 
     //used to generate the Open Source section
     //https://github.com/mikepenz/AboutLibraries
@@ -149,9 +149,9 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxjava:2.2.20'
 
     configurations.all {
-        resolutionStrategy.force "androidx.appcompat:appcompat:1.2.0"
+        resolutionStrategy.force "androidx.appcompat:appcompat:1.3.0"
         resolutionStrategy.force "com.google.android.material:material:1.3.0"
-        resolutionStrategy.force "androidx.recyclerview:recyclerview:1.2.0"
+        resolutionStrategy.force "androidx.recyclerview:recyclerview:1.2.1"
         resolutionStrategy.force "androidx.cardview:cardview:1.0.0"
 
 //        resolutionStrategy.force "com.mikepenz:materialize:1.2.1"
