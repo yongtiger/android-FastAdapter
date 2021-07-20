@@ -505,6 +505,15 @@ public class FastAdapter<Item extends IItem> extends RecyclerView.Adapter<Recycl
         return mSelectExtension.isSelectable();
     }
 
+    ///[UPGRADE#isMultiSelect(), isAllowDeselection()]
+    public boolean isMultiSelect() {
+        return mSelectExtension.isMultiSelect();
+    }
+    public boolean isAllowDeselection() {
+        return mSelectExtension.isAllowDeselection();
+    }
+
+
     /**
      * re-selects all elements stored in the savedInstanceState
      * IMPORTANT! Call this method only after all items where added to the adapters again. Otherwise it may select wrong items!

@@ -122,6 +122,14 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
         return mMultiSelect;
     }
 
+    ///[ADD#SelectExtension#isAllowDeselection()]
+    /**
+     * @return if items are multi-select
+     */
+    public boolean isAllowDeselection() {
+        return mAllowDeselection;
+    }
+
     /**
      * set a listener that get's notified whenever an item is selected or deselected
      *
