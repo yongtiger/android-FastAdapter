@@ -141,4 +141,5 @@ dependencies {
         resolutionStrategy.force "com.mikepenz:aboutlibraries:6.2.3"    ///Java && AndroidX | v6.2.3
 //        resolutionStrategy.force "com.mikepenz:aboutlibraries:8.1.6"  ///Note: cannot support more than 6.2.3
     }
+
 }
