@@ -81,7 +81,8 @@ dependencies {
     //used to generate the Open Source section
     //https://github.com/mikepenz/AboutLibraries
 //    implementation('com.mikepenz:aboutlibraries:6.2.3') {
-    implementation('com.mikepenz:aboutlibraries:8.9.1') { ///Note: cannot support more than 6.2.3
+//    implementation('com.mikepenz:aboutlibraries:8.1.6') { ///Note: cannot support more than 6.2.3
+    implementation('com.github.yongtiger:android-AboutLibraries:6.2.3') {
         transitive = true
         exclude group: "com.mikepenz"
     }

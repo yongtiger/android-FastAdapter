@@ -10,8 +10,8 @@ buildscript {
         ]
 
         release = [
-                versionName: "1.4.5",   ///v1.4.5#update gradle:7.0.2
-                versionCode: 10405
+                versionName: "1.4.6",   ///v1.4.6#update gradle:7.0.2
+                versionCode: 10406
         ]
     }
 
