@@ -47,7 +47,7 @@ dependencies {
     // comes with the awesome "Holder"-Pattern
     // https://github.com/mikepenz/Materialize
 //    implementation 'com.mikepenz:materialize:1.2.1'
-    implementation  'com.github.yongtiger:android-Materialize:v1.2.4'
+    implementation  'com.github.yongtiger:android-Materialize:v1.4.0'
 
     // used to provide out of the box icon font support. simplifies development,
     // and provides scalable icons. the core is very very light
@@ -69,14 +69,14 @@ dependencies {
     ///https://github.com/mikepenz/ItemAnimators
     ///Note: does not animate items on scroll, just when added, removed, moved, or changed
 //    api 'com.mikepenz:itemanimators:1.1.0'
-    implementation 'com.github.yongtiger:android-ItemAnimator:v0.0.5'
+    implementation 'com.github.yongtiger:android-ItemAnimator:v0.1.0'
 
     ///[RecyclerView Animators#Scroll Animation]
     ///https://github.com/wasabeef/recyclerview-animators
 //    implementation 'jp.wasabeef:recyclerview-animators:3.0.0'   ///Note: 3.0.0以上为Kotlin，且仅支持API 21+
     ///注意：使用'jp.wasabeef:recyclerview-animators'时，Item会显示不全！因为AnimationAdapter中没有onBindHolder(holder, position, payload)
     ///https://github.com/mikepenz/FastAdapter/issues/184
-    implementation 'com.github.yongtiger:android-RecyclerViewAnimators:v0.0.11'
+    implementation 'com.github.yongtiger:android-RecyclerViewAnimators:v0.1.0'
 
     //used to generate the Open Source section
     //https://github.com/mikepenz/AboutLibraries
