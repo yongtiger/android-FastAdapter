@@ -81,10 +81,10 @@ dependencies {
     //used to generate the Open Source section
     //https://github.com/mikepenz/AboutLibraries
 //    implementation('com.mikepenz:aboutlibraries:6.2.3') {
-////    implementation('com.mikepenz:aboutlibraries:8.1.6') { ///Note: cannot support more than 6.2.3
-//        transitive = true
-//        exclude group: "com.mikepenz"
-//    }
+    implementation('com.mikepenz:aboutlibraries:8.9.1') { ///Note: cannot support more than 6.2.3
+        transitive = true
+        exclude group: "com.mikepenz"
+    }
     //used to display the icons in the drawer
     //https://github.com/mikepenz/Android-Iconics
     implementation 'com.mikepenz:material-design-iconic-typeface:2.2.0.1@aar'

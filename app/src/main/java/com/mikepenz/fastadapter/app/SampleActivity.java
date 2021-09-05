@@ -14,7 +14,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-
+import com.mikepenz.aboutlibraries.Libs;
+import com.mikepenz.aboutlibraries.LibsBuilder;
 import com.mikepenz.community_material_typeface_library.CommunityMaterial;
 import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.adapters.ItemAdapter;
@@ -135,14 +136,14 @@ public class SampleActivity extends AppCompatActivity {
                             } else if (drawerItem.getIdentifier() == 19) {
                                 intent = new Intent(SampleActivity.this, DiffUtilActivity.class);
                             } else if (drawerItem.getIdentifier() == 100) {
-//                                intent = new LibsBuilder()
-//                                        .withFields(R.string.class.getFields())
-//                                        .withActivityTitle(getString(R.string.open_source))
-//                                        .withActivityStyle(Libs.ActivityStyle.LIGHT)
-//                                        .withAboutIconShown(true)
-//                                        .withVersionShown(true)
-//                                        .withAboutVersionShown(true)
-//                                        .intent(SampleActivity.this);
+                                intent = new LibsBuilder()
+                                        .withFields(R.string.class.getFields())
+                                        .withActivityTitle(getString(R.string.open_source))
+                                        .withActivityStyle(Libs.ActivityStyle.LIGHT)
+                                        .withAboutIconShown(true)
+                                        .withVersionShown(true)
+                                        .withAboutVersionShown(true)
+                                        .intent(SampleActivity.this);
                             }
                             if (intent != null) {
                                 SampleActivity.this.startActivity(intent);

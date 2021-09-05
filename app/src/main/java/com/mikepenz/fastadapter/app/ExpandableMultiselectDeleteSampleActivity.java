@@ -14,7 +14,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.michaelflisar.dragselectrecyclerview.DragSelectTouchListener;
-
+import com.mikepenz.aboutlibraries.util.UIUtils;
 import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.IItem;
 import com.mikepenz.fastadapter.ISelectionListener;
@@ -104,8 +104,8 @@ public class ExpandableMultiselectDeleteSampleActivity extends AppCompatActivity
                         ActionMode actionMode = mActionModeHelper.onLongClick((AppCompatActivity) ExpandableMultiselectDeleteSampleActivity.this, position);
                         mRangeSelectorHelper.onLongClick(position);
                         if (actionMode != null) {
-//                            //we want color our CAB
-//                            ExpandableMultiselectDeleteSampleActivity.this.findViewById(R.id.action_mode_bar).setBackgroundColor(UIUtils.getThemeColorFromAttrOrRes(ExpandableMultiselectDeleteSampleActivity.this, R.attr.colorPrimary, R.color.material_drawer_primary));
+                            //we want color our CAB
+                            ExpandableMultiselectDeleteSampleActivity.this.findViewById(R.id.action_mode_bar).setBackgroundColor(UIUtils.getThemeColorFromAttrOrRes(ExpandableMultiselectDeleteSampleActivity.this, R.attr.colorPrimary, R.color.material_drawer_primary));
 
                             // start the drag selection
                             mDragSelectTouchListener.startDragSelection(position);
