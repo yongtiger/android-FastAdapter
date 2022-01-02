@@ -21,7 +21,8 @@
         <!-- android:supportsRtl="true" -->
         <activity
             android:name="com.mikepenz.fastadapter.app.SampleActivity"
-            android:theme="@style/MaterialDrawerTheme.Light.TranslucentStatus">
+            android:theme="@style/MaterialDrawerTheme.Light.TranslucentStatus"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

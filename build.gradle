@@ -2,16 +2,16 @@
 buildscript {
     ext {
         setup = [
-                compileSdk : 30,
+                compileSdk : 31,
                 buildTools : "30.0.3",
 //                minSdk     : 14,
                 minSdk     : 16,    ///Note: cannot be smaller than version 16 declared in library [io.realm:realm-android-library:7.0.3]
-                targetSdk  : 30
+                targetSdk  : 31
         ]
 
         release = [
-                versionName: "1.4.6",   ///v1.4.6#update gradle:7.0.2
-                versionCode: 10406
+                versionName: "1.5.0",   ///v1.5.0#update gradle:7.0.4
+                versionCode: 10500
         ]
     }
 
@@ -24,7 +24,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.2'
+        classpath 'com.android.tools.build:gradle:7.0.4'
 
         ///[FIX#jitpack#jcenter废弃#Please remove usages of `jcenter()` Maven repository from your build scripts and migrate your build to other Maven repositories.]
         ///https://www.shangmayuan.com/a/12c08d0e68c3421cb2d547ee.html
@@ -38,7 +38,7 @@ buildscript {
         ///[realm]
         ///https://realm.io/docs/java/latest
         ///https://docs.mongodb.com/realm/sdk/android/
-        classpath "io.realm:realm-gradle-plugin:10.8.0"  ///Note: cannot be smaller than version 16 declared in library [io.realm:realm-android-library:7.0.3]
+        classpath "io.realm:realm-gradle-plugin:10.9.0"  ///Note: cannot be smaller than version 16 declared in library [io.realm:realm-android-library:7.0.3]
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
