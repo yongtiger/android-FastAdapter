@@ -10,8 +10,8 @@ buildscript {
         ]
 
         release = [
-                versionName: "1.5.0",   ///v1.5.0#update gradle:7.0.4
-                versionCode: 10500
+                versionName: "1.5.1",   ///v1.5.1#[FIX#ActionModeHelper$onClick(AppCompatActivity act, IItem item)#移除mSelectExtension.deselect()]
+                versionCode: 10501
         ]
     }
 

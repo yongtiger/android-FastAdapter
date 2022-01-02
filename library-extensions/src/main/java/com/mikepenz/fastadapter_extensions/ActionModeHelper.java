@@ -118,7 +118,7 @@ public class ActionModeHelper<Item extends IItem> {
         //if we are current in CAB mode, and we remove the last selection, we want to finish the actionMode
         if (mActionMode != null && (mSelectExtension.getSelectedItems().size() == 1) && item.isSelected()) {
             mActionMode.finish();
-            mSelectExtension.deselect();
+//            mSelectExtension.deselect();  ///[FIX#ActionModeHelper$onClick(AppCompatActivity act, IItem item)#移除mSelectExtension.deselect()]
             return true;
         }
 
