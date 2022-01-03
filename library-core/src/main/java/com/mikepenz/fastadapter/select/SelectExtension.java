@@ -51,8 +51,8 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
 
     ///[UPGRADE#ISelectionStateListener]
     private ISelectionStateListener mSelectionStateListener;
-    private boolean hasSelection;
-    private boolean hasSelection() {
+    private boolean hasSelected;
+    private boolean hasSelected() {
         for (int i = 0, size = mFastAdapter.getItemCount(); i < size; i++) {
             if (mFastAdapter.getItem(i).isSelected()) {
                 return true;
@@ -338,7 +338,7 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
         } else {
             ///[UPGRADE#ISelectionStateListener]
             if (mSelectionStateListener != null) {
-                hasSelection = hasSelection();
+                hasSelected = hasSelected();
             }
 
             if (!mMultiSelect) {
@@ -358,8 +358,8 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
 
             ///[UPGRADE#ISelectionStateListener]
             if (mSelectionStateListener != null) {
-                final boolean newIsSelectionsEmpty = hasSelection();
-                if (hasSelection != newIsSelectionsEmpty) {
+                final boolean newIsSelectionsEmpty = hasSelected();
+                if (hasSelected != newIsSelectionsEmpty) {
                     mSelectionStateListener.onSelectionStateChanged(newIsSelectionsEmpty);
                 }
             }
@@ -403,7 +403,7 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
 
         ///[UPGRADE#ISelectionStateListener]
         if (mSelectionStateListener != null) {
-            hasSelection = hasSelection();
+            hasSelected = hasSelected();
         }
 
         item.withSetSelected(true);
@@ -414,7 +414,7 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
 
         ///[UPGRADE#ISelectionStateListener]
         if (mSelectionStateListener != null) {
-            if (!hasSelection) {
+            if (!hasSelected) {
                 mSelectionStateListener.onSelectionStateChanged(true);
             }
         }
@@ -481,7 +481,7 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
 
         ///[UPGRADE#ISelectionStateListener]
         if (mSelectionStateListener != null) {
-            hasSelection = hasSelection();
+            hasSelected = hasSelected();
         }
 
         item.withSetSelected(true);
@@ -497,7 +497,7 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
 
         ///[UPGRADE#ISelectionStateListener]
         if (mSelectionStateListener != null) {
-            if (!hasSelection) {
+            if (!hasSelected) {
                 mSelectionStateListener.onSelectionStateChanged(true);
             }
         }
@@ -620,7 +620,7 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
 
         ///[UPGRADE#ISelectionStateListener]
         if (mSelectionStateListener != null) {
-            hasSelection = hasSelection();
+            hasSelected = hasSelected();
         }
 
         item.withSetSelected(false);
@@ -637,7 +637,7 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
 
         ///[UPGRADE#ISelectionStateListener]
         if (mSelectionStateListener != null) {
-            if (hasSelection) {
+            if (hasSelected) {
                 mSelectionStateListener.onSelectionStateChanged(false);
             }
         }
