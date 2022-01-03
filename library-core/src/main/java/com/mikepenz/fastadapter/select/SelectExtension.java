@@ -60,6 +60,10 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
         }
         return false;
     }
+    public SelectExtension<Item> withSelectionStateListener(ISelectionStateListener selectionStateListener) {
+        this.mSelectionStateListener = selectionStateListener;
+        return this;
+    }
 
     /**
      * select between the different selection behaviors.

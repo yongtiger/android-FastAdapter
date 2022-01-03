@@ -497,6 +497,11 @@ public class FastAdapter<Item extends IItem> extends RecyclerView.Adapter<Recycl
         mSelectExtension.withSelectionListener(selectionListener);
         return this;
     }
+    ///[UPGRADE#ISelectionStateListener]
+    public FastAdapter<Item> withSelectionStateListener(ISelectionStateListener selectionStateListener) {
+        mSelectExtension.withSelectionStateListener(selectionStateListener);
+        return this;
+    }
 
     /**
      * @return if items are selectable
