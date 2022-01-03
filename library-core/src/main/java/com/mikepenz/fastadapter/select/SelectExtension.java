@@ -418,8 +418,9 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
 
         ///[UPGRADE#ISelectionStateListener]
         if (mSelectionStateListener != null) {
-            if (!hasSelected) {
-                mSelectionStateListener.onSelectionStateChanged(true);
+            final boolean newIsSelectionsEmpty = hasSelected();
+            if (hasSelected != newIsSelectionsEmpty) {
+                mSelectionStateListener.onSelectionStateChanged(newIsSelectionsEmpty);
             }
         }
     }
@@ -501,8 +502,9 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
 
         ///[UPGRADE#ISelectionStateListener]
         if (mSelectionStateListener != null) {
-            if (!hasSelected) {
-                mSelectionStateListener.onSelectionStateChanged(true);
+            final boolean newIsSelectionsEmpty = hasSelected();
+            if (hasSelected != newIsSelectionsEmpty) {
+                mSelectionStateListener.onSelectionStateChanged(newIsSelectionsEmpty);
             }
         }
 
@@ -641,8 +643,9 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
 
         ///[UPGRADE#ISelectionStateListener]
         if (mSelectionStateListener != null) {
-            if (hasSelected) {
-                mSelectionStateListener.onSelectionStateChanged(false);
+            final boolean newIsSelectionsEmpty = hasSelected();
+            if (hasSelected != newIsSelectionsEmpty) {
+                mSelectionStateListener.onSelectionStateChanged(newIsSelectionsEmpty);
             }
         }
     }
