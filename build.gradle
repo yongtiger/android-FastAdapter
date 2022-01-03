@@ -10,8 +10,8 @@ buildscript {
         ]
 
         release = [
-                versionName: "1.5.1",   ///v1.5.1#[FIX#ActionModeHelper$onClick(AppCompatActivity act, IItem item)#移除mSelectExtension.deselect()]
-                versionCode: 10501
+                versionName: "1.6.0",   ///v1.6.0#[UPGRADE#ISelectionStateListener]
+                versionCode: 10600
         ]
     }
 
