@@ -301,7 +301,8 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
      * toggles the selection of all items
      */
     public void toggleSelection() {
-        ISelectionStateListener selectionStateListener = mSelectionStateListener;
+        ///[UPGRADE#ISelectionStateListener]
+        final ISelectionStateListener selectionStateListener = mSelectionStateListener;
         mSelectionStateListener = null;
 
         mFastAdapter.recursive(new AdapterPredicate<Item>() {
@@ -313,6 +314,26 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
                 return false;
             }
         }, false);
+
+        ///[UPGRADE#ISelectionStateListener]
+        mSelectionStateListener = selectionStateListener;
+        if (mSelectionStateListener != null) {
+            mSelectionStateListener.onSelectionStateChanged(true);
+        }
+    }
+
+    public void toggleByItems(@NonNull final List<Item> items) {
+        ///[UPGRADE#ISelectionStateListener]
+        final ISelectionStateListener selectionStateListener = mSelectionStateListener;
+        mSelectionStateListener = null;
+
+        for (Item item : items) {
+            if (item.isSelected()) {
+                deselect(item);
+            } else {
+                selectByIdentifier(item.getIdentifier(), false, false);
+            }
+        }
 
         ///[UPGRADE#ISelectionStateListener]
         mSelectionStateListener = selectionStateListener;
@@ -390,7 +411,8 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
      * @param considerSelectableFlag true if the select method should not select an item if its not selectable
      */
     public void select(final boolean considerSelectableFlag) {
-        ISelectionStateListener selectionStateListener = mSelectionStateListener;
+        ///[UPGRADE#ISelectionStateListener]
+        final ISelectionStateListener selectionStateListener = mSelectionStateListener;
         mSelectionStateListener = null;
 
         mFastAdapter.recursive(new AdapterPredicate<Item>() {
@@ -446,7 +468,8 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
      * @param positions the global positions to select
      */
     public void select(Iterable<Integer> positions) {
-        ISelectionStateListener selectionStateListener = mSelectionStateListener;
+        ///[UPGRADE#ISelectionStateListener]
+        final ISelectionStateListener selectionStateListener = mSelectionStateListener;
         mSelectionStateListener = null;
 
         for (Integer position : positions) {
@@ -557,12 +580,32 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
         }, true);
     }
 
+    public void selectByItems(@NonNull final List<Item> items) {
+        ///[UPGRADE#ISelectionStateListener]
+        final ISelectionStateListener selectionStateListener = mSelectionStateListener;
+        mSelectionStateListener = null;
+
+        for (Item item : items) {
+            selectByIdentifier(item.getIdentifier(), false, false);
+        }
+
+        ///[UPGRADE#ISelectionStateListener]
+        mSelectionStateListener = selectionStateListener;
+        if (mSelectionStateListener != null) {
+            mSelectionStateListener.onSelectionStateChanged(true);
+        }
+    }
+
     /**
      * @param identifiers            the set of identifiers to select
      * @param fireEvent              true if the onClick listener should be called
      * @param considerSelectableFlag true if the select method should not select an item if its not selectable
      */
     public void selectByIdentifiers(final Set<Long> identifiers, final boolean fireEvent, final boolean considerSelectableFlag) {
+        ///[UPGRADE#ISelectionStateListener]
+        final ISelectionStateListener selectionStateListener = mSelectionStateListener;
+        mSelectionStateListener = null;
+
         mFastAdapter.recursive(new AdapterPredicate<Item>() {
             @Override
             public boolean apply(@NonNull IAdapter<Item> lastParentAdapter, int lastParentPosition, Item item, int position) {
@@ -572,13 +615,20 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
                 return false;
             }
         }, false);
+
+        ///[UPGRADE#ISelectionStateListener]
+        mSelectionStateListener = selectionStateListener;
+        if (mSelectionStateListener != null) {
+            mSelectionStateListener.onSelectionStateChanged(true);
+        }
     }
 
     /**
      * deselects all selections
      */
     public void deselect() {
-        ISelectionStateListener selectionStateListener = mSelectionStateListener;
+        ///[UPGRADE#ISelectionStateListener]
+        final ISelectionStateListener selectionStateListener = mSelectionStateListener;
         mSelectionStateListener = null;
 
         mFastAdapter.recursive(new AdapterPredicate<Item>() {
@@ -612,7 +662,8 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
      * @param positions the global positions to deselect
      */
     public void deselect(Iterable<Integer> positions) {
-        ISelectionStateListener selectionStateListener = mSelectionStateListener;
+        ///[UPGRADE#ISelectionStateListener]
+        final ISelectionStateListener selectionStateListener = mSelectionStateListener;
         mSelectionStateListener = null;
 
         Iterator<Integer> entries = positions.iterator();
@@ -715,7 +766,8 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
      * @param identifiers the set of identifiers to deselect
      */
     public void deselectByIdentifiers(final Set<Long> identifiers) {
-        ISelectionStateListener selectionStateListener = mSelectionStateListener;
+        ///[UPGRADE#ISelectionStateListener]
+        final ISelectionStateListener selectionStateListener = mSelectionStateListener;
         mSelectionStateListener = null;
 
         mFastAdapter.recursive(new AdapterPredicate<Item>() {
@@ -739,7 +791,8 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
      * @param items the set of items to deselect. They require a identifier.
      */
     public void deselectByItems(final List<Item> items) {
-        ISelectionStateListener selectionStateListener = mSelectionStateListener;
+        ///[UPGRADE#ISelectionStateListener]
+        final ISelectionStateListener selectionStateListener = mSelectionStateListener;
         mSelectionStateListener = null;
 
         mFastAdapter.recursive(new AdapterPredicate<Item>() {
@@ -765,6 +818,9 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
      * @return a list of the IItem elements which were deleted
      */
     public List<Item> deleteAllSelectedItems() {
+        ISelectionStateListener selectionStateListener = mSelectionStateListener;
+        mSelectionStateListener = null;
+
         List<Item> deletedItems = new ArrayList<>();
 
         final List<Integer> positions = new ArrayList<>();
@@ -799,6 +855,13 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
                 }
             }
         }
+
+        ///[UPGRADE#ISelectionStateListener]
+        mSelectionStateListener = selectionStateListener;
+        if (mSelectionStateListener != null) {
+            mSelectionStateListener.onSelectionStateChanged(false);
+        }
+
         return deletedItems;
     }
 }

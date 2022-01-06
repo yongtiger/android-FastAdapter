@@ -10,8 +10,8 @@ buildscript {
         ]
 
         release = [
-                versionName: "1.6.4",   ///v1.6.4#[UPGRADE#ISelectionStateListener]
-                versionCode: 10604
+                versionName: "1.6.5",   ///v1.6.5#[UPGRADE#ISelectionStateListener]
+                versionCode: 10605
         ]
     }
 

@@ -183,9 +183,7 @@ public abstract class ModelAdapterUtil {
         if (adapter == null) {
             selectExtension.select(true);
         } else {
-            for (Item item : adapter.getAdapterItems()) {
-                selectExtension.select(fastAdapter.getPosition(item));
-            }
+            selectExtension.selectByItems(adapter.getAdapterItems());
         }
     }
 
@@ -198,9 +196,7 @@ public abstract class ModelAdapterUtil {
         if (adapter == null) {
             selectExtension.deselect();
         } else {
-            for (Item item : adapter.getAdapterItems()) {
-                selectExtension.deselect(fastAdapter.getPosition(item));
-            }
+            selectExtension.deselectByItems(adapter.getAdapterItems());
         }
     }
 
@@ -213,9 +209,7 @@ public abstract class ModelAdapterUtil {
         if (adapter == null) {
             selectExtension.toggleSelection();
         } else {
-            for (Item item : adapter.getAdapterItems()) {
-                selectExtension.toggleSelection(fastAdapter.getPosition(item));
-            }
+            selectExtension.toggleByItems(adapter.getAdapterItems());
         }
     }
 
