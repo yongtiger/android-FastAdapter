@@ -301,6 +301,9 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
      * toggles the selection of all items
      */
     public void toggleSelection() {
+        ISelectionStateListener selectionStateListener = mSelectionStateListener;
+        mSelectionStateListener = null;
+
         mFastAdapter.recursive(new AdapterPredicate<Item>() {
             @Override
             public boolean apply(@NonNull IAdapter<Item> lastParentAdapter, int lastParentPosition, Item item, int position) {
@@ -310,6 +313,12 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
                 return false;
             }
         }, false);
+
+        ///[UPGRADE#ISelectionStateListener]
+        mSelectionStateListener = selectionStateListener;
+        if (mSelectionStateListener != null) {
+            mSelectionStateListener.onSelectionStateChanged(true);
+        }
     }
 
     /**
@@ -330,6 +339,10 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
 
         boolean selected = item.isSelected();
 
+        ///[UPGRADE#ISelectionStateListener]
+        ISelectionStateListener selectionStateListener = mSelectionStateListener;
+        mSelectionStateListener = null;
+
         if (mSelectWithItemUpdate || view == null) {
             if (!mMultiSelect) {
                 deselect();
@@ -340,11 +353,6 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
                 select(position);
             }
         } else {
-            ///[UPGRADE#ISelectionStateListener]
-            if (mSelectionStateListener != null) {
-                hasSelected = hasSelected();
-            }
-
             if (!mMultiSelect) {
                 //we have to separately handle deselection here because if we toggle the current item we do not want to deselect this first!
                 List<Item> selections = getSelectedItems();
@@ -359,14 +367,12 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
             //notify that the selection changed
             if (mSelectionListener != null)
                 mSelectionListener.onSelectionChanged(item, !selected);
+        }
 
-            ///[UPGRADE#ISelectionStateListener]
-            if (mSelectionStateListener != null) {
-                final boolean newIsSelectionsEmpty = hasSelected();
-                if (hasSelected != newIsSelectionsEmpty) {
-                    mSelectionStateListener.onSelectionStateChanged(newIsSelectionsEmpty);
-                }
-            }
+        ///[UPGRADE#ISelectionStateListener]
+        mSelectionStateListener = selectionStateListener;
+        if (mSelectionStateListener != null) {
+            mSelectionStateListener.onSelectionStateChanged(!selected);
         }
     }
 
@@ -384,6 +390,9 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
      * @param considerSelectableFlag true if the select method should not select an item if its not selectable
      */
     public void select(final boolean considerSelectableFlag) {
+        ISelectionStateListener selectionStateListener = mSelectionStateListener;
+        mSelectionStateListener = null;
+
         mFastAdapter.recursive(new AdapterPredicate<Item>() {
             @Override
             public boolean apply(@NonNull IAdapter<Item> lastParentAdapter, int lastParentPosition, Item item, int position) {
@@ -392,6 +401,12 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
             }
         }, false);
         mFastAdapter.notifyDataSetChanged();
+
+        ///[UPGRADE#ISelectionStateListener]
+        mSelectionStateListener = selectionStateListener;
+        if (mSelectionStateListener != null) {
+            mSelectionStateListener.onSelectionStateChanged(true);
+        }
     }
 
     /**
@@ -431,8 +446,17 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
      * @param positions the global positions to select
      */
     public void select(Iterable<Integer> positions) {
+        ISelectionStateListener selectionStateListener = mSelectionStateListener;
+        mSelectionStateListener = null;
+
         for (Integer position : positions) {
             select(position);
+        }
+
+        ///[UPGRADE#ISelectionStateListener]
+        mSelectionStateListener = selectionStateListener;
+        if (mSelectionStateListener != null) {
+            mSelectionStateListener.onSelectionStateChanged(true);
         }
     }
 
@@ -554,6 +578,9 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
      * deselects all selections
      */
     public void deselect() {
+        ISelectionStateListener selectionStateListener = mSelectionStateListener;
+        mSelectionStateListener = null;
+
         mFastAdapter.recursive(new AdapterPredicate<Item>() {
             @Override
             public boolean apply(@NonNull IAdapter<Item> lastParentAdapter, int lastParentPosition, Item item, int position) {
@@ -562,6 +589,12 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
             }
         }, false);
         mFastAdapter.notifyDataSetChanged();
+
+        ///[UPGRADE#ISelectionStateListener]
+        mSelectionStateListener = selectionStateListener;
+        if (mSelectionStateListener != null) {
+            mSelectionStateListener.onSelectionStateChanged(false);
+        }
     }
 
     /**
@@ -579,9 +612,18 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
      * @param positions the global positions to deselect
      */
     public void deselect(Iterable<Integer> positions) {
+        ISelectionStateListener selectionStateListener = mSelectionStateListener;
+        mSelectionStateListener = null;
+
         Iterator<Integer> entries = positions.iterator();
         while (entries.hasNext()) {
             deselect(entries.next(), entries);
+        }
+
+        ///[UPGRADE#ISelectionStateListener]
+        mSelectionStateListener = selectionStateListener;
+        if (mSelectionStateListener != null) {
+            mSelectionStateListener.onSelectionStateChanged(false);
         }
     }
 
@@ -673,6 +715,9 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
      * @param identifiers the set of identifiers to deselect
      */
     public void deselectByIdentifiers(final Set<Long> identifiers) {
+        ISelectionStateListener selectionStateListener = mSelectionStateListener;
+        mSelectionStateListener = null;
+
         mFastAdapter.recursive(new AdapterPredicate<Item>() {
             @Override
             public boolean apply(@NonNull IAdapter<Item> lastParentAdapter, int lastParentPosition, Item item, int position) {
@@ -682,12 +727,21 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
                 return false;
             }
         }, false);
+
+        ///[UPGRADE#ISelectionStateListener]
+        mSelectionStateListener = selectionStateListener;
+        if (mSelectionStateListener != null) {
+            mSelectionStateListener.onSelectionStateChanged(false);
+        }
     }
 
     /**
      * @param items the set of items to deselect. They require a identifier.
      */
     public void deselectByItems(final List<Item> items) {
+        ISelectionStateListener selectionStateListener = mSelectionStateListener;
+        mSelectionStateListener = null;
+
         mFastAdapter.recursive(new AdapterPredicate<Item>() {
             @Override
             public boolean apply(@NonNull IAdapter<Item> lastParentAdapter, int lastParentPosition, Item item, int position) {
@@ -697,6 +751,12 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
                 return false;
             }
         }, false);
+
+        ///[UPGRADE#ISelectionStateListener]
+        mSelectionStateListener = selectionStateListener;
+        if (mSelectionStateListener != null) {
+            mSelectionStateListener.onSelectionStateChanged(false);
+        }
     }
 
     /**
