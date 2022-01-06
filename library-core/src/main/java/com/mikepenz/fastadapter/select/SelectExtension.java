@@ -329,7 +329,7 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
 
         for (Item item : items) {
             if (item.isSelected()) {
-                deselect(item);
+                deselect(item, mFastAdapter.getPosition(item), null);
             } else {
                 selectByIdentifier(item.getIdentifier(), false, false);
             }
