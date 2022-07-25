@@ -13,6 +13,7 @@ import com.mikepenz.fastadapter.select.SelectExtension;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -142,9 +143,14 @@ public abstract class ModelAdapterUtil {
 
     @NonNull
     public static <Item extends IItem> List<Item> getSelectedItems(@Nullable ModelAdapter<Item, Item> adapter, @NonNull FastAdapter<Item> fastAdapter) {
+        final SelectExtension<Item> selectExtension = fastAdapter.getExtension(SelectExtension.class);
+        if (selectExtension == null) {
+            return new ArrayList<>();
+        }
+
         final List<Item> selectedItems;
         if (adapter == null) {
-            selectedItems = fastAdapter.getSelectedItems();
+            selectedItems = selectExtension.getSelectedItems();
         } else {
             if (adapter.getItemFilter() == null) {
                 ///[FIX#ItemFilter/ModelAdapter#getSelections()/getSelectedItems()]
@@ -159,9 +165,14 @@ public abstract class ModelAdapterUtil {
 
     @NonNull
     public static <Item extends IItem> Set<Integer> getSelections(@Nullable ModelAdapter<Item, Item> adapter, @NonNull FastAdapter<Item> fastAdapter) {
+        final SelectExtension<Item> selectExtension = fastAdapter.getExtension(SelectExtension.class);
+        if (selectExtension == null) {
+            return new HashSet<>();
+        }
+
         final Set<Integer> selections;
         if (adapter == null) {
-            selections = fastAdapter.getSelections();
+            selections = selectExtension.getSelections();
         } else {
             if (adapter.getItemFilter() == null) {
                 ///[FIX#ItemFilter/ModelAdapter#getSelections()/getSelectedItems()]

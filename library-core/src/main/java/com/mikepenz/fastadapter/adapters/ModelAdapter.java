@@ -15,6 +15,7 @@ import com.mikepenz.fastadapter.IItemAdapter;
 import com.mikepenz.fastadapter.IItemList;
 import com.mikepenz.fastadapter.IModelItem;
 import com.mikepenz.fastadapter.ISubItem;
+import com.mikepenz.fastadapter.select.SelectExtension;
 import com.mikepenz.fastadapter.utils.AdapterPredicate;
 import com.mikepenz.fastadapter.utils.DefaultItemList;
 import com.mikepenz.fastadapter.utils.DefaultItemListImpl;
@@ -675,11 +676,16 @@ public class ModelAdapter<Model, Item extends IItem> extends AbstractAdapter<Ite
      */
     public Set<Integer> getSelections() {
         Set<Integer> selections = new HashSet<>();
-        for (int selection : getFastAdapter().getSelections()) {
-            if (getFastAdapter().getAdapter(selection) == this) {
-                selections.add(selection);
+
+        final SelectExtension<Item> selectExtension = getFastAdapter().getExtension(SelectExtension.class);
+        if (selectExtension != null) {
+            for (int selection : selectExtension.getSelections()) {
+                if (getFastAdapter().getAdapter(selection) == this) {
+                    selections.add(selection);
+                }
             }
         }
+
         return selections;
     }
 
@@ -691,11 +697,16 @@ public class ModelAdapter<Model, Item extends IItem> extends AbstractAdapter<Ite
      */
     public List<Item> getSelectedItems() {
         List<Item> selections = new ArrayList<>();
-        for (Item selection : getFastAdapter().getSelectedItems()) {
-            if (getFastAdapter().getAdapter(getFastAdapter().getPosition(selection)) == this) {
-                selections.add(selection);
+
+        final SelectExtension<Item> selectExtension = getFastAdapter().getExtension(SelectExtension.class);
+        if (selectExtension != null) {
+            for (Item selection : selectExtension.getSelectedItems()) {
+                if (getFastAdapter().getAdapter(getFastAdapter().getPosition(selection)) == this) {
+                    selections.add(selection);
+                }
             }
         }
+
         return selections;
     }
 

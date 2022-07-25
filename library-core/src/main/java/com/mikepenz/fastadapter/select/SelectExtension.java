@@ -182,7 +182,8 @@ public class SelectExtension<Item extends IItem> implements IAdapterExtension<It
             return;
         }
 
-        List<Item> selections = mFastAdapter.getSelectedItems();
+        final SelectExtension<Item> selectExtension = mFastAdapter.getExtension(SelectExtension.class);
+        List<Item> selections = selectExtension == null ? new ArrayList<>() : selectExtension.getSelectedItems();
         long[] selectionsArray = new long[selections.size()];
         int i = 0;
         for (Item item : selections) {

@@ -10,8 +10,8 @@ buildscript {
         ]
 
         release = [
-                versionName: "1.8.0",   ///v1.8.0#upgrade gradle
-                versionCode: 10800
+                versionName: "1.9.0",   ///v1.9.0#FastAdapter#getSelections()/getSelectedItems() is Deprecated
+                versionCode: 10900
         ]
     }
 
@@ -24,7 +24,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.1.2'
+        classpath 'com.android.tools.build:gradle:7.2.1'
 
         ///[FIX#jitpack#jcenter废弃#Please remove usages of `jcenter()` Maven repository from your build scripts and migrate your build to other Maven repositories.]
         ///https://www.shangmayuan.com/a/12c08d0e68c3421cb2d547ee.html
@@ -38,7 +38,7 @@ buildscript {
         ///[realm]
         ///https://realm.io/docs/java/latest
         ///https://docs.mongodb.com/realm/sdk/android/
-        classpath "io.realm:realm-gradle-plugin:10.10.1"  ///Note: cannot be smaller than version 16 declared in library [io.realm:realm-android-library:7.0.3]
+        classpath "io.realm:realm-gradle-plugin:10.11.1"  ///Note: cannot be smaller than version 16 declared in library [io.realm:realm-android-library:7.0.3]
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
